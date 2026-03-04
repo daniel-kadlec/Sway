@@ -7,7 +7,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className={'p-24'}>
       <Navbar/>
         {children}
       </body>
