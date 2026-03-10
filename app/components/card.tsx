@@ -5,7 +5,9 @@ type CardProps = {
 };
 export default function Card({className}: CardProps) {
     return (
-        <div className={`bg-white rounded-3xl shadow-md p-4 h-[400px] ${className}`}>
+        <div className={`bg-white rounded-3xl shadow-md p-4 h-full ${className}`}>
+            <Lead/>
+            <Lead/>
             <Lead/>
         </div>
     );

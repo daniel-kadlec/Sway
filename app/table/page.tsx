@@ -1,6 +1,6 @@
-import Table from "@/app/components/table";
 export default function Kanban(){
     return(
-        <Table/>
+        <div className="flex bg-white rounded-3xl shadow-md h-full w-full">
+        </div>
     )
 }
