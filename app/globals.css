@@ -1,2 +1,11 @@
 @import "tailwindcss";
 
+:root {
+    --container-gap: 24px;
+}
+
+@media (min-width: 1000px) {
+    :root {
+        --container-margin: 0px;
+    }
+}

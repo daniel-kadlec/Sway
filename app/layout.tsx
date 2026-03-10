@@ -7,7 +7,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={'p-24 flex flex-col overflow-hidden bg-gray-200 h-screen max-w-[1800px] mx-auto'}>
+      <body className={'p-24 flex flex-col overflow-hidden bg-gray-200 h-screen max-w-450 mx-auto'}>
           <Navbar/>
           {children}
       </body>
