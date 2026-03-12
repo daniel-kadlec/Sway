@@ -13,8 +13,8 @@ export default function Navbar(){
             {/*Right side*/}
             <div className="flex flex-col justify-between w-1/2 h-full gap-(--container-gap)">
                 {/*Nav*/}
-                <div className="w-[calc(100%+1.5rem)] -ml-(--container-gap) h-1/3 bg-gray-300 rounded-r-3xl p-11 flex items-center justify-end">
-                    <span className="flex flex-row gap-(--container-gap)">
+                <div className="w-[calc(100%+var(--container-gap))] -ml-(--container-gap) h-1/3 bg-gray-300 rounded-r-3xl p-11 flex items-center justify-end">
+                    <span className="flex flex-row gap-6">
                         <Link href="/dashboard">Dashboard</Link>
                         <Link href="/kanban">Kanban</Link>
                         <Link href="/table">Table</Link>
