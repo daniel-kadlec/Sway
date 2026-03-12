@@ -26,6 +26,5 @@
     mask-image:
         radial-gradient(circle at bottom right,
         transparent var(--cut),
-        black calc(var(--cut)));
-
+        black var(--cut));
 }

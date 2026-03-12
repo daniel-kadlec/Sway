@@ -1,6 +1,5 @@
 import Link from "next/link";
 import StatusSummary from "@/app/components/status-summary";
-import Stats from "@/app/components/stats";
 
 export default function Navbar(){
     return  (
