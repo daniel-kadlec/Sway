@@ -26,6 +26,7 @@
     /*//*/
 
     --shadow-primary: 2px 5px 6px rgba(0, 0, 0, 0.05);
+    --shadow-primary-nav: -1px 5px 6px rgba(0, 0, 0, 0.05);
 
 }
 
