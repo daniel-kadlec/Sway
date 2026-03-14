@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import StatusSummary from "@/app/components/status-summary";
+import NavLinks from "@/app/components/navLinks";
 import { useEffect, useState } from "react";
 
 import { FaUser } from "react-icons/fa6";
@@ -59,11 +60,7 @@ export default function Navbar(){
                 {/*Nav*/}
                 <div className="w-[calc(100%+var(--container-gap))] -ml-(--container-gap) h-1/3 bg-primary rounded-r-3xl flex items-center justify-end pr-18 min-h-1/3 shadow-primary-nav">
                     <span className={'flex items-center gap-18'}>
-                        <span className="flex flex-row gap-16">
-                            <Link className={'link'} href="/dashboard">Dashboard</Link>
-                            <Link className={'link'} href="/kanban">Kanban</Link>
-                            <Link className={'link'} href="/table">Table</Link>
-                        </span>
+                        <NavLinks/>
                         <span className={'flex gap-4 items-center'}>
                             <FaPlus size={28} className={'text-white cursor-pointer'}/>
                             <FaUser size={26} className={'text-white cursor-pointer'}/>
