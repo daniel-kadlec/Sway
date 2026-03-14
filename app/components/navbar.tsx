@@ -55,7 +55,7 @@ export default function Navbar(){
                 </h1>
                 <h2 className={'text-3xl font-bold mt-1'}>You have 3 actions today</h2>
 
-                <span className={'flex gap-4 items-center mt-1'}>
+                <span className={'flex gap-4 items-center'}>
                     <span className={'date-element'}>{weekday}</span>
                     <span className={'circle'}></span>
                     <span className={'date-element'}>{monthDay}</span>

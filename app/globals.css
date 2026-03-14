@@ -63,5 +63,5 @@
     @apply w-2 h-2 rounded-full bg-white;
 }
 .date-element{
-    @apply text-shadow-white text-xl;
+    @apply text-shadow-white text-2xl;
 }
