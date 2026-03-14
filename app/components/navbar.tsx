@@ -1,5 +1,8 @@
+'use client';
+
 import Link from "next/link";
 import StatusSummary from "@/app/components/status-summary";
+import { useEffect, useState } from "react";
 
 import { FaUser } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
@@ -7,6 +10,31 @@ import { FaPlus } from "react-icons/fa6";
 
 
 export default function Navbar(){
+
+    const [time, setTime] = useState(new Date());
+
+    // time
+    useEffect(() => {
+        const interval = setInterval(() => setTime(new Date()), 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const weekday = new Intl.DateTimeFormat("en-US", {
+        weekday: "long",
+    }).format(time);
+
+    const monthDay = new Intl.DateTimeFormat("en-US", {
+        month: "long",
+        day: "numeric",
+    }).format(time);
+
+    const clockTime = new Intl.DateTimeFormat("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+    }).format(time);
+
+
     return  (
         <div className={'w-full flex h-80 mb-(--container-gap) text-offwhite'}>
 
@@ -16,11 +44,11 @@ export default function Navbar(){
                 <h2 className={'text-3xl font-bold mt-1'}>You have 3 actions today</h2>
 
                 <span className={'flex gap-4 items-center mt-1'}>
-                    <span className={'date-element'}>Wednesday</span>
+                    <span className={'date-element'}>{weekday}</span>
                     <span className={'circle'}></span>
-                    <span className={'date-element'}>February 18</span>
+                    <span className={'date-element'}>{monthDay}</span>
                     <span className={'circle'}></span>
-                    <span className={'date-element'}>10:30</span>
+                    <span className={'date-element'}>{clockTime}</span>
                 </span>
 
             </div>
