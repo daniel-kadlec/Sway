@@ -35,13 +35,24 @@ export default function Navbar(){
         hour12: false,
     }).format(time);
 
+    const greeting = () => {
+        const hour = time.getHours();
+        if (hour < 6) return "Máš chrápat";
+        if (hour < 12) return "Good morning";
+        if (hour < 18) return "Good afternoon";
+        if (hour < 22) return "Jdi chrápat";
+        return "Good evening";
+    }
+
 
     return  (
         <div className={'w-full flex h-80 mb-(--container-gap) text-offwhite'}>
 
             {/*Left side*/}
             <div className={'w-1/2 h-full bg-primary rounded-l-3xl rounded-br-3xl p-12 mr-(--container-gap) font-primary shadow-primary'}>
-                <h1 className={'text-5xl font-bold'}>Good morning, Daniel!</h1>
+                <h1 className={'text-5xl font-bold'}>
+                    {greeting() + ", Daniel!"}
+                </h1>
                 <h2 className={'text-3xl font-bold mt-1'}>You have 3 actions today</h2>
 
                 <span className={'flex gap-4 items-center mt-1'}>
