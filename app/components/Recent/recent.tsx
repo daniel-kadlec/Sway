@@ -9,7 +9,7 @@ export default function Recent({ className }: RecentProps) {
     return (
         <div className={`long-card-base flex items-center justify-end relative ${className}`}>
 
-            <div className="bg-primary text-white rounded-3xl px-16 py-6 flex flex-col justify-center  font-medium h-full absolute top-0 left-0">
+            <div className="bg-primary text-white rounded-3xl px-16 py-6 flex flex-col justify-center  font-medium h-full absolute top-0 left-0 shadow-primary">
                 <span className={'text-3xl'}>
                     Data for the last
                 </span>
