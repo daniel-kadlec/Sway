@@ -74,8 +74,8 @@ export default function CardHeader({ title, variant = "gray" }: CardHeaderProps)
         <div className={`flex items-center justify-between px-10 py-5 ${v.bg} ${v.text} border-b border-lightgray`}>
             <h3 className="font-semibold text-3xl">{title}</h3>
 
-            <div className={`p-2.5 rounded-full flex items-center justify-center ${v.iconBg}`}>
-                <Icon className={`${v.iconColor}`} size={20} />
+            <div className={`p-3 rounded-full flex items-center justify-center ${v.iconBg}`}>
+                <Icon className={`${v.iconColor}`} size={26} />
             </div>
         </div>
     );
