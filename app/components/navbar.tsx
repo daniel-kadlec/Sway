@@ -38,9 +38,11 @@ export default function Navbar(){
     const greeting = () => {
         const hour = time.getHours();
         if (hour < 6) return "Máš chrápat";
-        if (hour < 12) return "Good morning";
+        if (hour < 10) return "Good morning";
+        if (hour < 13) return "Good day";
         if (hour < 18) return "Good afternoon";
-        if (hour < 22) return "Jdi chrápat";
+        if (hour < 23) return "Good evening";
+        if (hour < 24) return "Jdi chrápat";
         return "Good evening";
     }
 
