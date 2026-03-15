@@ -26,7 +26,7 @@ export default function StatusSummary() {
 
             <StatusSummaryItem
                 icon={FaUser}
-                text="12 Assigned"
+                text="7 Active"
                 bgColor="bg-primary-light"
                 iconColor="text-primary"
                 iconSize={22}

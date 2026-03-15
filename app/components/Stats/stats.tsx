@@ -19,7 +19,7 @@ export default function Stats({ className }: StatsProps) {
                     icon={IoIosWarning}
                     label="Total leads"
                     value={420}
-                    iconSize={42}
+                    iconSize={46}
                     iconOffsetY={-1}
                 />
 
@@ -29,7 +29,7 @@ export default function Stats({ className }: StatsProps) {
                     icon={FaRegClock}
                     label="Total replies"
                     value={69}
-                    iconSize={36}
+                    iconSize={38}
                 />
 
                 <div className="vertical-line" />
@@ -38,7 +38,7 @@ export default function Stats({ className }: StatsProps) {
                     icon={FaUser}
                     label="Total clients"
                     value={420}
-                    iconSize={32}
+                    iconSize={34}
                 />
 
                 <div className="vertical-line" />
@@ -47,7 +47,7 @@ export default function Stats({ className }: StatsProps) {
                     icon={FaArrowTrendUp}
                     label="Conversion rate"
                     value="69%"
-                    iconSize={32}
+                    iconSize={38}
                 />
             </div>
         </div>

@@ -1,5 +1,5 @@
 import Card from "@/app/components/card";
-import Recent from "@/app/components/recent";
+import Recent from "@/app/components/Recent/recent";
 export default function Kanban(){
     return(
         <div className={'h-full'}>
