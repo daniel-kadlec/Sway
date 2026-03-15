@@ -10,7 +10,7 @@ export default function Lead(){
                 <h1 className={'font-bold text-3xl text-offblack'}>El Negro</h1>
                 <IoLogoInstagram size={30} className={'text-primary mt-0.5'}/>
             </span>
-            <span className={'mt-2 -ml-1 flex gap-4 items-center'}>
+            <span className={'mt-2 -ml-0.5 flex gap-4 items-center'}>
                 <span className={'bg-primary-light text-primary px-4 py-0.5 rounded-full font-bold text-lg'}>Stage</span>
                 <span className={'flex items-center gap-2 text-primary'}>
                     <FaRegCalendar size={20}/>

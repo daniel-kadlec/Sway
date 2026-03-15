@@ -4,6 +4,10 @@ import { IoIosWarning } from "react-icons/io";
 import { FaRegClock } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa6";
 import { FaArrowTrendUp } from "react-icons/fa6";
+import { FaFrog } from "react-icons/fa";
+import { FaComment } from "react-icons/fa";
+
+
 
 type StatsProps = {
     className?: string;
@@ -14,19 +18,19 @@ export default function Stats({ className }: StatsProps) {
         <div
             className={`long-card-base flex items-center ${className}`}
         >
-            <div className={'flex items-center justify-center gap-24 w-full pl-10 pr-16'}>
+            <div className={'flex items-center justify-center gap-24 w-full px-10'}>
                 <StatItem
-                    icon={IoIosWarning}
+                    icon={FaFrog}
                     label="Total leads"
                     value={420}
-                    iconSize={46}
+                    iconSize={40}
                     iconOffsetY={-1}
                 />
 
                 <div className="vertical-line" />
 
                 <StatItem
-                    icon={FaRegClock}
+                    icon={FaComment }
                     label="Total replies"
                     value={69}
                     iconSize={38}
