@@ -43,7 +43,6 @@ export default function Navbar(){
         if (hour < 18) return "Good afternoon";
         if (hour < 23) return "Good evening";
         if (hour < 24) return "Jdi chrápat";
-        return "Good evening";
     }
 
 
