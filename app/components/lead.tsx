@@ -14,9 +14,9 @@ export default function Lead(){
                 <span className={'bg-primary-light text-primary px-4 py-0.5 rounded-full font-bold text-lg'}>Stage</span>
                 <span className={'flex items-center gap-2 text-primary'}>
                     <FaRegCalendar size={20}/>
-                    <span className={'text-lg font-medium'}>12.2.</span>
+                    <span className={'text-lg font-semibold'}>12.2.</span>
                     <FaRegClock size={20}/>
-                    <span className={'text-lg font-medium'}>Today</span>
+                    <span className={'text-lg font-semibold'}>Today</span>
                 </span>
             </span>
         </div>

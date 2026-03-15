@@ -1,5 +1,5 @@
 import Card from "@/app/components/card";
-import Stats from "@/app/components/stats";
+import Stats from "@/app/components/Stats/stats";
 export default function Dashoard() {
     return (
         <div className={'h-full'}>

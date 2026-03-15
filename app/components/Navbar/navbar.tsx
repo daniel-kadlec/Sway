@@ -1,8 +1,8 @@
 'use client';
 
 import Link from "next/link";
-import StatusSummary from "@/app/components/status-summary";
-import NavLinks from "@/app/components/navLinks";
+import StatusSummary from "@/app/components/Status summary/status-summary";
+import NavLinks from "@/app/components/Navbar/navLinks";
 import { useEffect, useState } from "react";
 
 import { FaUser } from "react-icons/fa6";
