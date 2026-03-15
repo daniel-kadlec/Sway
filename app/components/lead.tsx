@@ -5,7 +5,7 @@ import { FaRegClock } from "react-icons/fa6";
 
 export default function Lead(){
     return(
-        <div className={'h-30 w-full border-b-1 border-lightgray py-4 px-10 flex flex-col justify-center'}>
+        <div className={'h-30 w-full border-b border-lightgray py-4 px-10 flex flex-col justify-center'}>
             <span className={'flex gap-2 items-center'}>
                 <h1 className={'font-bold text-3xl text-offblack'}>El Negro</h1>
                 <IoLogoInstagram size={30} className={'text-primary mt-0.5'}/>
