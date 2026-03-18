@@ -1,7 +1,7 @@
 import "./globals.css";
 import Navbar from "@/app/components/Navbar/navbar";
 import {ModalProvider} from "@/app/Context/ModalContext";
-import ModalShell from "@/app/components/Modal/ModalShell";
+import ModalShell from "@/app/components/Modal/modalShell";
 export default function RootLayout({
   children,
 }: Readonly<{
