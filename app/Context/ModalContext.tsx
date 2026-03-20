@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState } from "react";
 
-type ModalType = "create" | "edit" | "view" | null;
+type ModalType = "create" | "edit" | "view" | "finish" | null;
 
 type ModalState = {
     isOpen: boolean;

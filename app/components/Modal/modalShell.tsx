@@ -4,12 +4,14 @@ import {useModal} from "@/app/Context/ModalContext";
 import CreateModal from "@/app/components/Modal/createModal";
 import EditModal from "@/app/components/Modal/editModal";
 import ViewModal from "@/app/components/Modal/viewModal";
+import FinishModal from "@/app/components/Modal/finishModal";
 
 
 const MODAL_COMPONENTS = {
     create: CreateModal,
     edit: EditModal,
     view: ViewModal,
+    finish: FinishModal,
 };
 
 

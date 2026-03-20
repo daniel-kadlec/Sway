@@ -1,5 +1,5 @@
 import Lead from "@/app/components/Card/lead";
-import CardHeader from "@/app/components/card-header";
+import CardHeader from "@/app/components/Card/card-header";
 
 type CardProps = {
     title: string;
