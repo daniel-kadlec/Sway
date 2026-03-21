@@ -62,6 +62,9 @@
 .circle{
     @apply w-2 h-2 rounded-full bg-white;
 }
+.table-cell{
+    @apply py-6 px-6 min-w-[250px] truncate;
+}
 .date-element{
     @apply text-shadow-white text-2xl;
 }
