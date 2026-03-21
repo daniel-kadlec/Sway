@@ -71,7 +71,9 @@
 .vertical-line{
     @apply w-0.5 h-28 bg-lightgray;
 }
-
+.lead-control{
+    @apply cursor-pointer hover:opacity-70 transition-all duration-300;
+}
 .hide-scrollbar::-webkit-scrollbar {
     display: none;
 }

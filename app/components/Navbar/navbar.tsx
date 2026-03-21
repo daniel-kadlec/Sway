@@ -4,6 +4,7 @@ import Link from "next/link";
 import StatusSummary from "@/app/components/Status summary/status-summary";
 import NavLinks from "@/app/components/Navbar/navLinks";
 import { useEffect, useState } from "react";
+import {useModal} from "@/app/Context/ModalContext";
 
 import { FaUser } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
@@ -13,6 +14,8 @@ import { FaPlus } from "react-icons/fa6";
 export default function Navbar(){
 
     const [time, setTime] = useState(new Date());
+    const { openModal } = useModal();
+
 
     // time
     useEffect(() => {
@@ -74,7 +77,7 @@ export default function Navbar(){
                     <span className={'flex items-center gap-18'}>
                         <NavLinks/>
                         <span className={'flex gap-4 items-center'}>
-                            <FaPlus size={28} className={'text-white cursor-pointer'}/>
+                            <FaPlus onClick={() => openModal("create")} size={28} className={'text-white cursor-pointer'}/>
                             <FaUser size={26} className={'text-white cursor-pointer'}/>
                         </span>
 
