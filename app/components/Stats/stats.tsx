@@ -18,7 +18,7 @@ export default function Stats({ className }: StatsProps) {
         <div
             className={`long-card-base flex items-center ${className}`}
         >
-            <div className={'flex items-center justify-center gap-24 w-full px-10'}>
+            <div className={'flex items-center justify-center gap-21 w-full'}>
                 <StatItem
                     icon={FaFrog}
                     label="Total leads"
