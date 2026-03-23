@@ -74,6 +74,9 @@
 .lead-control{
     @apply cursor-pointer hover:opacity-70 transition-all duration-300;
 }
+.modal-container{
+    @apply w-full rounded-3xl bg-white shadow-xl px-16 py-14 relative max-w-[900px];
+}
 
 .hide-scrollbar::-webkit-scrollbar {
     display: none;

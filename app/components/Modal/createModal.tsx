@@ -15,7 +15,7 @@ export default function CreateModal({ data }: CreateModalProps) {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-            <div className="w-full rounded-3xl bg-white shadow-xl p-16 relative max-w-[1000px]">
+            <div className="modal-container">
 
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
