@@ -1,6 +1,6 @@
 export function Label({ children }: { children: React.ReactNode }) {
     return (
-        <label className="block text-2xl font-medium text-primary mb-1 ml-0.5">
+        <label className="block text-xl font-medium text-primary mb-1 ml-0.5">
             {children}
         </label>
     );
@@ -10,14 +10,14 @@ export function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
     return (
         <input
             {...props}
-            className="w-full rounded-xl border border-lightgray px-8 py-5 text-2xl focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
         />
     );
 }
 
 export function Select() {
     return (
-        <select className="w-full rounded-xl border border-lightgray px-8 py-5 text-2xl focus:outline-none focus:ring-2 focus:ring-primary"
+        <select className="w-full rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
         >
             <option>Instagram</option>
             <option>Email</option>

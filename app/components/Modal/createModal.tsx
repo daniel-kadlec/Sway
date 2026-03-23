@@ -18,24 +18,24 @@ export default function CreateModal({ data }: CreateModalProps) {
             <div className="w-full rounded-3xl bg-white shadow-xl p-16 relative max-w-[1000px]">
 
                 {/* Header */}
-                <div className="flex items-center justify-between mb-8 border-b border-lightgray pb-10">
-                    <h2 className="text-5xl font-bold text-primary">
+                <div className="flex items-center justify-between mb-8">
+                    <h2 className="text-4xl font-bold text-primary">
                         Create a new lead
                     </h2>
 
                     <button
                         onClick={() => closeModal()}
-                        className="size-14 flex items-center justify-center rounded-full bg-primary-light transition cursor-pointer"
+                        className="size-12 flex items-center justify-center rounded-full bg-primary-light transition cursor-pointer hover:opacity-90"
                     >
-                       <IoClose className={'text-primary size-10'}/>
+                       <IoClose className={'text-primary size-8'}/>
                     </button>
                 </div>
 
                 {/* Advanced toggle */}
                 <div className="flex justify-end">
-                    <label className="flex items-center gap-3 text-2xl cursor-pointer font-bold">
+                    <label className="flex items-center gap-2 text-xl cursor-pointer font-bold">
                         <input
-                            className={'size-6'}
+                            className={'size-5'}
                             type="checkbox"
                             checked={advanced}
                             onChange={() => setAdvanced(!advanced)}
@@ -90,7 +90,7 @@ export default function CreateModal({ data }: CreateModalProps) {
                             <div className="col-span-2">
                                 <Label>Note</Label>
                                 <textarea
-                                    className="w-full min-h-[150px] rounded-xl border border-lightgray px-8 py-5 text-2xl focus:outline-none focus:ring-2 focus:ring-primary"
+                                    className="w-full min-h-[100px] rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
                                     placeholder="Poznámka..."
                                 />
                             </div>
