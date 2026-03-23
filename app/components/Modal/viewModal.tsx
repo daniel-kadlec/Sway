@@ -1,5 +1,6 @@
 import { useModal } from "@/app/Context/ModalContext";
 import Button from "@/app/components/button";
+import ContextMenu from "@/app/components/context-menu";
 import {IoClose, IoEllipsisHorizontal, IoMail, IoCall, IoGlobeOutline, IoLogoInstagram} from "react-icons/io5";
 
 import { FaForward } from "react-icons/fa";
@@ -18,11 +19,11 @@ function InfoItem({icon: Icon, value, href}: {
     value?: string;
     href?: string;
 }) {
-    const content = value || "negr";
+    const content = value || "nn zidy pls";
 
     return (
         <div className="flex items-center gap-5">
-            <Icon className="text-primary size-11" />
+            <Icon className="text-primary size-11 cursor-pointer" />
 
             <div className="min-w-0">
                 {href ? (
@@ -55,10 +56,11 @@ export default function ViewModal({ data }: ViewModalProps) {
                     </h2>
 
                     <div className="flex items-center gap-3">
-                        <button className="size-12 flex items-center justify-center rounded-full bg-primary-light transition cursor-pointer hover:opacity-90">
-                            <IoEllipsisHorizontal className="text-primary size-8" />
-                        </button>
-
+                        <ContextMenu>
+                            <button className="size-12 flex items-center justify-center rounded-full bg-primary-light transition cursor-pointer hover:opacity-90">
+                                <IoEllipsisHorizontal className="text-primary size-8" />
+                            </button>
+                        </ContextMenu>
                         <button className="size-12 flex items-center justify-center rounded-full bg-primary-light transition cursor-pointer hover:opacity-90">
                             <FaForward className="text-primary size-5 ml-1" />
                         </button>
