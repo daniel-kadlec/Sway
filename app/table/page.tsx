@@ -35,19 +35,19 @@ export default function Table() {
                     <tr className="border-b border-b-lightgray transition">
                         <td className="font-bold text-primary table-cell">John Doe</td>
                         <td className="table-cell">john@example.com</td>
-                        <td className="table-cell">@johndoe</td>
+                        <td className="table-cell">johndoe</td>
                         <td className="table-cell">123 456 789</td>
                         <td className="table-cell">johndoe.com</td>
 
                         <td className="table-cell">2026-03-25</td>
-                        <td className="table-cell">Sent proposal</td>
+                        <td className="table-cell">2026-04-2</td>
 
 
-                        <td className="table-cell">Sent proposal</td>
+                        <td className="table-cell">2026-03-25</td>
                         <td className="table-cell">2026-03-28</td>
 
-                        <td className="table-cell">Negotiation</td>
-                        <td className="table-cell">Pending</td>
+                        <td className="table-cell">Primary follow-up</td>
+                        <td className="table-cell">In progresswwwwwwwwwwwww </td>
                     </tr>
                 </tbody>
             </table>
