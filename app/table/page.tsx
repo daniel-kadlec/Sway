@@ -14,7 +14,8 @@ export default function Table() {
     ];
 
     return (
-        <div className="bg-white rounded-3xl shadow-primary overflow-x-auto h-full">
+
+        <div className="bg-white rounded-3xl shadow-primary overflow-x-auto h-full custom-scrollbar">
             <table className="w-full text-left border-collapse text-2xl">
                 {/* Header */}
                 <thead className="bg-primary text-offwhite">
