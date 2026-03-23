@@ -1,4 +1,9 @@
+'use client';
+import {useModal} from "@/app/Context/ModalContext";
+
 export default function Table() {
+    const { openModal } = useModal();
+
     const columns = [
         "Name",
         "E-mail",
@@ -33,7 +38,7 @@ export default function Table() {
 
                 {/* body */}
                 <tbody>
-                    <tr className="border-b border-b-lightgray transition">
+                    <tr onClick={() => openModal("view")} className="border-b border-b-lightgray transition duration-300 cursor-pointer hover:bg-lightgray ">
                         <td className="font-bold text-primary table-cell">John Doe</td>
                         <td className="table-cell">john@example.com</td>
                         <td className="table-cell">johndoe</td>
