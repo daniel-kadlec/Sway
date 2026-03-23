@@ -1,6 +1,11 @@
 'use client';
 import {useModal} from "@/app/Context/ModalContext";
 
+import { FaSort } from "react-icons/fa6";
+import { FaSortUp } from "react-icons/fa";
+import { FaSortDown } from "react-icons/fa6";
+
+
 export default function Table() {
     const { openModal } = useModal();
 
@@ -27,10 +32,10 @@ export default function Table() {
                 <tr>
                     {columns.map((col) => (
                         <th key={col} className="table-cell font-bold whitespace-nowrap">
-                            <div className="flex items-center gap-2 cursor-pointer">
+                            <span className="flex items-center gap-2 cursor-pointer">
                                 {col}
-                                <span className="opacity-70">⇅</span>
-                            </div>
+                                <FaSort className="size-6 mt-0.5"/>
+                            </span>
                         </th>
                     ))}
                 </tr>
