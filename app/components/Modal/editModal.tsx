@@ -94,13 +94,13 @@ export default function EditModal({ data }: editModalProps) {
                 {/* Actions */}
                 <div className="flex mt-12 justify-between">
                     <div className={'flex gap-6'}>
-                        <Button className="!bg-error-light !text-error flex items-center gap-2">
+                        <Button className="!bg-error-light !text-error icon-button">
                             <FaTrash className="size-4" />
                             Delete
                         </Button>
 
                         <Button
-                            className="!bg-primary-light !text-primary flex items-center gap-2"
+                            className="!bg-primary-light !text-primary icon-button"
                             onClick={() => openModal("view", data)}
                         >
                             <FaPen className="size-4" />

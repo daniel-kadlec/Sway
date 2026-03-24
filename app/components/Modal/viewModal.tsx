@@ -8,6 +8,8 @@ import { FaTrash } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { FaFlagCheckered } from "react-icons/fa";
+import { TbReload } from "react-icons/tb";
+
 
 
 
@@ -21,7 +23,7 @@ function InfoItem({icon: Icon, value, href}: {
     value?: string;
     href?: string;
 }) {
-    const content = value || "nn zidy pls";
+    const content = value || "—";
 
     return (
         <div className="flex items-center gap-5">
@@ -50,10 +52,14 @@ export default function ViewModal({ data }: ViewModalProps) {
     const { closeModal, openModal } = useModal();
 
     const ContextMenuContent = (
-        <div className={'flex justify-center'}>
-            <Button onClick={()=> openModal('finish')} className={'flex justify-center items-center gap-2 w-full'}>
+        <div className={' flex flex-col items-center justify-center gap-3 p-2 w-full'}>
+            <Button onClick={()=> openModal('finish')} className={'icon-button w-full bg-success-light! text-success!'}>
                 <FaFlagCheckered className={'mt-0.5'}/>
                 Finish
+            </Button>
+            <Button className={'icon-button w-full bg-lightgray! text-darkgray!'}>
+                <TbReload className={'mt-0.5'}/>
+                Reset
             </Button>
         </div>
     );
@@ -161,7 +167,7 @@ export default function ViewModal({ data }: ViewModalProps) {
                 {/* Actions */}
                 <div className="flex items-center gap-4 mt-14">
                     <Button
-                        className="!bg-error-light !text-error flex items-center justify-center gap-2"
+                        className="!bg-error-light !text-error icon-button"
                         onClick={() => data?.onDelete?.(data)}
                     >
                         <FaTrash className="size-4" />
@@ -169,7 +175,7 @@ export default function ViewModal({ data }: ViewModalProps) {
                     </Button>
 
                     <Button
-                        className="bg-primary-light! text-primary! flex items-center justify-center gap-2"
+                        className="bg-primary-light! text-primary! icon-button"
                         onClick={() => openModal("edit", data)}
                     >
                         <FaPen className="size-4" />

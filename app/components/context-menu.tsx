@@ -29,7 +29,7 @@ export default function ContextMenu({ children, content }: ContextMenuProps) {
             </div>
 
             {open && (
-                <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-48 rounded-xl bg-white shadow-primary p-3 z-50">
+                <div className="absolute left-1/2 -translate-x-1/2 mt-3 w-48 rounded-xl bg-offwhite shadow-lg p-3 z-50">
                     {content}
                 </div>
             )}

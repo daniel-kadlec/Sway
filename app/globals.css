@@ -10,7 +10,7 @@
     --color-offblack: #020209;
     --color-offwhite: #FAFAFA;
     --color-darkgray: #414145;
-    --color-lightgray: #F0F1F5;
+    --color-lightgray: #eaebf1;
     --color-white: #FFFFFF;
 
     --color-primary-light: #CCCCFF;
@@ -76,6 +76,9 @@
 }
 .modal-container{
     @apply w-full rounded-3xl bg-white shadow-xl px-16 py-14 relative max-w-[900px];
+}
+.icon-button{
+    @apply flex justify-center items-center gap-2
 }
 
 .hide-scrollbar::-webkit-scrollbar {

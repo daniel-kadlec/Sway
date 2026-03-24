@@ -1,9 +1,8 @@
 import { IconType } from "react-icons";
-import { FaClock, FaCheck} from "react-icons/fa6";
+import { FaClock} from "react-icons/fa6";
 import { IoIosWarning } from "react-icons/io";
 import { FaTrophy } from "react-icons/fa";
-import { BsInbox } from "react-icons/bs";
-import { FiTarget } from "react-icons/fi";
+import { FaFloppyDisk } from "react-icons/fa6";
 
 type CardHeaderProps = {
     title: string;
@@ -45,7 +44,7 @@ const variants: Record<string, {
         iconBg: "bg-lightgray",
         iconColor: "text-darkgray",
         text: "text-offblack",
-        icon: BsInbox,
+        icon: FaFloppyDisk,
     },
 
     purple: {
@@ -71,7 +70,7 @@ export default function CardHeader({ title, variant = "gray" }: CardHeaderProps)
 
     return (
         <div className={`flex items-center justify-between px-10 py-5 border-b min-h-[100px]  ${v.bg} ${v.text} ${variant === "blue" ? "border-primary" : "border-b border-lightgray"}`}>
-            <h3 className="font-semibold text-3xl">{title}</h3>
+            <h1 className="font-semibold text-4xl">{title}</h1>
 
             {Icon && (
                 <div className={`p-3 rounded-full flex items-center justify-center ${v.iconBg}`}>
