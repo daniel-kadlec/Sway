@@ -9,6 +9,7 @@ import {useModal} from "@/app/Context/ModalContext";
 import { FaUser } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import ContextMenu from "@/app/components/context-menu";
+import Button from "@/app/components/button";
 
 
 
@@ -49,6 +50,11 @@ export default function Navbar(){
         if (hour < 24) return "Jdi chrápat";
     }
 
+    const ContextMenucontent = (
+        <Button className="w-full justify-start !bg-error-light !text-error ">
+            Logout
+        </Button>
+    );
 
     return  (
         <div className={'w-full flex h-80 mb-(--container-gap) text-offwhite'}>
@@ -79,7 +85,7 @@ export default function Navbar(){
                         <NavLinks/>
                         <span className={'flex gap-4 items-center'}>
                             <FaPlus onClick={() => openModal("create")} size={28} className={'text-white cursor-pointer'}/>
-                            <ContextMenu>
+                            <ContextMenu content={ContextMenucontent}>
                                 <FaUser size={26} className={'text-white cursor-pointer'}/>
                             </ContextMenu>
                         </span>

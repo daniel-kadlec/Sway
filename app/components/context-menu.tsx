@@ -3,9 +3,10 @@ import Button from "@/app/components/button";
 
 type ContextMenuProps = {
     children: React.ReactNode;
+    content: React.ReactNode;
 };
 
-export default function ContextMenu({ children }: ContextMenuProps) {
+export default function ContextMenu({ children, content }: ContextMenuProps) {
     const [open, setOpen] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
@@ -31,9 +32,7 @@ export default function ContextMenu({ children }: ContextMenuProps) {
             {/* Menu */}
             {open && (
                 <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-48 rounded-xl bg-white shadow-primary p-3 z-50">
-                    <Button className="w-full justify-start !bg-error-light !text-error ">
-                        Logout
-                    </Button>
+                    {content}
                 </div>
             )}
         </div>
