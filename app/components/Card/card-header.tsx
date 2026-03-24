@@ -1,80 +1,22 @@
-import { IconType } from "react-icons";
-import { FaClock} from "react-icons/fa6";
-import { IoIosWarning } from "react-icons/io";
-import { FaTrophy } from "react-icons/fa";
-import { FaFloppyDisk } from "react-icons/fa6";
+'use client';
+
+import {VariantConfig} from "@/app/components/Card/card";
 
 type CardHeaderProps = {
     title: string;
-    variant?: "blue" | "red" | "yellow" | "gray" | "purple" | "green";
+    v: VariantConfig;
 };
 
-const variants: Record<string, {
-    bg: string;
-    iconBg: string;
-    iconColor: string;
-    text: string;
-    icon?: IconType;
-}> = {
-    blue: {
-        bg: "bg-primary",
-        iconBg: "bg-primary-light",
-        iconColor: "text-primary",
-        text: "text-white",
-    },
-
-    red: {
-        bg: "",
-        iconBg: "bg-error-light",
-        iconColor: "text-error",
-        text: "text-offblack",
-        icon: IoIosWarning,
-    },
-
-    yellow: {
-        bg: "",
-        iconBg: "bg-warning-light",
-        iconColor: "text-warning",
-        text: "text-offblack",
-        icon: FaClock,
-    },
-
-    gray: {
-        bg: "",
-        iconBg: "bg-lightgray",
-        iconColor: "text-darkgray",
-        text: "text-offblack",
-        icon: FaFloppyDisk,
-    },
-
-    purple: {
-        bg: "",
-        iconBg: "bg-primary-light",
-        iconColor: "text-primary",
-        text: "text-offblack",
-        icon: FaClock,
-    },
-
-    green: {
-        bg: "",
-        iconBg: "bg-success-light",
-        iconColor: "text-success",
-        text: "text-offblack",
-        icon: FaTrophy,
-    },
-};
-
-export default function CardHeader({ title, variant = "gray" }: CardHeaderProps) {
-    const v = variants[variant];
+export default function CardHeader({ title, v }: CardHeaderProps) {
     const Icon = v.icon;
 
     return (
-        <div className={`flex items-center justify-between px-10 py-5 border-b min-h-[100px]  ${v.bg} ${v.text} ${variant === "blue" ? "border-primary" : "border-b border-lightgray"}`}>
+        <div className={`flex items-center justify-between px-10 py-5 border-b min-h-[100px] ${v.bg} ${v.text} ${v.bg ? "border-primary" : "border-lightgray"}`}>
             <h1 className="font-semibold text-4xl">{title}</h1>
 
             {Icon && (
                 <div className={`p-3 rounded-full flex items-center justify-center ${v.iconBg}`}>
-                    <Icon className={`${v.iconColor}`} size={26} />
+                    <Icon className={v.iconColor} size={26} />
                 </div>
             )}
         </div>
