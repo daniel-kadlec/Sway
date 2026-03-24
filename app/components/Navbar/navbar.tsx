@@ -51,7 +51,7 @@ export default function Navbar(){
     }
 
     const ContextMenucontent = (
-        <div className={'text-offblack flex flex-col justify-center items-center'}>
+        <div className={'text-offblack flex flex-col justify-center items-center p-3'}>
             <h1 className={'text-primary font-bold text-2xl'}>Daniel Kadlec</h1>
             <h1 className={''}>Admin</h1>
             <Button className="w-full justify-start mt-3 !bg-error-light !text-error ">

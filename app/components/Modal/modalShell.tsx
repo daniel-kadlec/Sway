@@ -21,14 +21,18 @@ export default function ModalShell() {
     if (!modal.isOpen) return null;
     const Component = MODAL_COMPONENTS[modal.type!];
 
+    // Only close if the click is directly on the overlay
+    const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (e.target === e.currentTarget) {
+            closeModal();
+        }
+    };
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded">
+        <div onClick={handleOverlayClick} className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="modal-container">
 
                 {Component && <Component data={modal.data} />}
-
-                <button onClick={closeModal} className={'cursor-pointer'}>Close</button>
             </div>
         </div>
     );

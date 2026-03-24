@@ -13,7 +13,6 @@ export default function Lead() {
     return (
         <div className="group relative h-30 w-full border-b border-lightgray py-4 px-10 flex flex-col justify-center overflow-hidden">
 
-            {/* CONTENT */}
             <span className="flex gap-2 items-center z-10">
                 <h1 className="font-bold text-3xl text-offblack">El Negro</h1>
                 <IoLogoInstagram size={30} className="text-primary mt-0.5" />
