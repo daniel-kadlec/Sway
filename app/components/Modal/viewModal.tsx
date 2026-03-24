@@ -7,6 +7,8 @@ import { FaForward } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import { FaFlagCheckered } from "react-icons/fa";
+
 
 
 type ViewModalProps = {
@@ -43,8 +45,18 @@ function InfoItem({icon: Icon, value, href}: {
     );
 }
 
+
 export default function ViewModal({ data }: ViewModalProps) {
     const { closeModal, openModal } = useModal();
+
+    const ContextMenuContent = (
+        <div className={'flex justify-center'}>
+            <Button onClick={()=> openModal('finish')} className={'flex justify-center items-center gap-2'}>
+                <FaFlagCheckered className={'mt-0.5'}/>
+                Finish
+            </Button>
+        </div>
+    );
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
@@ -56,7 +68,7 @@ export default function ViewModal({ data }: ViewModalProps) {
                     </h2>
 
                     <div className="flex items-center gap-3">
-                        <ContextMenu>
+                        <ContextMenu content={ContextMenuContent}>
                             <button className="size-12 flex items-center justify-center rounded-full bg-primary-light transition cursor-pointer hover:opacity-90">
                                 <IoEllipsisHorizontal className="text-primary size-8" />
                             </button>

@@ -51,10 +51,15 @@ export default function Navbar(){
     }
 
     const ContextMenucontent = (
-        <Button className="w-full justify-start !bg-error-light !text-error ">
-            Logout
-        </Button>
-    );
+        <div className={'text-offblack flex flex-col justify-center items-center'}>
+            <h1 className={'text-primary font-bold text-2xl'}>Daniel Kadlec</h1>
+            <h1 className={''}>Admin</h1>
+            <Button className="w-full justify-start mt-3 !bg-error-light !text-error ">
+                Logout
+            </Button>
+        </div>
+    )
+
 
     return  (
         <div className={'w-full flex h-80 mb-(--container-gap) text-offwhite'}>

@@ -7,8 +7,6 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
 import {useModal} from "@/app/Context/ModalContext";
 
-
-
 export default function Lead() {
     const { openModal } = useModal();
 
