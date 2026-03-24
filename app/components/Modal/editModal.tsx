@@ -13,8 +13,7 @@ export default function EditModal({ data }: editModalProps) {
     const { closeModal, openModal } = useModal();
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-            <div className="modal-container">
+            <>
 
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
@@ -113,7 +112,6 @@ export default function EditModal({ data }: editModalProps) {
                         Save
                     </Button>
                 </div>
-            </div>
-        </div>
+            </>
     );
 }
