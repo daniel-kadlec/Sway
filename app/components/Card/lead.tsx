@@ -39,7 +39,7 @@ export default function Lead({ v }: LeadProps) {
             {/* overlay */}
             <div
                 onClick={() => openModal("view")}
-                className={`absolute inset-0 ${v.bg || "bg-primary"}/80 z-10 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center text-white cursor-pointer p-4`}
+                className={`absolute inset-0 bg-primary/80 z-10 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center text-white cursor-pointer p-4`}
             >
                 <div className="flex items-center gap-10">
                     <FaFlagCheckered
