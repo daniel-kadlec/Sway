@@ -7,6 +7,9 @@ export function middleware(req: NextRequest) {
     if (!isAuth && req.nextUrl.pathname !== "/login") {
         return NextResponse.redirect(new URL("/login", req.url));
     }
+    if (isAuth && req.nextUrl.pathname == "/login") {
+        return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
 
     return NextResponse.next();
 }
