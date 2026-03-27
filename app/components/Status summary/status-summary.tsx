@@ -9,7 +9,7 @@ export default function StatusSummary() {
         <div className="bg-white rounded-3xl shadow-primary h-full w-full py-8 px-14 flex items-center justify-between">
             <StatusSummaryItem
                 icon={IoIosWarning}
-                text="3 Overdue"
+                text="— Overdue"
                 bgColor="bg-error-light"
                 iconColor="text-error"
                 iconSize={30}
@@ -18,7 +18,7 @@ export default function StatusSummary() {
 
             <StatusSummaryItem
                 icon={FaRegClock}
-                text="5 Pending"
+                text="— Pending"
                 bgColor="bg-warning-light"
                 iconColor="text-warning"
                 iconSize={25}
@@ -26,7 +26,7 @@ export default function StatusSummary() {
 
             <StatusSummaryItem
                 icon={FaUser}
-                text="7 Active"
+                text="— Active"
                 bgColor="bg-primary-light"
                 iconColor="text-primary"
                 iconSize={22}

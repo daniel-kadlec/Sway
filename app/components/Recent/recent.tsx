@@ -14,18 +14,18 @@ export default function Recent({ className }: RecentProps) {
                     Data for the last
                 </span>
                 <span className={'flex items-center gap-1 -mt-2 cursor-pointer text-4xl'}>
-                    <span className="font-semibold">2 weeks</span>
+                    <span className="font-semibold">—</span>
                     <FiChevronDown size={36} className={'mt-2'}/>
                 </span>
             </div>
 
             {/* Stats */}
             <div className="flex gap-24 mr-26">
-                <RecentItem label="Leads added" value="+18" />
-                <RecentItem label="Contacted" value="+14" />
-                <RecentItem label="Responded" value="+9" />
-                <RecentItem label="Deals won" value="+3" />
-                <RecentItem label="Deals lost" value="+6" />
+                <RecentItem label="Leads added" value="+—"/>
+                <RecentItem label="Contacted" value="+—" />
+                <RecentItem label="Responded" value="+—" />
+                <RecentItem label="Deals won" value="+—" />
+                <RecentItem label="Deals lost" value="+—" />
             </div>
 
         </div>

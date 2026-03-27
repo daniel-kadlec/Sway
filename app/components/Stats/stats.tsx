@@ -22,7 +22,7 @@ export default function Stats({ className }: StatsProps) {
                 <StatItem
                     icon={FaFrog}
                     label="Total leads"
-                    value={420}
+                    value={"—"}
                     iconSize={40}
                     iconOffsetY={-1}
                 />
@@ -32,7 +32,7 @@ export default function Stats({ className }: StatsProps) {
                 <StatItem
                     icon={FaComment }
                     label="Total replies"
-                    value={69}
+                    value={"—"}
                     iconSize={38}
                 />
 
@@ -41,7 +41,7 @@ export default function Stats({ className }: StatsProps) {
                 <StatItem
                     icon={FaUser}
                     label="Total clients"
-                    value={420}
+                    value={"—"}
                     iconSize={34}
                 />
 
@@ -50,7 +50,7 @@ export default function Stats({ className }: StatsProps) {
                 <StatItem
                     icon={FaArrowTrendUp}
                     label="Conversion rate"
-                    value="69%"
+                    value="—%"
                     iconSize={38}
                 />
             </div>
