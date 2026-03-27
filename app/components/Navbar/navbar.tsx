@@ -4,6 +4,7 @@ import StatusSummary from "@/app/components/Status summary/status-summary";
 import NavLinks from "@/app/components/Navbar/navLinks";
 import { useEffect, useState } from "react";
 import {useModal} from "@/app/Context/ModalContext";
+import { useRouter } from "next/navigation";
 
 import { FaUser } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
@@ -17,6 +18,7 @@ export default function Navbar(){
 
     const [time, setTime] = useState(new Date());
     const { openModal } = useModal();
+    const router = useRouter();
 
 
     // time
@@ -54,7 +56,11 @@ export default function Navbar(){
         <div className={'text-offblack flex flex-col justify-center items-center p-3'}>
             <h1 className={'text-primary font-bold text-2xl'}>Daniel Kadlec</h1>
             <h1 className={''}>Admin</h1>
-            <Button className="w-full justify-start mt-3 !bg-error-light !text-error icon-button">
+            <Button  onClick={async () => {
+                                await fetch("/api/logout", { method: "POST" });
+                                router.push("/login");
+                            }}
+                     className="w-full justify-start mt-3 !bg-error-light !text-error icon-button">
                 <TbLogout2 className={'mt-0.5'}/>
                 Logout
             </Button>
