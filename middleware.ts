@@ -1,26 +1,34 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import jwt from "jsonwebtoken";
+
+export const runtime = "nodejs";
 
 export function middleware(req: NextRequest) {
-    const isAuth = req.cookies.get("auth");
+    const { pathname } = req.nextUrl;
+    const token = req.cookies.get("auth")?.value;
 
-    if (!isAuth && req.nextUrl.pathname !== "/login") {
+    let isAuth = false;
+
+    if (token) {
+        try {
+            jwt.verify(token, process.env.JWT_SECRET!);
+            isAuth = true;
+        } catch {
+        }
+    }
+
+    if (!isAuth && pathname !== "/login") {
         return NextResponse.redirect(new URL("/login", req.url));
     }
-    if (isAuth && req.nextUrl.pathname == "/login") {
+
+    if (isAuth && pathname === "/login") {
         return NextResponse.redirect(new URL("/dashboard", req.url));
     }
 
     return NextResponse.next();
 }
+
 export const config = {
-    matcher: [
-        /*
-         * Match all request paths except:
-         * - _next (Next.js internals)
-         * - api (optional, but usually excluded)
-         * - static files (images, etc.)
-         */
-        "/((?!_next|api|favicon.ico).*)",
-    ],
+    matcher: ["/((?!_next|api|favicon.ico).*)"],
 };
