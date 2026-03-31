@@ -1,4 +1,4 @@
-import { useModal } from "@/app/Context/ModalContext";
+import { useModal } from "@/app/context/ModalContext";
 import Button from "@/app/components/button";
 import ContextMenu from "@/app/components/context-menu";
 import {IoClose, IoEllipsisHorizontal, IoMail, IoCall, IoGlobeOutline, IoLogoInstagram} from "react-icons/io5";

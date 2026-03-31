@@ -1,5 +1,5 @@
 'use client';
-import {useModal} from "@/app/Context/ModalContext";
+import {useModal} from "@/app/context/ModalContext";
 
 import { FaSort } from "react-icons/fa6";
 import { FaSortUp } from "react-icons/fa";

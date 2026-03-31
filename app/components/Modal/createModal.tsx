@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {useModal} from "@/app/Context/ModalContext";
+import {useModal} from "@/app/context/ModalContext";
 import { IoClose } from "react-icons/io5";
 import { Label, Input, Select } from "./inputs";
 import Button from "@/app/components/button";

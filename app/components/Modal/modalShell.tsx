@@ -1,6 +1,6 @@
 "use client";
 
-import {useModal} from "@/app/Context/ModalContext";
+import {useModal} from "@/app/context/ModalContext";
 import CreateModal from "@/app/components/Modal/createModal";
 import EditModal from "@/app/components/Modal/editModal";
 import ViewModal from "@/app/components/Modal/viewModal";

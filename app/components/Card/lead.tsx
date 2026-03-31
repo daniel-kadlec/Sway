@@ -5,7 +5,7 @@ import { FaRegCalendar, FaRegClock } from "react-icons/fa6";
 import { FaFlagCheckered, FaForward } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
-import { useModal } from "@/app/Context/ModalContext";
+import { useModal } from "@/app/context/ModalContext";
 import { VariantConfig } from "@/app/components/Card/card";
 
 type LeadProps = {

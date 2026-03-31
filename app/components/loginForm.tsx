@@ -3,9 +3,12 @@ import {Input} from "@/app/components/Modal/inputs";
 import Button from "@/app/components/button";
 import {useState} from "react";
 import { TbLogin } from "react-icons/tb";
+import {useToast} from "@/app/context/ToastContext";
 
 export default function LoginForm(){
     const [password, setPassword] = useState("");
+
+    const {showToast} = useToast();
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -20,8 +23,9 @@ export default function LoginForm(){
 
         if (res.ok) {
             window.location.href = "/";
+            showToast("Logged in successfully");
         } else {
-            alert("Wrong password");
+            showToast("Incorrect password");
         }
     }
 
