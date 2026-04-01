@@ -25,7 +25,7 @@ export default function LoginForm(){
             window.location.href = "/";
             showToast("Logged in successfully");
         } else {
-            showToast("Incorrect password");
+            showToast("Incorrect password", "Try again");
         }
     }
 

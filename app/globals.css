@@ -102,3 +102,16 @@
     background: #e5e7eb;
     border-radius: 9999px;
 }
+
+@keyframes countdown {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+.toastCountdown{
+    animation: countdown 3s linear;
+}

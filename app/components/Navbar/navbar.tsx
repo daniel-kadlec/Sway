@@ -62,7 +62,7 @@ export default function Navbar(){
                 async () => {
                     await fetch("/api/logout", { method: "POST" });
                     router.push("/login");
-                    showToast("Logged out successfully");
+                    showToast("Logged out sucessfully", "See you later!");
                 }}
                      className="w-full justify-start mt-3 !bg-error-light !text-error icon-button">
                 <TbLogout2 className={'mt-0.5'}/>
