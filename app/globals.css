@@ -113,5 +113,34 @@
 }
 
 .toastCountdown{
-    animation: countdown 3s linear;
+    width: 100%;
+    animation: countdown 3s linear forwards;
 }
+
+@keyframes toastPresence {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    10%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    90%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    98% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+.toastPresence{
+    animation: toastPresence 3s ease-in-out;
+}
+
