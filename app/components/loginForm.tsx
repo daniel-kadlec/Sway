@@ -4,10 +4,11 @@ import Button from "@/app/components/button";
 import {useState} from "react";
 import { TbLogin } from "react-icons/tb";
 import {useToast} from "@/app/context/ToastContext";
+import {useRouter} from "next/navigation";
 
 export default function LoginForm(){
     const [password, setPassword] = useState("");
-
+    const router = useRouter();
     const {showToast} = useToast();
 
     async function handleSubmit(e: React.FormEvent) {
@@ -22,8 +23,8 @@ export default function LoginForm(){
         });
 
         if (res.ok) {
-            window.location.href = "/";
             showToast("Logged in successfully", "Welcome back!", "success");
+            router.push("/");
         } else {
             showToast("Incorrect password", "Try again", "error");
         }
