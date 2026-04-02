@@ -4,7 +4,12 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     const { password } = await req.json();
-    const cleanPassword = password.trim();
+    const cleanPassword = password?.trim();
+
+    if (!cleanPassword) {
+        return NextResponse.json({ error: "Password is required" }, { status: 400 });
+    }
+
     const isValid = await bcrypt.compare(
         cleanPassword,
         process.env.APP_PASSWORD_HASH!
@@ -13,6 +18,7 @@ export async function POST(req: Request) {
     if (!isValid) {
         return NextResponse.json({ error: "Invalid password" }, { status: 401 });
     }
+
     const token = jwt.sign({ role: "admin" }, process.env.JWT_SECRET!, {
         expiresIn: "1h",
     });

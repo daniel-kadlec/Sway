@@ -13,7 +13,7 @@ const variants = {
         bg: "bg-success",
         iconColor: "text-success",
         icon: FaCheck,
-        iconSize: 16,
+        iconSize: 18,
     },
     warning: {
         bgLight: "bg-warning-light",
@@ -44,7 +44,7 @@ export default function ToastContainer({ toasts }: Props) {
                         className={`bg-white text-offblack relative px-6 py-3 rounded-xl overflow-hidden shadow-primary flex justify-center items-center toastPresence min-w-[200px]`}
                     >
                         <div className="flex gap-3 justify-center items-center mb-1">
-                            <div className={`${variant.bgLight} p-2 rounded-full mt-0.5 flex justify-center items-center`}>
+                            <div className={`${variant.bgLight} w-9 h-9 rounded-full mt-0.5 flex justify-center items-center`}>
                                 <Icon className={`${variant.iconColor}`} size={variant.iconSize}/>
                             </div>
 
