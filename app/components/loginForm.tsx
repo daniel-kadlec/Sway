@@ -26,8 +26,7 @@ export default function LoginForm(){
             showToast("Logged in successfully", "Welcome back!", "success");
             router.push("/");
         }
-
-        if (res.status === 400) {
+        else if (res.status === 400) {
             showToast("Password is required", "Enter a password", "error");
             router.push("/");
         }
