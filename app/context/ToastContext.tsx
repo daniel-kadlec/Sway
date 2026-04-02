@@ -3,15 +3,22 @@
 import { createContext, useContext, useState } from "react";
 import ToastContainer from "@/app/components/toastContainer";
 
-type ToastType = {
+export type ToastVariant = "success" | "warning" | "error";
+
+export type ToastType = {
     id: string;
     message: string;
     description?: string;
+    type: ToastVariant;
 };
 
 type ToastContextType = {
     toasts: ToastType[];
-    showToast: (message: string, description?: string) => void;
+    showToast: (
+        message: string,
+        description?: string,
+        type?: ToastVariant
+    ) => void;
     removeToast: (id: string) => void;
 };
 
@@ -20,10 +27,17 @@ const ToastContext = createContext<ToastContextType | undefined>(undefined);
 export function ToastProvider({ children }: { children: React.ReactNode }) {
     const [toasts, setToasts] = useState<ToastType[]>([]);
 
-    function showToast(message: string, description?:string) {
+    function showToast(
+        message: string,
+        description?: string,
+        type: ToastVariant = "success"
+    ) {
         const id = crypto.randomUUID();
 
-        setToasts((prev) => [...prev, { id, message, description }]);
+        setToasts((prev) => [
+            ...prev,
+            { id, message, description, type },
+        ]);
 
         setTimeout(() => {
             removeToast(id);
@@ -37,7 +51,6 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     return (
         <ToastContext.Provider value={{ toasts, showToast, removeToast }}>
             {children}
-
             <ToastContainer toasts={toasts} />
         </ToastContext.Provider>
     );

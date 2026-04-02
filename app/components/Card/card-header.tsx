@@ -1,4 +1,4 @@
-'use client';
+    'use client';
 
 import {VariantConfig} from "@/app/components/Card/card";
 
