@@ -6,9 +6,6 @@ export async function POST(req: Request) {
     const { password } = await req.json();
     const cleanPassword = password?.trim();
 
-    if (!cleanPassword) {
-        return NextResponse.json({ error: "Password is required" }, { status: 400 });
-    }
 
     const isValid = await bcrypt.compare(
         cleanPassword,

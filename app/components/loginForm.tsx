@@ -14,6 +14,11 @@ export default function LoginForm(){
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
 
+        if (!password){
+            showToast("Password is required", "Please enter your password!", "error");
+            return;
+        }
+
         const res = await fetch("/api/login", {
             method: "POST",
             headers: {
@@ -26,11 +31,6 @@ export default function LoginForm(){
             showToast("Logged in successfully", "Welcome back!", "success");
             router.push("/");
         }
-        else if (res.status === 400) {
-            showToast("Password is required", "Enter a password", "error");
-            router.push("/");
-        }
-
         else {
             showToast("Incorrect password", "Try again!", "error");
         }
