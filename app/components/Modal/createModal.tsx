@@ -3,6 +3,7 @@ import {useModal} from "@/app/context/ModalContext";
 import { IoClose } from "react-icons/io5";
 import { Label, Input, Select } from "./inputs";
 import Button from "@/app/components/button";
+import {useToast} from "@/app/context/ToastContext";
 
 type CreateModalProps = {
     data?: any;
@@ -11,7 +12,29 @@ type CreateModalProps = {
 export default function CreateModal({ data }: CreateModalProps) {
     const [advanced, setAdvanced] = useState(false);
     const { closeModal } = useModal();
+    const { showToast } = useToast();
 
+    const handleLeadCreate = async () => {
+        try {
+            const res = await fetch("/api/leads", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: "Test Lead",
+                    email: "test@email.com",
+                }),
+            });
+
+            if (!res.ok) throw new Error();
+
+            showToast("Lead created successfully", "", "success");
+            closeModal();
+        } catch (err) {
+            showToast("Failed to create lead", "", "error");
+        }
+    };
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
@@ -100,10 +123,10 @@ export default function CreateModal({ data }: CreateModalProps) {
 
                 <div className="flex justify-end gap-3 mt-10">
                     <Button className={'bg-primary-light! text-primary!'}>
-                        Save & Next
+                        Create & Next
                     </Button>
-                    <Button>
-                        Save
+                    <Button onClick={handleLeadCreate}>
+                        Create
                     </Button>
                 </div>
             </div>
