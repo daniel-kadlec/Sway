@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/app/api/leads/route.ts">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/app/api/leads/route.ts" />
+              <option name="originalContent" value="import { PrismaClient } from &quot;@prisma/client&quot;;&#10;import { PrismaPg } from &quot;@prisma/adapter-pg&quot;;&#10;import { Pool } from &quot;pg&quot;;&#10;&#10;const connectionString = process.env.DATABASE_URL!;&#10;&#10;const pool = new Pool({ connectionString });&#10;const adapter = new PrismaPg(pool);&#10;const prisma = new PrismaClient({ adapter });&#10;&#10;console.log(process.env.DATABASE_URL!);&#10;&#10;export async function POST(req: Request) {&#10;    const body = await req.json();&#10;&#10;    const lead = await prisma.lead.create({&#10;        data: {&#10;            name: body.name,&#10;            email: body.email,&#10;        },&#10;    });&#10;&#10;    return Response.json(lead);&#10;}&#10;&#10;export async function GET() {&#10;    const leads = await prisma.lead.findMany({&#10;        orderBy: { createdAt: &quot;desc&quot; },&#10;    });&#10;&#10;    return Response.json(leads);&#10;}" />
+              <option name="updatedContent" value="import { PrismaClient } from &quot;../../generated/prisma&quot;;&#10;import { PrismaPg } from &quot;@prisma/adapter-pg&quot;;&#10;import { Pool } from &quot;pg&quot;;&#10;&#10;const connectionString = process.env.DATABASE_URL!;&#10;&#10;const pool = new Pool({ connectionString });&#10;const adapter = new PrismaPg(pool);&#10;const prisma = new PrismaClient({ adapter });&#10;&#10;console.log(process.env.DATABASE_URL!);&#10;&#10;export async function POST(req: Request) {&#10;    const body = await req.json();&#10;&#10;    const lead = await prisma.lead.create({&#10;        data: {&#10;            name: body.name,&#10;            email: body.email,&#10;        },&#10;    });&#10;&#10;    return Response.json(lead);&#10;}&#10;&#10;export async function GET() {&#10;    const leads = await prisma.lead.findMany({&#10;        orderBy: { createdAt: &quot;desc&quot; },&#10;    });&#10;&#10;    return Response.json(leads);&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/generated/prisma/index.ts">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/app/generated/prisma/index.ts" />
+              <option name="updatedContent" value="export * from './client'&#10;export { PrismaClient } from './client'&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/package.json">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/package.json" />
+              <option name="originalContent" value="{&#10;  &quot;name&quot;: &quot;outreach-table&quot;,&#10;  &quot;version&quot;: &quot;0.1.0&quot;,&#10;  &quot;private&quot;: true,&#10;  &quot;scripts&quot;: {&#10;    &quot;dev&quot;: &quot;next dev&quot;,&#10;    &quot;build&quot;: &quot;next build&quot;,&#10;    &quot;start&quot;: &quot;next start&quot;,&#10;    &quot;lint&quot;: &quot;eslint&quot;&#10;  },&#10;  &quot;dependencies&quot;: {&#10;    &quot;@prisma/adapter-pg&quot;: &quot;^7.6.0&quot;,&#10;    &quot;@prisma/client&quot;: &quot;^7.6.0&quot;,&#10;    &quot;bcryptjs&quot;: &quot;^3.0.3&quot;,&#10;    &quot;jsonwebtoken&quot;: &quot;^9.0.3&quot;,&#10;    &quot;next&quot;: &quot;16.1.6&quot;,&#10;    &quot;pg&quot;: &quot;^8.20.0&quot;,&#10;    &quot;react&quot;: &quot;19.2.3&quot;,&#10;    &quot;react-dom&quot;: &quot;19.2.3&quot;,&#10;    &quot;react-icons&quot;: &quot;^5.6.0&quot;&#10;  },&#10;  &quot;devDependencies&quot;: {&#10;    &quot;@tailwindcss/postcss&quot;: &quot;^4&quot;,&#10;    &quot;@types/bcrypt&quot;: &quot;^6.0.0&quot;,&#10;    &quot;@types/jsonwebtoken&quot;: &quot;^9.0.10&quot;,&#10;    &quot;@types/node&quot;: &quot;^20&quot;,&#10;    &quot;@types/react&quot;: &quot;^19&quot;,&#10;    &quot;@types/react-dom&quot;: &quot;^19&quot;,&#10;    &quot;eslint&quot;: &quot;^9&quot;,&#10;    &quot;eslint-config-next&quot;: &quot;16.1.6&quot;,&#10;    &quot;prisma&quot;: &quot;^7.6.0&quot;,&#10;    &quot;tailwindcss&quot;: &quot;^4&quot;,&#10;    &quot;typescript&quot;: &quot;^5&quot;&#10;  }&#10;}&#10;" />
+              <option name="updatedContent" value="{&#10;  &quot;name&quot;: &quot;outreach-table&quot;,&#10;  &quot;version&quot;: &quot;0.1.0&quot;,&#10;  &quot;private&quot;: true,&#10;  &quot;scripts&quot;: {&#10;    &quot;dev&quot;: &quot;next dev&quot;,&#10;    &quot;build&quot;: &quot;next build&quot;,&#10;    &quot;start&quot;: &quot;next start&quot;,&#10;    &quot;lint&quot;: &quot;eslint&quot;,&#10;    &quot;postinstall&quot;: &quot;prisma generate&quot;&#10;  },&#10;  &quot;dependencies&quot;: {&#10;    &quot;@prisma/adapter-pg&quot;: &quot;^7.6.0&quot;,&#10;    &quot;@prisma/client&quot;: &quot;^7.6.0&quot;,&#10;    &quot;bcryptjs&quot;: &quot;^3.0.3&quot;,&#10;    &quot;jsonwebtoken&quot;: &quot;^9.0.3&quot;,&#10;    &quot;next&quot;: &quot;16.1.6&quot;,&#10;    &quot;pg&quot;: &quot;^8.20.0&quot;,&#10;    &quot;react&quot;: &quot;19.2.3&quot;,&#10;    &quot;react-dom&quot;: &quot;19.2.3&quot;,&#10;    &quot;react-icons&quot;: &quot;^5.6.0&quot;&#10;  },&#10;  &quot;devDependencies&quot;: {&#10;    &quot;@tailwindcss/postcss&quot;: &quot;^4&quot;,&#10;    &quot;@types/bcrypt&quot;: &quot;^6.0.0&quot;,&#10;    &quot;@types/jsonwebtoken&quot;: &quot;^9.0.10&quot;,&#10;    &quot;@types/node&quot;: &quot;^20&quot;,&#10;    &quot;@types/react&quot;: &quot;^19&quot;,&#10;    &quot;@types/react-dom&quot;: &quot;^19&quot;,&#10;    &quot;eslint&quot;: &quot;^9&quot;,&#10;    &quot;eslint-config-next&quot;: &quot;16.1.6&quot;,&#10;    &quot;prisma&quot;: &quot;^7.6.0&quot;,&#10;    &quot;tailwindcss&quot;: &quot;^4&quot;,&#10;    &quot;typescript&quot;: &quot;^5&quot;&#10;  }&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/prisma/schema.prisma">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/prisma/schema.prisma" />
+              <option name="originalContent" value="generator client {&#10;  provider = &quot;prisma-client&quot;&#10;}&#10;&#10;datasource db {&#10;  provider = &quot;postgresql&quot;&#10;}&#10;&#10;model Lead {&#10;  id        String   @id @default(uuid())&#10;  name      String&#10;  email     String?&#10;  notes     String?&#10;  createdAt DateTime @default(now())&#10;}&#10;" />
+              <option name="updatedContent" value="generator client {&#10;  provider = &quot;prisma-client&quot;&#10;  output   = &quot;../app/generated/prisma&quot;&#10;}&#10;&#10;datasource db {&#10;  provider = &quot;postgresql&quot;&#10;}&#10;&#10;model Lead {&#10;  id        String   @id @default(uuid())&#10;  name      String&#10;  email     String?&#10;  notes     String?&#10;  createdAt DateTime @default(now())&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

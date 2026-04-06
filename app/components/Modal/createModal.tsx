@@ -22,7 +22,7 @@ export default function CreateModal({ data }: CreateModalProps) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    name: "Test Lead",
+                    name: "Test Lead 222222",
                     email: "test@email.com",
                 }),
             });
