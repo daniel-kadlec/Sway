@@ -5,8 +5,16 @@ export async function POST(req: Request) {
 
     const lead = await prisma.lead.create({
         data: {
-            name: body.name,
-            notes: body.notes,
+            companyName: body.companyName,
+            primaryContact: body.primaryContact,
+            primaryPlatform: body.primaryPlatform,
+            website: body.website,
+            contactDate: body.contactDate
+                ? new Date(body.contactDate)
+                : null,
+            secondaryContact: body.secondaryContact,
+            secondaryPlatform: body.secondaryPlatform,
+            note: body.note
         },
     });
 

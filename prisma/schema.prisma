@@ -8,9 +8,14 @@ datasource db {
 }
 
 model Lead {
-  id        String   @id @default(uuid())
-  name      String
-  email     String?
-  notes     String?
-  createdAt DateTime @default(now())
+  id                String    @id @default(uuid())
+  companyName       String
+  primaryContact    String
+  primaryPlatform   String
+  website           String?
+  contactDate       DateTime? @db.Date
+  secondaryContact  String?
+  secondaryPlatform String?
+  note              String?
+  createdAt         DateTime  @default(now())
 }

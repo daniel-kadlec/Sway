@@ -14,6 +14,24 @@ export default function CreateModal({ data }: CreateModalProps) {
     const { closeModal } = useModal();
     const { showToast } = useToast();
 
+    const [form, setForm] = useState({
+        companyName: "",
+        primaryContact: "",
+        primaryPlatform: "",
+        website: "",
+        contactDate: "",
+        secondaryContact: "",
+        secondaryPlatform: "",
+        note: "",
+    });
+
+    const handleInputChange = (field: string, value: string) => {
+        setForm((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
+
     const handleLeadCreate = async () => {
         try {
             const res = await fetch("/api/leads", {
@@ -21,10 +39,7 @@ export default function CreateModal({ data }: CreateModalProps) {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    name: "Test Lead 222222",
-                    email: "test@email.com",
-                }),
+                body: JSON.stringify(form),
             });
 
             if (!res.ok) throw new Error();
@@ -67,47 +82,51 @@ export default function CreateModal({ data }: CreateModalProps) {
                     </label>
                 </div>
 
-                {/* Form */}
                 <div className="grid grid-cols-2 gap-8">
 
-                    {/* Company */}
                     <div className="col-span-2">
                         <Label>Company name</Label>
-                        <Input placeholder="Velká firma" />
+                        <Input onChange={(e) => handleInputChange("companyName", e.target.value)} placeholder="Velká firma" />
                     </div>
 
-                    {/* Primary */}
                     <div>
                         <Label>Primary contact</Label>
-                        <Input placeholder="E-mail, IG, phone" />
+                        <Input onChange={(e) => handleInputChange("primaryContact", e.target.value)} placeholder="E-mail, IG, phone" />
                     </div>
 
                     <div>
                         <Label>Primary platform</Label>
-                        <Select />
+                        <Select value={form.primaryPlatform}
+                                onChange={(e) =>
+                                    handleInputChange("primaryPlatform", e.target.value)
+                                }/>
                     </div>
 
-                    {/* Website + date */}
                     <div>
                         <Label>Website (optional)</Label>
-                        <Input placeholder="youtube.com" />
+                        <Input onChange={(e) => handleInputChange("website", e.target.value)} placeholder="youtube.com" />
                     </div>
 
                     <div>
                         <Label>Contact date (optional)</Label>
-                        <Input placeholder="7.7.2027" />
+                        <Input
+                            type="date"
+                            value={form.contactDate}
+                            onChange={(e) => handleInputChange("contactDate", e.target.value)} placeholder="7.7.2027" />
                     </div>
 
                     {advanced && (
                         <>
                             <div>
                                 <Label>Secondary contact</Label>
-                                <Input placeholder="E-mail, IG, phone" />
+                                <Input onChange={(e) => handleInputChange("secondaryContact", e.target.value)} placeholder="E-mail, IG, phone" />
                             </div>
 
                             <div>
-                                <Label>Secondary platform</Label>
-                                <Select />
+                                <Select value={form.primaryPlatform}
+                                        onChange={(e) =>
+                                            handleInputChange("secondaryPlatform", e.target.value)
+                                        }/>
                             </div>
 
                             <div className="col-span-2">
@@ -115,6 +134,7 @@ export default function CreateModal({ data }: CreateModalProps) {
                                 <textarea
                                     className="w-full min-h-[100px] rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
                                     placeholder="Poznámka..."
+                                    onChange={(e) => handleInputChange("note", e.target.value)}
                                 />
                             </div>
                         </>

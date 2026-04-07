@@ -26,25 +26,40 @@ export type AggregateLead = {
 
 export type LeadMinAggregateOutputType = {
   id: string | null
-  name: string | null
-  email: string | null
-  notes: string | null
+  companyName: string | null
+  primaryContact: string | null
+  primaryPlatform: string | null
+  website: string | null
+  contactDate: Date | null
+  secondaryContact: string | null
+  secondaryPlatform: string | null
+  note: string | null
   createdAt: Date | null
 }
 
 export type LeadMaxAggregateOutputType = {
   id: string | null
-  name: string | null
-  email: string | null
-  notes: string | null
+  companyName: string | null
+  primaryContact: string | null
+  primaryPlatform: string | null
+  website: string | null
+  contactDate: Date | null
+  secondaryContact: string | null
+  secondaryPlatform: string | null
+  note: string | null
   createdAt: Date | null
 }
 
 export type LeadCountAggregateOutputType = {
   id: number
-  name: number
-  email: number
-  notes: number
+  companyName: number
+  primaryContact: number
+  primaryPlatform: number
+  website: number
+  contactDate: number
+  secondaryContact: number
+  secondaryPlatform: number
+  note: number
   createdAt: number
   _all: number
 }
@@ -52,25 +67,40 @@ export type LeadCountAggregateOutputType = {
 
 export type LeadMinAggregateInputType = {
   id?: true
-  name?: true
-  email?: true
-  notes?: true
+  companyName?: true
+  primaryContact?: true
+  primaryPlatform?: true
+  website?: true
+  contactDate?: true
+  secondaryContact?: true
+  secondaryPlatform?: true
+  note?: true
   createdAt?: true
 }
 
 export type LeadMaxAggregateInputType = {
   id?: true
-  name?: true
-  email?: true
-  notes?: true
+  companyName?: true
+  primaryContact?: true
+  primaryPlatform?: true
+  website?: true
+  contactDate?: true
+  secondaryContact?: true
+  secondaryPlatform?: true
+  note?: true
   createdAt?: true
 }
 
 export type LeadCountAggregateInputType = {
   id?: true
-  name?: true
-  email?: true
-  notes?: true
+  companyName?: true
+  primaryContact?: true
+  primaryPlatform?: true
+  website?: true
+  contactDate?: true
+  secondaryContact?: true
+  secondaryPlatform?: true
+  note?: true
   createdAt?: true
   _all?: true
 }
@@ -149,9 +179,14 @@ export type LeadGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 
 export type LeadGroupByOutputType = {
   id: string
-  name: string
-  email: string | null
-  notes: string | null
+  companyName: string
+  primaryContact: string
+  primaryPlatform: string
+  website: string | null
+  contactDate: Date | null
+  secondaryContact: string | null
+  secondaryPlatform: string | null
+  note: string | null
   createdAt: Date
   _count: LeadCountAggregateOutputType | null
   _min: LeadMinAggregateOutputType | null
@@ -178,17 +213,27 @@ export type LeadWhereInput = {
   OR?: Prisma.LeadWhereInput[]
   NOT?: Prisma.LeadWhereInput | Prisma.LeadWhereInput[]
   id?: Prisma.StringFilter<"Lead"> | string
-  name?: Prisma.StringFilter<"Lead"> | string
-  email?: Prisma.StringNullableFilter<"Lead"> | string | null
-  notes?: Prisma.StringNullableFilter<"Lead"> | string | null
+  companyName?: Prisma.StringFilter<"Lead"> | string
+  primaryContact?: Prisma.StringFilter<"Lead"> | string
+  primaryPlatform?: Prisma.StringFilter<"Lead"> | string
+  website?: Prisma.StringNullableFilter<"Lead"> | string | null
+  contactDate?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  secondaryContact?: Prisma.StringNullableFilter<"Lead"> | string | null
+  secondaryPlatform?: Prisma.StringNullableFilter<"Lead"> | string | null
+  note?: Prisma.StringNullableFilter<"Lead"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
 }
 
 export type LeadOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  email?: Prisma.SortOrderInput | Prisma.SortOrder
-  notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyName?: Prisma.SortOrder
+  primaryContact?: Prisma.SortOrder
+  primaryPlatform?: Prisma.SortOrder
+  website?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  secondaryContact?: Prisma.SortOrderInput | Prisma.SortOrder
+  secondaryPlatform?: Prisma.SortOrderInput | Prisma.SortOrder
+  note?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -197,17 +242,27 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.LeadWhereInput | Prisma.LeadWhereInput[]
   OR?: Prisma.LeadWhereInput[]
   NOT?: Prisma.LeadWhereInput | Prisma.LeadWhereInput[]
-  name?: Prisma.StringFilter<"Lead"> | string
-  email?: Prisma.StringNullableFilter<"Lead"> | string | null
-  notes?: Prisma.StringNullableFilter<"Lead"> | string | null
+  companyName?: Prisma.StringFilter<"Lead"> | string
+  primaryContact?: Prisma.StringFilter<"Lead"> | string
+  primaryPlatform?: Prisma.StringFilter<"Lead"> | string
+  website?: Prisma.StringNullableFilter<"Lead"> | string | null
+  contactDate?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  secondaryContact?: Prisma.StringNullableFilter<"Lead"> | string | null
+  secondaryPlatform?: Prisma.StringNullableFilter<"Lead"> | string | null
+  note?: Prisma.StringNullableFilter<"Lead"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
 }, "id">
 
 export type LeadOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  email?: Prisma.SortOrderInput | Prisma.SortOrder
-  notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyName?: Prisma.SortOrder
+  primaryContact?: Prisma.SortOrder
+  primaryPlatform?: Prisma.SortOrder
+  website?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  secondaryContact?: Prisma.SortOrderInput | Prisma.SortOrder
+  secondaryPlatform?: Prisma.SortOrderInput | Prisma.SortOrder
+  note?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.LeadCountOrderByAggregateInput
   _max?: Prisma.LeadMaxOrderByAggregateInput
@@ -219,89 +274,144 @@ export type LeadScalarWhereWithAggregatesInput = {
   OR?: Prisma.LeadScalarWhereWithAggregatesInput[]
   NOT?: Prisma.LeadScalarWhereWithAggregatesInput | Prisma.LeadScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Lead"> | string
-  name?: Prisma.StringWithAggregatesFilter<"Lead"> | string
-  email?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
-  notes?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  companyName?: Prisma.StringWithAggregatesFilter<"Lead"> | string
+  primaryContact?: Prisma.StringWithAggregatesFilter<"Lead"> | string
+  primaryPlatform?: Prisma.StringWithAggregatesFilter<"Lead"> | string
+  website?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  contactDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
+  secondaryContact?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  secondaryPlatform?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  note?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Lead"> | Date | string
 }
 
 export type LeadCreateInput = {
   id?: string
-  name: string
-  email?: string | null
-  notes?: string | null
+  companyName: string
+  primaryContact: string
+  primaryPlatform: string
+  website?: string | null
+  contactDate?: Date | string | null
+  secondaryContact?: string | null
+  secondaryPlatform?: string | null
+  note?: string | null
   createdAt?: Date | string
 }
 
 export type LeadUncheckedCreateInput = {
   id?: string
-  name: string
-  email?: string | null
-  notes?: string | null
+  companyName: string
+  primaryContact: string
+  primaryPlatform: string
+  website?: string | null
+  contactDate?: Date | string | null
+  secondaryContact?: string | null
+  secondaryPlatform?: string | null
+  note?: string | null
   createdAt?: Date | string
 }
 
 export type LeadUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryContact?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryPlatform?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secondaryContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPlatform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LeadUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryContact?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryPlatform?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secondaryContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPlatform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LeadCreateManyInput = {
   id?: string
-  name: string
-  email?: string | null
-  notes?: string | null
+  companyName: string
+  primaryContact: string
+  primaryPlatform: string
+  website?: string | null
+  contactDate?: Date | string | null
+  secondaryContact?: string | null
+  secondaryPlatform?: string | null
+  note?: string | null
   createdAt?: Date | string
 }
 
 export type LeadUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryContact?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryPlatform?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secondaryContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPlatform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LeadUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryContact?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryPlatform?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secondaryContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPlatform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LeadCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  notes?: Prisma.SortOrder
+  companyName?: Prisma.SortOrder
+  primaryContact?: Prisma.SortOrder
+  primaryPlatform?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  contactDate?: Prisma.SortOrder
+  secondaryContact?: Prisma.SortOrder
+  secondaryPlatform?: Prisma.SortOrder
+  note?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type LeadMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  notes?: Prisma.SortOrder
+  companyName?: Prisma.SortOrder
+  primaryContact?: Prisma.SortOrder
+  primaryPlatform?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  contactDate?: Prisma.SortOrder
+  secondaryContact?: Prisma.SortOrder
+  secondaryPlatform?: Prisma.SortOrder
+  note?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type LeadMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  notes?: Prisma.SortOrder
+  companyName?: Prisma.SortOrder
+  primaryContact?: Prisma.SortOrder
+  primaryPlatform?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  contactDate?: Prisma.SortOrder
+  secondaryContact?: Prisma.SortOrder
+  secondaryPlatform?: Prisma.SortOrder
+  note?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -313,6 +423,10 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
@@ -321,46 +435,71 @@ export type DateTimeFieldUpdateOperationsInput = {
 
 export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  email?: boolean
-  notes?: boolean
+  companyName?: boolean
+  primaryContact?: boolean
+  primaryPlatform?: boolean
+  website?: boolean
+  contactDate?: boolean
+  secondaryContact?: boolean
+  secondaryPlatform?: boolean
+  note?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["lead"]>
 
 export type LeadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  email?: boolean
-  notes?: boolean
+  companyName?: boolean
+  primaryContact?: boolean
+  primaryPlatform?: boolean
+  website?: boolean
+  contactDate?: boolean
+  secondaryContact?: boolean
+  secondaryPlatform?: boolean
+  note?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["lead"]>
 
 export type LeadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  email?: boolean
-  notes?: boolean
+  companyName?: boolean
+  primaryContact?: boolean
+  primaryPlatform?: boolean
+  website?: boolean
+  contactDate?: boolean
+  secondaryContact?: boolean
+  secondaryPlatform?: boolean
+  note?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["lead"]>
 
 export type LeadSelectScalar = {
   id?: boolean
-  name?: boolean
-  email?: boolean
-  notes?: boolean
+  companyName?: boolean
+  primaryContact?: boolean
+  primaryPlatform?: boolean
+  website?: boolean
+  contactDate?: boolean
+  secondaryContact?: boolean
+  secondaryPlatform?: boolean
+  note?: boolean
   createdAt?: boolean
 }
 
-export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "notes" | "createdAt", ExtArgs["result"]["lead"]>
+export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "companyName" | "primaryContact" | "primaryPlatform" | "website" | "contactDate" | "secondaryContact" | "secondaryPlatform" | "note" | "createdAt", ExtArgs["result"]["lead"]>
 
 export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Lead"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    name: string
-    email: string | null
-    notes: string | null
+    companyName: string
+    primaryContact: string
+    primaryPlatform: string
+    website: string | null
+    contactDate: Date | null
+    secondaryContact: string | null
+    secondaryPlatform: string | null
+    note: string | null
     createdAt: Date
   }, ExtArgs["result"]["lead"]>
   composites: {}
@@ -786,9 +925,14 @@ export interface Prisma__LeadClient<T, Null = never, ExtArgs extends runtime.Typ
  */
 export interface LeadFieldRefs {
   readonly id: Prisma.FieldRef<"Lead", 'String'>
-  readonly name: Prisma.FieldRef<"Lead", 'String'>
-  readonly email: Prisma.FieldRef<"Lead", 'String'>
-  readonly notes: Prisma.FieldRef<"Lead", 'String'>
+  readonly companyName: Prisma.FieldRef<"Lead", 'String'>
+  readonly primaryContact: Prisma.FieldRef<"Lead", 'String'>
+  readonly primaryPlatform: Prisma.FieldRef<"Lead", 'String'>
+  readonly website: Prisma.FieldRef<"Lead", 'String'>
+  readonly contactDate: Prisma.FieldRef<"Lead", 'DateTime'>
+  readonly secondaryContact: Prisma.FieldRef<"Lead", 'String'>
+  readonly secondaryPlatform: Prisma.FieldRef<"Lead", 'String'>
+  readonly note: Prisma.FieldRef<"Lead", 'String'>
   readonly createdAt: Prisma.FieldRef<"Lead", 'DateTime'>
 }
     

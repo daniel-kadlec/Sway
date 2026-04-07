@@ -72,9 +72,14 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const LeadScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  email: 'email',
-  notes: 'notes',
+  companyName: 'companyName',
+  primaryContact: 'primaryContact',
+  primaryPlatform: 'primaryPlatform',
+  website: 'website',
+  contactDate: 'contactDate',
+  secondaryContact: 'secondaryContact',
+  secondaryPlatform: 'secondaryPlatform',
+  note: 'note',
   createdAt: 'createdAt'
 } as const
 

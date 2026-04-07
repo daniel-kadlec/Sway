@@ -15,9 +15,11 @@ export function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
     );
 }
 
-export function Select() {
+export function Select(props: React.InputHTMLAttributes<HTMLSelectElement>) {
     return (
-        <select className="w-full rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
+        <select
+            {...props}
+            className="w-full rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
         >
             <option>Instagram</option>
             <option>Email</option>
