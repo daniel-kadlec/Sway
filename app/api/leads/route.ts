@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/lib/prisma/client";
+import { PrismaClient } from "@/lib/generated/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
 
@@ -12,8 +12,8 @@ export async function POST(req: Request) {
 
     const lead = await prisma.lead.create({
         data: {
-            name: body.name,
-            email: body.email,
+            name: "4ernej 4ur8k",
+            notes: "niggggggg",
         },
     });
 

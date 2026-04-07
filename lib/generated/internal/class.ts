@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.6.0",
   "engineVersion": "75cbdc1eb7150937890ad5465d861175c6624711",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../lib/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Lead {\n  id        String   @id @default(uuid())\n  name      String\n  email     String?\n  notes     String?\n  createdAt DateTime @default(now())\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../lib/generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Lead {\n  id        String   @id @default(uuid())\n  name      String\n  email     String?\n  notes     String?\n  createdAt DateTime @default(now())\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
