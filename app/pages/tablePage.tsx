@@ -1,13 +1,21 @@
-'use client';
+import { prisma } from "@/lib/utils/prisma";
 import {useModal} from "@/app/context/ModalContext";
+import Table from "@/app/components/table";
+
 
 import { FaSort } from "react-icons/fa6";
 import { FaSortUp } from "react-icons/fa";
 import { FaSortDown } from "react-icons/fa6";
 
 
-export default function TablePage() {
-    const { openModal } = useModal();
+
+
+export default async function TablePage() {
+
+    const leads = await prisma.lead.findMany({
+        orderBy: { createdAt: "desc" },
+    });
+
 
     const columns = [
         "Name",
@@ -40,27 +48,7 @@ export default function TablePage() {
                     ))}
                 </tr>
                 </thead>
-
-                {/* body */}
-                <tbody>
-                <tr onClick={() => openModal("view")} className="border-b border-b-lightgray transition duration-300 cursor-pointer hover:bg-lightgray ">
-                    <td className="font-bold text-primary table-cell">John Doe</td>
-                    <td className="table-cell">john@example.com</td>
-                    <td className="table-cell">johndoe</td>
-                    <td className="table-cell">123 456 789</td>
-                    <td className="table-cell">johndoe.com</td>
-
-                    <td className="table-cell">2026-03-25</td>
-                    <td className="table-cell">2026-04-2</td>
-
-
-                    <td className="table-cell">2026-03-25</td>
-                    <td className="table-cell">2026-03-28</td>
-
-                    <td className="table-cell">Primary follow-up</td>
-                    <td className="table-cell">In progresswwwwwwwwwwwww </td>
-                </tr>
-                </tbody>
+                <Table leads={leads}/>
             </table>
         </div>
     );

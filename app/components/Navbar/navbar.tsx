@@ -80,7 +80,7 @@ export default function Navbar(){
                 <h1 className={'text-5xl font-bold'}>
                     {greeting() + ", Daniel!"}
                 </h1>
-                <h2 className={'text-3xl font-bold mt-1'}>You have 3 actions today</h2>
+                <h2 className={'text-3xl font-bold mt-1'}>You have — actions today</h2>
 
                 <span className={'flex gap-4 items-center'}>
                     <span className={'date-element'}>{weekday}</span>

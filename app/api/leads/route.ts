@@ -20,11 +20,3 @@ export async function POST(req: Request) {
 
     return Response.json(lead);
 }
-
-export async function GET() {
-    const leads = await prisma.lead.findMany({
-        orderBy: { createdAt: "desc" },
-    });
-
-    return Response.json(leads);
-}

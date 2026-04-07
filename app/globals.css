@@ -91,16 +91,18 @@
 
 /* Custom scrollbar*/
 .custom-scrollbar::-webkit-scrollbar {
-    height: 6px; /* smaller */
+    height: 8px; /* smaller */
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent;
+
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
     background: #e5e7eb;
     border-radius: 9999px;
+    cursor: grab;
 }
 
 @keyframes countdown {

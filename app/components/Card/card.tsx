@@ -79,9 +79,6 @@ export default function Card({ title, variant = "blue", className }: CardProps) 
     return (
         <div className={`bg-white rounded-3xl shadow-primary h-full max-h-[600px] overflow-y-scroll hide-scrollbar ${className}`}>
             <CardHeader title={title} v={v} />
-            <Lead v={v} />
-            <Lead v={v} />
-            <Lead v={v} />
         </div>
     );
 }
