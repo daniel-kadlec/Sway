@@ -1,19 +1,12 @@
-import { PrismaClient } from "@/lib/generated/client";
-import { PrismaPg } from "@prisma/adapter-pg";
-import { Pool } from "pg";
+import { prisma } from "@/lib/utils/prisma";
 
-const connectionString = process.env.DATABASE_URL!;
-
-const pool = new Pool({ connectionString });
-const adapter = new PrismaPg(pool);
-const prisma = new PrismaClient({ adapter });
 export async function POST(req: Request) {
     const body = await req.json();
 
     const lead = await prisma.lead.create({
         data: {
-            name: "4ernej 4ur8k",
-            notes: "niggggggg",
+            name: body.name,
+            notes: body.notes,
         },
     });
 
