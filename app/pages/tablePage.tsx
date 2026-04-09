@@ -22,7 +22,7 @@ export default async function TablePage() {
         "E-mail",
         "IG username",
         "Phone",
-        "URL",
+        "Website",
         "Primary contact",
         "Primary follow up",
         "Secondary contact",
@@ -34,9 +34,9 @@ export default async function TablePage() {
     return (
 
         <div className="bg-white rounded-3xl shadow-primary overflow-x-auto h-full custom-scrollbar">
-            <table className="w-full text-left border-collapse text-2xl">
+            <table className="w-full text-left border-collapse text-2xl relative">
                 {/* Header */}
-                <thead className="bg-primary text-offwhite">
+                <thead className="bg-primary text-offwhite sticky top-0">
                 <tr>
                     {columns.map((col) => (
                         <th key={col} className="table-cell font-bold whitespace-nowrap">

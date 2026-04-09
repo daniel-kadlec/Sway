@@ -9,6 +9,7 @@ import { FaPen } from "react-icons/fa";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { FaFlagCheckered } from "react-icons/fa";
 import { TbReload } from "react-icons/tb";
+import { FaClock } from "react-icons/fa";
 
 
 
@@ -57,7 +58,15 @@ export default function ViewModal({ data }: ViewModalProps) {
                 <FaFlagCheckered className={'mt-0.5'}/>
                 Finish
             </Button>
+            <Button className={'icon-button w-full bg-warning-light! text-warning!'}>
+                <FaClock className={'mt-0.5'}/>
+                Pending
+            </Button>
             <Button className={'icon-button w-full bg-lightgray! text-darkgray!'}>
+                <FaForward className={'mt-0.5 rotate-180'}/>
+                Go back
+            </Button>
+            <Button className={'icon-button w-full bg-error-light! text-error!'}>
                 <TbReload className={'mt-0.5'}/>
                 Reset
             </Button>

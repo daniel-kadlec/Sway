@@ -91,12 +91,20 @@
 
 /* Custom scrollbar*/
 .custom-scrollbar::-webkit-scrollbar {
-    height: 8px; /* smaller */
+    width: 8px;
+    height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar:vertical {
+    width: 0px;
+}
+
+.custom-scrollbar::-webkit-scrollbar:horizontal {
+    height: 8px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent;
-
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
@@ -145,4 +153,7 @@
 .toastPresence{
     animation: toastPresence 3s ease-in-out;
 }
-
+.required::after {
+    @apply text-error ml-0.5;
+    content: '*';
+}

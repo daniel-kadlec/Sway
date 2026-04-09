@@ -7,15 +7,76 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Stage {
+  BACKLOG
+  PRIMARY_CONTACT
+  PRIMARY_CONTACT_FOLLOW_UP
+  SECONDARY_CONTACT
+  SECONDARY_CONTACT_FOLLOW_UP
+  CLOSED
+}
+
+enum LeadStatus {
+  ACTIVE
+  PENDING
+  CLOSED
+}
+
+enum LeadVerdict {
+  WON
+  LOST
+}
+
+enum Platform {
+  EMAIL
+  INSTAGRAM
+  PHONE
+}
+
+enum LogType {
+  CREATED
+  STAGE_CHANGED
+  STAGE_REVERTED
+  RESET
+  MARKED_PENDING
+}
+
 model Lead {
-  id                String    @id @default(uuid())
-  companyName       String
-  primaryContact    String
-  primaryPlatform   String
-  website           String?
-  contactDate       DateTime? @db.Date
-  secondaryContact  String?
-  secondaryPlatform String?
-  note              String?
-  createdAt         DateTime  @default(now())
+  id          String  @id @default(uuid())
+  companyName String
+  note        String?
+
+  primaryContactValue String
+  primaryPlatform     Platform
+
+  secondaryContactValue String?
+  secondaryPlatform     Platform?
+
+  website String?
+
+  stage   Stage
+  status  LeadStatus   @default(ACTIVE)
+  verdict LeadVerdict?
+
+  nextActionAt DateTime?
+
+  createdAt DateTime @default(now())
+
+  logs LeadLog[]
+
+  @@index([stage])
+  @@index([status])
+  @@index([nextActionAt])
+}
+
+model LeadLog {
+  id     String @id @default(uuid())
+  leadId String
+  lead   Lead   @relation(fields: [leadId], references: [id])
+
+  type      LogType
+  fromStage Stage?
+  toStage   Stage?
+
+  createdAt DateTime @default(now())
 }

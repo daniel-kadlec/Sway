@@ -1,7 +1,7 @@
 import StatusSummaryItem from "@/app/components/Status summary/status-summary-item";
 
 import { IoIosWarning } from "react-icons/io";
-import { FaRegClock } from "react-icons/fa6";
+import {FaClock} from "react-icons/fa6";
 import { FaUser } from "react-icons/fa6";
 
 export default function StatusSummary() {
@@ -17,7 +17,7 @@ export default function StatusSummary() {
             />
 
             <StatusSummaryItem
-                icon={FaRegClock}
+                icon={FaClock}
                 text="— Pending"
                 bgColor="bg-warning-light"
                 iconColor="text-warning"
