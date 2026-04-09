@@ -384,7 +384,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  Lead: 'Lead'
+  Lead: 'Lead',
+  LeadLog: 'LeadLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -400,7 +401,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "lead"
+    modelProps: "lead" | "leadLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -478,6 +479,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    LeadLog: {
+      payload: Prisma.$LeadLogPayload<ExtArgs>
+      fields: Prisma.LeadLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadLogPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadLogPayload>
+        }
+        findMany: {
+          args: Prisma.LeadLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadLogPayload>[]
+        }
+        create: {
+          args: Prisma.LeadLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadLogPayload>
+        }
+        createMany: {
+          args: Prisma.LeadLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadLogPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadLogPayload>
+        }
+        update: {
+          args: Prisma.LeadLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadLogPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadLog>
+        }
+        groupBy: {
+          args: Prisma.LeadLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadLogCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -520,17 +595,32 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const LeadScalarFieldEnum = {
   id: 'id',
   companyName: 'companyName',
-  primaryContact: 'primaryContact',
-  primaryPlatform: 'primaryPlatform',
-  website: 'website',
-  contactDate: 'contactDate',
-  secondaryContact: 'secondaryContact',
-  secondaryPlatform: 'secondaryPlatform',
   note: 'note',
+  primaryContactValue: 'primaryContactValue',
+  primaryPlatform: 'primaryPlatform',
+  secondaryContactValue: 'secondaryContactValue',
+  secondaryPlatform: 'secondaryPlatform',
+  website: 'website',
+  stage: 'stage',
+  status: 'status',
+  verdict: 'verdict',
+  nextActionAt: 'nextActionAt',
   createdAt: 'createdAt'
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
+
+
+export const LeadLogScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  type: 'type',
+  fromStage: 'fromStage',
+  toStage: 'toStage',
+  createdAt: 'createdAt'
+} as const
+
+export type LeadLogScalarFieldEnum = (typeof LeadLogScalarFieldEnum)[keyof typeof LeadLogScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -578,6 +668,62 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'Platform'
+ */
+export type EnumPlatformFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Platform'>
+    
+
+
+/**
+ * Reference to a field of type 'Platform[]'
+ */
+export type ListEnumPlatformFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Platform[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Stage'
+ */
+export type EnumStageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Stage'>
+    
+
+
+/**
+ * Reference to a field of type 'Stage[]'
+ */
+export type ListEnumStageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Stage[]'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadStatus'
+ */
+export type EnumLeadStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadStatus[]'
+ */
+export type ListEnumLeadStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadVerdict'
+ */
+export type EnumLeadVerdictFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadVerdict'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadVerdict[]'
+ */
+export type ListEnumLeadVerdictFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadVerdict[]'>
+    
+
+
+/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -588,6 +734,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'LogType'
+ */
+export type EnumLogTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LogType'>
+    
+
+
+/**
+ * Reference to a field of type 'LogType[]'
+ */
+export type ListEnumLogTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LogType[]'>
     
 
 
@@ -700,6 +860,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   lead?: Prisma.LeadOmit
+  leadLog?: Prisma.LeadLogOmit
 }
 
 /* Types for Logging */

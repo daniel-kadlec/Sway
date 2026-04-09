@@ -9,7 +9,50 @@
 * 🟢 You can import this file directly.
 */
 
+export const Stage = {
+  BACKLOG: 'BACKLOG',
+  PRIMARY_CONTACT: 'PRIMARY_CONTACT',
+  PRIMARY_CONTACT_FOLLOW_UP: 'PRIMARY_CONTACT_FOLLOW_UP',
+  SECONDARY_CONTACT: 'SECONDARY_CONTACT',
+  SECONDARY_CONTACT_FOLLOW_UP: 'SECONDARY_CONTACT_FOLLOW_UP',
+  CLOSED: 'CLOSED'
+} as const
+
+export type Stage = (typeof Stage)[keyof typeof Stage]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const LeadStatus = {
+  ACTIVE: 'ACTIVE',
+  PENDING: 'PENDING',
+  CLOSED: 'CLOSED'
+} as const
+
+export type LeadStatus = (typeof LeadStatus)[keyof typeof LeadStatus]
+
+
+export const LeadVerdict = {
+  WON: 'WON',
+  LOST: 'LOST'
+} as const
+
+export type LeadVerdict = (typeof LeadVerdict)[keyof typeof LeadVerdict]
+
+
+export const Platform = {
+  EMAIL: 'EMAIL',
+  INSTAGRAM: 'INSTAGRAM',
+  PHONE: 'PHONE'
+} as const
+
+export type Platform = (typeof Platform)[keyof typeof Platform]
+
+
+export const LogType = {
+  CREATED: 'CREATED',
+  STAGE_CHANGED: 'STAGE_CHANGED',
+  STAGE_REVERTED: 'STAGE_REVERTED',
+  RESET: 'RESET',
+  MARKED_PENDING: 'MARKED_PENDING'
+} as const
+
+export type LogType = (typeof LogType)[keyof typeof LogType]

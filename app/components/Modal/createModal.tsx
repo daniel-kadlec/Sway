@@ -33,22 +33,22 @@ export default function CreateModal({ data }: CreateModalProps) {
     };
 
     const handleLeadCreate = async () => {
-        try {
-            const res = await fetch("/api/leads", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(form),
-            });
-
-            if (!res.ok) throw new Error();
-
-            showToast("Lead created successfully", "", "success");
-            closeModal();
-        } catch (err) {
-            showToast("Failed to create lead", "", "error");
-        }
+        // try {
+        //     const res = await fetch("/api/leads", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(form),
+        //     });
+        //
+        //     if (!res.ok) throw new Error();
+        //
+        //     showToast("Lead created successfully", "", "success");
+        //     closeModal();
+        // } catch (err) {
+        //     showToast("Failed to create lead", "", "error");
+        // }
     };
 
     return (

@@ -51,7 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Lead: 'Lead'
+  Lead: 'Lead',
+  LeadLog: 'LeadLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -73,17 +74,32 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const LeadScalarFieldEnum = {
   id: 'id',
   companyName: 'companyName',
-  primaryContact: 'primaryContact',
-  primaryPlatform: 'primaryPlatform',
-  website: 'website',
-  contactDate: 'contactDate',
-  secondaryContact: 'secondaryContact',
-  secondaryPlatform: 'secondaryPlatform',
   note: 'note',
+  primaryContactValue: 'primaryContactValue',
+  primaryPlatform: 'primaryPlatform',
+  secondaryContactValue: 'secondaryContactValue',
+  secondaryPlatform: 'secondaryPlatform',
+  website: 'website',
+  stage: 'stage',
+  status: 'status',
+  verdict: 'verdict',
+  nextActionAt: 'nextActionAt',
   createdAt: 'createdAt'
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
+
+
+export const LeadLogScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  type: 'type',
+  fromStage: 'fromStage',
+  toStage: 'toStage',
+  createdAt: 'createdAt'
+} as const
+
+export type LeadLogScalarFieldEnum = (typeof LeadLogScalarFieldEnum)[keyof typeof LeadLogScalarFieldEnum]
 
 
 export const SortOrder = {

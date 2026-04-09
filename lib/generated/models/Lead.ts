@@ -27,39 +27,48 @@ export type AggregateLead = {
 export type LeadMinAggregateOutputType = {
   id: string | null
   companyName: string | null
-  primaryContact: string | null
-  primaryPlatform: string | null
-  website: string | null
-  contactDate: Date | null
-  secondaryContact: string | null
-  secondaryPlatform: string | null
   note: string | null
+  primaryContactValue: string | null
+  primaryPlatform: $Enums.Platform | null
+  secondaryContactValue: string | null
+  secondaryPlatform: $Enums.Platform | null
+  website: string | null
+  stage: $Enums.Stage | null
+  status: $Enums.LeadStatus | null
+  verdict: $Enums.LeadVerdict | null
+  nextActionAt: Date | null
   createdAt: Date | null
 }
 
 export type LeadMaxAggregateOutputType = {
   id: string | null
   companyName: string | null
-  primaryContact: string | null
-  primaryPlatform: string | null
-  website: string | null
-  contactDate: Date | null
-  secondaryContact: string | null
-  secondaryPlatform: string | null
   note: string | null
+  primaryContactValue: string | null
+  primaryPlatform: $Enums.Platform | null
+  secondaryContactValue: string | null
+  secondaryPlatform: $Enums.Platform | null
+  website: string | null
+  stage: $Enums.Stage | null
+  status: $Enums.LeadStatus | null
+  verdict: $Enums.LeadVerdict | null
+  nextActionAt: Date | null
   createdAt: Date | null
 }
 
 export type LeadCountAggregateOutputType = {
   id: number
   companyName: number
-  primaryContact: number
-  primaryPlatform: number
-  website: number
-  contactDate: number
-  secondaryContact: number
-  secondaryPlatform: number
   note: number
+  primaryContactValue: number
+  primaryPlatform: number
+  secondaryContactValue: number
+  secondaryPlatform: number
+  website: number
+  stage: number
+  status: number
+  verdict: number
+  nextActionAt: number
   createdAt: number
   _all: number
 }
@@ -68,39 +77,48 @@ export type LeadCountAggregateOutputType = {
 export type LeadMinAggregateInputType = {
   id?: true
   companyName?: true
-  primaryContact?: true
-  primaryPlatform?: true
-  website?: true
-  contactDate?: true
-  secondaryContact?: true
-  secondaryPlatform?: true
   note?: true
+  primaryContactValue?: true
+  primaryPlatform?: true
+  secondaryContactValue?: true
+  secondaryPlatform?: true
+  website?: true
+  stage?: true
+  status?: true
+  verdict?: true
+  nextActionAt?: true
   createdAt?: true
 }
 
 export type LeadMaxAggregateInputType = {
   id?: true
   companyName?: true
-  primaryContact?: true
-  primaryPlatform?: true
-  website?: true
-  contactDate?: true
-  secondaryContact?: true
-  secondaryPlatform?: true
   note?: true
+  primaryContactValue?: true
+  primaryPlatform?: true
+  secondaryContactValue?: true
+  secondaryPlatform?: true
+  website?: true
+  stage?: true
+  status?: true
+  verdict?: true
+  nextActionAt?: true
   createdAt?: true
 }
 
 export type LeadCountAggregateInputType = {
   id?: true
   companyName?: true
-  primaryContact?: true
-  primaryPlatform?: true
-  website?: true
-  contactDate?: true
-  secondaryContact?: true
-  secondaryPlatform?: true
   note?: true
+  primaryContactValue?: true
+  primaryPlatform?: true
+  secondaryContactValue?: true
+  secondaryPlatform?: true
+  website?: true
+  stage?: true
+  status?: true
+  verdict?: true
+  nextActionAt?: true
   createdAt?: true
   _all?: true
 }
@@ -180,13 +198,16 @@ export type LeadGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type LeadGroupByOutputType = {
   id: string
   companyName: string
-  primaryContact: string
-  primaryPlatform: string
-  website: string | null
-  contactDate: Date | null
-  secondaryContact: string | null
-  secondaryPlatform: string | null
   note: string | null
+  primaryContactValue: string
+  primaryPlatform: $Enums.Platform
+  secondaryContactValue: string | null
+  secondaryPlatform: $Enums.Platform | null
+  website: string | null
+  stage: $Enums.Stage
+  status: $Enums.LeadStatus
+  verdict: $Enums.LeadVerdict | null
+  nextActionAt: Date | null
   createdAt: Date
   _count: LeadCountAggregateOutputType | null
   _min: LeadMinAggregateOutputType | null
@@ -214,27 +235,35 @@ export type LeadWhereInput = {
   NOT?: Prisma.LeadWhereInput | Prisma.LeadWhereInput[]
   id?: Prisma.StringFilter<"Lead"> | string
   companyName?: Prisma.StringFilter<"Lead"> | string
-  primaryContact?: Prisma.StringFilter<"Lead"> | string
-  primaryPlatform?: Prisma.StringFilter<"Lead"> | string
-  website?: Prisma.StringNullableFilter<"Lead"> | string | null
-  contactDate?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
-  secondaryContact?: Prisma.StringNullableFilter<"Lead"> | string | null
-  secondaryPlatform?: Prisma.StringNullableFilter<"Lead"> | string | null
   note?: Prisma.StringNullableFilter<"Lead"> | string | null
+  primaryContactValue?: Prisma.StringFilter<"Lead"> | string
+  primaryPlatform?: Prisma.EnumPlatformFilter<"Lead"> | $Enums.Platform
+  secondaryContactValue?: Prisma.StringNullableFilter<"Lead"> | string | null
+  secondaryPlatform?: Prisma.EnumPlatformNullableFilter<"Lead"> | $Enums.Platform | null
+  website?: Prisma.StringNullableFilter<"Lead"> | string | null
+  stage?: Prisma.EnumStageFilter<"Lead"> | $Enums.Stage
+  status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
+  verdict?: Prisma.EnumLeadVerdictNullableFilter<"Lead"> | $Enums.LeadVerdict | null
+  nextActionAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  logs?: Prisma.LeadLogListRelationFilter
 }
 
 export type LeadOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   companyName?: Prisma.SortOrder
-  primaryContact?: Prisma.SortOrder
-  primaryPlatform?: Prisma.SortOrder
-  website?: Prisma.SortOrderInput | Prisma.SortOrder
-  contactDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  secondaryContact?: Prisma.SortOrderInput | Prisma.SortOrder
-  secondaryPlatform?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryContactValue?: Prisma.SortOrder
+  primaryPlatform?: Prisma.SortOrder
+  secondaryContactValue?: Prisma.SortOrderInput | Prisma.SortOrder
+  secondaryPlatform?: Prisma.SortOrderInput | Prisma.SortOrder
+  website?: Prisma.SortOrderInput | Prisma.SortOrder
+  stage?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  verdict?: Prisma.SortOrderInput | Prisma.SortOrder
+  nextActionAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  logs?: Prisma.LeadLogOrderByRelationAggregateInput
 }
 
 export type LeadWhereUniqueInput = Prisma.AtLeast<{
@@ -243,26 +272,33 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.LeadWhereInput[]
   NOT?: Prisma.LeadWhereInput | Prisma.LeadWhereInput[]
   companyName?: Prisma.StringFilter<"Lead"> | string
-  primaryContact?: Prisma.StringFilter<"Lead"> | string
-  primaryPlatform?: Prisma.StringFilter<"Lead"> | string
-  website?: Prisma.StringNullableFilter<"Lead"> | string | null
-  contactDate?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
-  secondaryContact?: Prisma.StringNullableFilter<"Lead"> | string | null
-  secondaryPlatform?: Prisma.StringNullableFilter<"Lead"> | string | null
   note?: Prisma.StringNullableFilter<"Lead"> | string | null
+  primaryContactValue?: Prisma.StringFilter<"Lead"> | string
+  primaryPlatform?: Prisma.EnumPlatformFilter<"Lead"> | $Enums.Platform
+  secondaryContactValue?: Prisma.StringNullableFilter<"Lead"> | string | null
+  secondaryPlatform?: Prisma.EnumPlatformNullableFilter<"Lead"> | $Enums.Platform | null
+  website?: Prisma.StringNullableFilter<"Lead"> | string | null
+  stage?: Prisma.EnumStageFilter<"Lead"> | $Enums.Stage
+  status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
+  verdict?: Prisma.EnumLeadVerdictNullableFilter<"Lead"> | $Enums.LeadVerdict | null
+  nextActionAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  logs?: Prisma.LeadLogListRelationFilter
 }, "id">
 
 export type LeadOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   companyName?: Prisma.SortOrder
-  primaryContact?: Prisma.SortOrder
-  primaryPlatform?: Prisma.SortOrder
-  website?: Prisma.SortOrderInput | Prisma.SortOrder
-  contactDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  secondaryContact?: Prisma.SortOrderInput | Prisma.SortOrder
-  secondaryPlatform?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryContactValue?: Prisma.SortOrder
+  primaryPlatform?: Prisma.SortOrder
+  secondaryContactValue?: Prisma.SortOrderInput | Prisma.SortOrder
+  secondaryPlatform?: Prisma.SortOrderInput | Prisma.SortOrder
+  website?: Prisma.SortOrderInput | Prisma.SortOrder
+  stage?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  verdict?: Prisma.SortOrderInput | Prisma.SortOrder
+  nextActionAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.LeadCountOrderByAggregateInput
   _max?: Prisma.LeadMaxOrderByAggregateInput
@@ -275,144 +311,186 @@ export type LeadScalarWhereWithAggregatesInput = {
   NOT?: Prisma.LeadScalarWhereWithAggregatesInput | Prisma.LeadScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Lead"> | string
   companyName?: Prisma.StringWithAggregatesFilter<"Lead"> | string
-  primaryContact?: Prisma.StringWithAggregatesFilter<"Lead"> | string
-  primaryPlatform?: Prisma.StringWithAggregatesFilter<"Lead"> | string
-  website?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
-  contactDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
-  secondaryContact?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
-  secondaryPlatform?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   note?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  primaryContactValue?: Prisma.StringWithAggregatesFilter<"Lead"> | string
+  primaryPlatform?: Prisma.EnumPlatformWithAggregatesFilter<"Lead"> | $Enums.Platform
+  secondaryContactValue?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  secondaryPlatform?: Prisma.EnumPlatformNullableWithAggregatesFilter<"Lead"> | $Enums.Platform | null
+  website?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  stage?: Prisma.EnumStageWithAggregatesFilter<"Lead"> | $Enums.Stage
+  status?: Prisma.EnumLeadStatusWithAggregatesFilter<"Lead"> | $Enums.LeadStatus
+  verdict?: Prisma.EnumLeadVerdictNullableWithAggregatesFilter<"Lead"> | $Enums.LeadVerdict | null
+  nextActionAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Lead"> | Date | string
 }
 
 export type LeadCreateInput = {
   id?: string
   companyName: string
-  primaryContact: string
-  primaryPlatform: string
-  website?: string | null
-  contactDate?: Date | string | null
-  secondaryContact?: string | null
-  secondaryPlatform?: string | null
   note?: string | null
+  primaryContactValue: string
+  primaryPlatform: $Enums.Platform
+  secondaryContactValue?: string | null
+  secondaryPlatform?: $Enums.Platform | null
+  website?: string | null
+  stage: $Enums.Stage
+  status?: $Enums.LeadStatus
+  verdict?: $Enums.LeadVerdict | null
+  nextActionAt?: Date | string | null
   createdAt?: Date | string
+  logs?: Prisma.LeadLogCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateInput = {
   id?: string
   companyName: string
-  primaryContact: string
-  primaryPlatform: string
-  website?: string | null
-  contactDate?: Date | string | null
-  secondaryContact?: string | null
-  secondaryPlatform?: string | null
   note?: string | null
+  primaryContactValue: string
+  primaryPlatform: $Enums.Platform
+  secondaryContactValue?: string | null
+  secondaryPlatform?: $Enums.Platform | null
+  website?: string | null
+  stage: $Enums.Stage
+  status?: $Enums.LeadStatus
+  verdict?: $Enums.LeadVerdict | null
+  nextActionAt?: Date | string | null
   createdAt?: Date | string
+  logs?: Prisma.LeadLogUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   companyName?: Prisma.StringFieldUpdateOperationsInput | string
-  primaryContact?: Prisma.StringFieldUpdateOperationsInput | string
-  primaryPlatform?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  secondaryContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  secondaryPlatform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryContactValue?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryPlatform?: Prisma.EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
+  secondaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumStageFieldUpdateOperationsInput | $Enums.Stage
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  verdict?: Prisma.NullableEnumLeadVerdictFieldUpdateOperationsInput | $Enums.LeadVerdict | null
+  nextActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  logs?: Prisma.LeadLogUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   companyName?: Prisma.StringFieldUpdateOperationsInput | string
-  primaryContact?: Prisma.StringFieldUpdateOperationsInput | string
-  primaryPlatform?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  secondaryContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  secondaryPlatform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryContactValue?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryPlatform?: Prisma.EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
+  secondaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumStageFieldUpdateOperationsInput | $Enums.Stage
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  verdict?: Prisma.NullableEnumLeadVerdictFieldUpdateOperationsInput | $Enums.LeadVerdict | null
+  nextActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  logs?: Prisma.LeadLogUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateManyInput = {
   id?: string
   companyName: string
-  primaryContact: string
-  primaryPlatform: string
-  website?: string | null
-  contactDate?: Date | string | null
-  secondaryContact?: string | null
-  secondaryPlatform?: string | null
   note?: string | null
+  primaryContactValue: string
+  primaryPlatform: $Enums.Platform
+  secondaryContactValue?: string | null
+  secondaryPlatform?: $Enums.Platform | null
+  website?: string | null
+  stage: $Enums.Stage
+  status?: $Enums.LeadStatus
+  verdict?: $Enums.LeadVerdict | null
+  nextActionAt?: Date | string | null
   createdAt?: Date | string
 }
 
 export type LeadUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   companyName?: Prisma.StringFieldUpdateOperationsInput | string
-  primaryContact?: Prisma.StringFieldUpdateOperationsInput | string
-  primaryPlatform?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  secondaryContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  secondaryPlatform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryContactValue?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryPlatform?: Prisma.EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
+  secondaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumStageFieldUpdateOperationsInput | $Enums.Stage
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  verdict?: Prisma.NullableEnumLeadVerdictFieldUpdateOperationsInput | $Enums.LeadVerdict | null
+  nextActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LeadUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   companyName?: Prisma.StringFieldUpdateOperationsInput | string
-  primaryContact?: Prisma.StringFieldUpdateOperationsInput | string
-  primaryPlatform?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  secondaryContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  secondaryPlatform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryContactValue?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryPlatform?: Prisma.EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
+  secondaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumStageFieldUpdateOperationsInput | $Enums.Stage
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  verdict?: Prisma.NullableEnumLeadVerdictFieldUpdateOperationsInput | $Enums.LeadVerdict | null
+  nextActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LeadCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   companyName?: Prisma.SortOrder
-  primaryContact?: Prisma.SortOrder
-  primaryPlatform?: Prisma.SortOrder
-  website?: Prisma.SortOrder
-  contactDate?: Prisma.SortOrder
-  secondaryContact?: Prisma.SortOrder
-  secondaryPlatform?: Prisma.SortOrder
   note?: Prisma.SortOrder
+  primaryContactValue?: Prisma.SortOrder
+  primaryPlatform?: Prisma.SortOrder
+  secondaryContactValue?: Prisma.SortOrder
+  secondaryPlatform?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  verdict?: Prisma.SortOrder
+  nextActionAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type LeadMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   companyName?: Prisma.SortOrder
-  primaryContact?: Prisma.SortOrder
-  primaryPlatform?: Prisma.SortOrder
-  website?: Prisma.SortOrder
-  contactDate?: Prisma.SortOrder
-  secondaryContact?: Prisma.SortOrder
-  secondaryPlatform?: Prisma.SortOrder
   note?: Prisma.SortOrder
+  primaryContactValue?: Prisma.SortOrder
+  primaryPlatform?: Prisma.SortOrder
+  secondaryContactValue?: Prisma.SortOrder
+  secondaryPlatform?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  verdict?: Prisma.SortOrder
+  nextActionAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type LeadMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   companyName?: Prisma.SortOrder
-  primaryContact?: Prisma.SortOrder
-  primaryPlatform?: Prisma.SortOrder
-  website?: Prisma.SortOrder
-  contactDate?: Prisma.SortOrder
-  secondaryContact?: Prisma.SortOrder
-  secondaryPlatform?: Prisma.SortOrder
   note?: Prisma.SortOrder
+  primaryContactValue?: Prisma.SortOrder
+  primaryPlatform?: Prisma.SortOrder
+  secondaryContactValue?: Prisma.SortOrder
+  secondaryPlatform?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  verdict?: Prisma.SortOrder
+  nextActionAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type LeadScalarRelationFilter = {
+  is?: Prisma.LeadWhereInput
+  isNot?: Prisma.LeadWhereInput
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -423,6 +501,26 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
+export type EnumPlatformFieldUpdateOperationsInput = {
+  set?: $Enums.Platform
+}
+
+export type NullableEnumPlatformFieldUpdateOperationsInput = {
+  set?: $Enums.Platform | null
+}
+
+export type EnumStageFieldUpdateOperationsInput = {
+  set?: $Enums.Stage
+}
+
+export type EnumLeadStatusFieldUpdateOperationsInput = {
+  set?: $Enums.LeadStatus
+}
+
+export type NullableEnumLeadVerdictFieldUpdateOperationsInput = {
+  set?: $Enums.LeadVerdict | null
+}
+
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
@@ -431,75 +529,223 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type LeadCreateNestedOneWithoutLogsInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutLogsInput, Prisma.LeadUncheckedCreateWithoutLogsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutLogsInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneRequiredWithoutLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutLogsInput, Prisma.LeadUncheckedCreateWithoutLogsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutLogsInput
+  upsert?: Prisma.LeadUpsertWithoutLogsInput
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutLogsInput, Prisma.LeadUpdateWithoutLogsInput>, Prisma.LeadUncheckedUpdateWithoutLogsInput>
+}
+
+export type LeadCreateWithoutLogsInput = {
+  id?: string
+  companyName: string
+  note?: string | null
+  primaryContactValue: string
+  primaryPlatform: $Enums.Platform
+  secondaryContactValue?: string | null
+  secondaryPlatform?: $Enums.Platform | null
+  website?: string | null
+  stage: $Enums.Stage
+  status?: $Enums.LeadStatus
+  verdict?: $Enums.LeadVerdict | null
+  nextActionAt?: Date | string | null
+  createdAt?: Date | string
+}
+
+export type LeadUncheckedCreateWithoutLogsInput = {
+  id?: string
+  companyName: string
+  note?: string | null
+  primaryContactValue: string
+  primaryPlatform: $Enums.Platform
+  secondaryContactValue?: string | null
+  secondaryPlatform?: $Enums.Platform | null
+  website?: string | null
+  stage: $Enums.Stage
+  status?: $Enums.LeadStatus
+  verdict?: $Enums.LeadVerdict | null
+  nextActionAt?: Date | string | null
+  createdAt?: Date | string
+}
+
+export type LeadCreateOrConnectWithoutLogsInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutLogsInput, Prisma.LeadUncheckedCreateWithoutLogsInput>
+}
+
+export type LeadUpsertWithoutLogsInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutLogsInput, Prisma.LeadUncheckedUpdateWithoutLogsInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutLogsInput, Prisma.LeadUncheckedCreateWithoutLogsInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutLogsInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutLogsInput, Prisma.LeadUncheckedUpdateWithoutLogsInput>
+}
+
+export type LeadUpdateWithoutLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryContactValue?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryPlatform?: Prisma.EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
+  secondaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumStageFieldUpdateOperationsInput | $Enums.Stage
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  verdict?: Prisma.NullableEnumLeadVerdictFieldUpdateOperationsInput | $Enums.LeadVerdict | null
+  nextActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type LeadUncheckedUpdateWithoutLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryContactValue?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryPlatform?: Prisma.EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
+  secondaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.EnumStageFieldUpdateOperationsInput | $Enums.Stage
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  verdict?: Prisma.NullableEnumLeadVerdictFieldUpdateOperationsInput | $Enums.LeadVerdict | null
+  nextActionAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type LeadCountOutputType
+ */
+
+export type LeadCountOutputType = {
+  logs: number
+}
+
+export type LeadCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  logs?: boolean | LeadCountOutputTypeCountLogsArgs
+}
+
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadCountOutputType
+   */
+  select?: Prisma.LeadCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeCountLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadLogWhereInput
+}
 
 
 export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   companyName?: boolean
-  primaryContact?: boolean
-  primaryPlatform?: boolean
-  website?: boolean
-  contactDate?: boolean
-  secondaryContact?: boolean
-  secondaryPlatform?: boolean
   note?: boolean
+  primaryContactValue?: boolean
+  primaryPlatform?: boolean
+  secondaryContactValue?: boolean
+  secondaryPlatform?: boolean
+  website?: boolean
+  stage?: boolean
+  status?: boolean
+  verdict?: boolean
+  nextActionAt?: boolean
   createdAt?: boolean
+  logs?: boolean | Prisma.Lead$logsArgs<ExtArgs>
+  _count?: boolean | Prisma.LeadCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
 export type LeadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   companyName?: boolean
-  primaryContact?: boolean
-  primaryPlatform?: boolean
-  website?: boolean
-  contactDate?: boolean
-  secondaryContact?: boolean
-  secondaryPlatform?: boolean
   note?: boolean
+  primaryContactValue?: boolean
+  primaryPlatform?: boolean
+  secondaryContactValue?: boolean
+  secondaryPlatform?: boolean
+  website?: boolean
+  stage?: boolean
+  status?: boolean
+  verdict?: boolean
+  nextActionAt?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["lead"]>
 
 export type LeadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   companyName?: boolean
-  primaryContact?: boolean
-  primaryPlatform?: boolean
-  website?: boolean
-  contactDate?: boolean
-  secondaryContact?: boolean
-  secondaryPlatform?: boolean
   note?: boolean
+  primaryContactValue?: boolean
+  primaryPlatform?: boolean
+  secondaryContactValue?: boolean
+  secondaryPlatform?: boolean
+  website?: boolean
+  stage?: boolean
+  status?: boolean
+  verdict?: boolean
+  nextActionAt?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["lead"]>
 
 export type LeadSelectScalar = {
   id?: boolean
   companyName?: boolean
-  primaryContact?: boolean
-  primaryPlatform?: boolean
-  website?: boolean
-  contactDate?: boolean
-  secondaryContact?: boolean
-  secondaryPlatform?: boolean
   note?: boolean
+  primaryContactValue?: boolean
+  primaryPlatform?: boolean
+  secondaryContactValue?: boolean
+  secondaryPlatform?: boolean
+  website?: boolean
+  stage?: boolean
+  status?: boolean
+  verdict?: boolean
+  nextActionAt?: boolean
   createdAt?: boolean
 }
 
-export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "companyName" | "primaryContact" | "primaryPlatform" | "website" | "contactDate" | "secondaryContact" | "secondaryPlatform" | "note" | "createdAt", ExtArgs["result"]["lead"]>
+export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "companyName" | "note" | "primaryContactValue" | "primaryPlatform" | "secondaryContactValue" | "secondaryPlatform" | "website" | "stage" | "status" | "verdict" | "nextActionAt" | "createdAt", ExtArgs["result"]["lead"]>
+export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  logs?: boolean | Prisma.Lead$logsArgs<ExtArgs>
+  _count?: boolean | Prisma.LeadCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type LeadIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type LeadIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Lead"
-  objects: {}
+  objects: {
+    logs: Prisma.$LeadLogPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     companyName: string
-    primaryContact: string
-    primaryPlatform: string
-    website: string | null
-    contactDate: Date | null
-    secondaryContact: string | null
-    secondaryPlatform: string | null
     note: string | null
+    primaryContactValue: string
+    primaryPlatform: $Enums.Platform
+    secondaryContactValue: string | null
+    secondaryPlatform: $Enums.Platform | null
+    website: string | null
+    stage: $Enums.Stage
+    status: $Enums.LeadStatus
+    verdict: $Enums.LeadVerdict | null
+    nextActionAt: Date | null
     createdAt: Date
   }, ExtArgs["result"]["lead"]>
   composites: {}
@@ -895,6 +1141,7 @@ readonly fields: LeadFieldRefs;
  */
 export interface Prisma__LeadClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  logs<T extends Prisma.Lead$logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -926,13 +1173,16 @@ export interface Prisma__LeadClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface LeadFieldRefs {
   readonly id: Prisma.FieldRef<"Lead", 'String'>
   readonly companyName: Prisma.FieldRef<"Lead", 'String'>
-  readonly primaryContact: Prisma.FieldRef<"Lead", 'String'>
-  readonly primaryPlatform: Prisma.FieldRef<"Lead", 'String'>
-  readonly website: Prisma.FieldRef<"Lead", 'String'>
-  readonly contactDate: Prisma.FieldRef<"Lead", 'DateTime'>
-  readonly secondaryContact: Prisma.FieldRef<"Lead", 'String'>
-  readonly secondaryPlatform: Prisma.FieldRef<"Lead", 'String'>
   readonly note: Prisma.FieldRef<"Lead", 'String'>
+  readonly primaryContactValue: Prisma.FieldRef<"Lead", 'String'>
+  readonly primaryPlatform: Prisma.FieldRef<"Lead", 'Platform'>
+  readonly secondaryContactValue: Prisma.FieldRef<"Lead", 'String'>
+  readonly secondaryPlatform: Prisma.FieldRef<"Lead", 'Platform'>
+  readonly website: Prisma.FieldRef<"Lead", 'String'>
+  readonly stage: Prisma.FieldRef<"Lead", 'Stage'>
+  readonly status: Prisma.FieldRef<"Lead", 'LeadStatus'>
+  readonly verdict: Prisma.FieldRef<"Lead", 'LeadVerdict'>
+  readonly nextActionAt: Prisma.FieldRef<"Lead", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Lead", 'DateTime'>
 }
     
@@ -950,6 +1200,10 @@ export type LeadFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Lead
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
   /**
    * Filter, which Lead to fetch.
    */
@@ -969,6 +1223,10 @@ export type LeadFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
+  /**
    * Filter, which Lead to fetch.
    */
   where: Prisma.LeadWhereUniqueInput
@@ -986,6 +1244,10 @@ export type LeadFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Lead
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
   /**
    * Filter, which Lead to fetch.
    */
@@ -1035,6 +1297,10 @@ export type LeadFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
+  /**
    * Filter, which Lead to fetch.
    */
   where?: Prisma.LeadWhereInput
@@ -1082,6 +1348,10 @@ export type LeadFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Lead
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
   /**
    * Filter, which Leads to fetch.
    */
@@ -1131,6 +1401,10 @@ export type LeadCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
+  /**
    * The data needed to create a Lead.
    */
   data: Prisma.XOR<Prisma.LeadCreateInput, Prisma.LeadUncheckedCreateInput>
@@ -1178,6 +1452,10 @@ export type LeadUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    * Omit specific fields from the Lead
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
   /**
    * The data needed to update a Lead.
    */
@@ -1245,6 +1523,10 @@ export type LeadUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
+  /**
    * The filter to search for the Lead to update in case it exists.
    */
   where: Prisma.LeadWhereUniqueInput
@@ -1271,6 +1553,10 @@ export type LeadDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
+  /**
    * Filter which Lead to delete.
    */
   where: Prisma.LeadWhereUniqueInput
@@ -1291,6 +1577,30 @@ export type LeadDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * Lead.logs
+ */
+export type Lead$logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadLog
+   */
+  select?: Prisma.LeadLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadLog
+   */
+  omit?: Prisma.LeadLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadLogInclude<ExtArgs> | null
+  where?: Prisma.LeadLogWhereInput
+  orderBy?: Prisma.LeadLogOrderByWithRelationInput | Prisma.LeadLogOrderByWithRelationInput[]
+  cursor?: Prisma.LeadLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadLogScalarFieldEnum | Prisma.LeadLogScalarFieldEnum[]
+}
+
+/**
  * Lead without action
  */
 export type LeadDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1302,4 +1612,8 @@ export type LeadDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    * Omit specific fields from the Lead
    */
   omit?: Prisma.LeadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
 }
