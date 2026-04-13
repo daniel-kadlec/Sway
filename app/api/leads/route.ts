@@ -16,7 +16,10 @@ export async function POST(req: Request) {
             secondaryPlatform: body.secondaryPlatform || undefined,
             note: body.note,
             stage: body.contactDate ? "SCHEDULED" : "BACKLOG",
-            status: body.contactDate ? "ACTIVE" : "IDLE"
+            status: body.contactDate ? "ACTIVE" : "IDLE",
+            primaryContactAt: body.contactDate
+                ? new Date(body.contactDate)
+                : null,
         },
     });
 

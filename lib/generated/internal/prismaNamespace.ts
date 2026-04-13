@@ -605,6 +605,10 @@ export const LeadScalarFieldEnum = {
   status: 'status',
   verdict: 'verdict',
   nextActionAt: 'nextActionAt',
+  primaryContactAt: 'primaryContactAt',
+  primaryFollowUpAt: 'primaryFollowUpAt',
+  secondaryContactAt: 'secondaryContactAt',
+  secondaryFollowUpAt: 'secondaryFollowUpAt',
   createdAt: 'createdAt'
 } as const
 

@@ -34,6 +34,18 @@ export default function Table({ leads }: { leads: any[] }) {
                 lead.stage.charAt(0).toUpperCase() +
                 lead.stage.slice(1).toLowerCase();
 
+            function formatedDate (date: string): string {
+                if (date == undefined){
+                    return "—";
+                }
+                const formatedDate = new Date(date).toLocaleDateString("cs-CZ", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                })
+                return formatedDate;
+            }
+
             return (
                 <tr key={lead.id} onClick={() => openModal("view")} className="border-b border-b-lightgray transition duration-300 cursor-pointer hover:bg-lightgray ">
                     <td className="font-bold text-primary table-cell">{lead.companyName}</td>
@@ -42,21 +54,11 @@ export default function Table({ leads }: { leads: any[] }) {
                     <td className="table-cell">{contacts.PHONE || "—"}</td>
                     <td className="table-cell">{lead.website || "—"}</td>
 
-                    <td className="table-cell">
-                        {/*{lead.nextActionAt*/}
-                        {/*    ? new Date(lead.nextActionAt).toLocaleDateString("cs-CZ", {*/}
-                        {/*        day: "2-digit",*/}
-                        {/*        month: "2-digit",*/}
-                        {/*        year: "numeric",*/}
-                        {/*    })*/}
-                        {/*    : "—"}*/}
-                        —
-                    </td>
-                    <td className="table-cell">—</td>
+                    <td className="table-cell">{formatedDate(lead.primaryContactAt)}</td>
+                    <td className="table-cell">{formatedDate(lead.primaryFollowUpAt)}</td>
 
-
-                    <td className="table-cell">—</td>
-                    <td className="table-cell">—</td>
+                    <td className="table-cell">{formatedDate(lead.secondaryContactAt)}</td>
+                    <td className="table-cell">{formatedDate(lead.secondaryFollowUpAt)}</td>
 
                     <td className="table-cell">{formattedStage}</td>
                     <td className="table-cell">{lead.verdict || "—"}</td>
