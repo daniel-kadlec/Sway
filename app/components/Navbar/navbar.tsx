@@ -96,7 +96,7 @@ export default function Navbar(){
             <div className="flex flex-col gap-(--container-gap) w-1/2 h-full relative">
                 <div className={'cut-corner'}></div>
                 {/*Nav*/}
-                <div className="w-[calc(100%+var(--container-gap))] -ml-(--container-gap) h-1/3 bg-primary rounded-r-3xl flex items-center justify-end pr-18 min-h-1/3 shadow-primary-nav">
+                <div className="w-[calc(100%+var(--container-gap))] -ml-(--container-gap) h-2/5 bg-primary rounded-r-3xl flex items-center justify-end pr-18 min-h-2/5 shadow-primary-nav">
                     <span className={'flex items-center gap-18'}>
                         <NavLinks/>
                         <span className={'flex gap-4 items-center'}>
