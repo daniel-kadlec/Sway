@@ -23,10 +23,16 @@ export default function Table({ leads }: { leads: any[] }) {
         return result;
     }
 
+
+
     return (
         <tbody>
         {leads.map((lead) => {
             const contacts = mapContacts(lead);
+
+            const formattedStage =
+                lead.stage.charAt(0).toUpperCase() +
+                lead.stage.slice(1).toLowerCase();
 
             return (
                 <tr key={lead.id} onClick={() => openModal("view")} className="border-b border-b-lightgray transition duration-300 cursor-pointer hover:bg-lightgray ">
@@ -52,7 +58,7 @@ export default function Table({ leads }: { leads: any[] }) {
                     <td className="table-cell">—</td>
                     <td className="table-cell">—</td>
 
-                    <td className="table-cell">—</td>
+                    <td className="table-cell">{formattedStage}</td>
                     <td className="table-cell">—</td>
                 </tr>
             )}
