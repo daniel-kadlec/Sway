@@ -59,7 +59,7 @@ export default function Table({ leads }: { leads: any[] }) {
                     <td className="table-cell">—</td>
 
                     <td className="table-cell">{formattedStage}</td>
-                    <td className="table-cell">—</td>
+                    <td className="table-cell">{lead.verdict || "—"}</td>
                 </tr>
             )}
         )}
