@@ -16,12 +16,12 @@ export default function CreateModal({ data }: CreateModalProps) {
 
     const [form, setForm] = useState({
         companyName: "",
-        primaryContact: "",
-        primaryPlatform: "",
+        primaryContactValue: "",
+        primaryPlatform: "INSTAGRAM",
         website: "",
         contactDate: "",
-        secondaryContact: "",
-        secondaryPlatform: "",
+        secondaryContactValue: "",
+        secondaryPlatform: "EMAIL",
         note: "",
     });
 
@@ -33,22 +33,22 @@ export default function CreateModal({ data }: CreateModalProps) {
     };
 
     const handleLeadCreate = async () => {
-        // try {
-        //     const res = await fetch("/api/leads", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(form),
-        //     });
-        //
-        //     if (!res.ok) throw new Error();
-        //
-        //     showToast("Lead created successfully", "", "success");
-        //     closeModal();
-        // } catch (err) {
-        //     showToast("Failed to create lead", "", "error");
-        // }
+        try {
+            const res = await fetch("/api/leads", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(form),
+            });
+
+            if (!res.ok) throw new Error();
+
+            showToast("Lead created successfully", "", "success");
+            closeModal();
+        } catch (err) {
+            showToast("Failed to create lead", "", "error");
+        }
     };
 
     return (
@@ -90,7 +90,7 @@ export default function CreateModal({ data }: CreateModalProps) {
 
                 <div>
                     <Label>Primary contact<span className={'required'}/></Label>
-                    <Input onChange={(e) => handleInputChange("primaryContact", e.target.value)} placeholder="E-mail, IG, phone" />
+                    <Input onChange={(e) => handleInputChange("primaryContactValue", e.target.value)} placeholder="E-mail, IG, phone" />
                 </div>
 
                 <div>
@@ -118,7 +118,7 @@ export default function CreateModal({ data }: CreateModalProps) {
                     <>
                         <div>
                             <Label>Secondary contact</Label>
-                            <Input onChange={(e) => handleInputChange("secondaryContact", e.target.value)} placeholder="E-mail, IG, phone" />
+                            <Input onChange={(e) => handleInputChange("secondaryContactValue", e.target.value)} placeholder="E-mail, IG, phone" />
                         </div>
 
                         <div>

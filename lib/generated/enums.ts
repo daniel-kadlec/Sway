@@ -11,6 +11,7 @@
 
 export const Stage = {
   BACKLOG: 'BACKLOG',
+  SCHEDULED: 'SCHEDULED',
   PRIMARY_CONTACT: 'PRIMARY_CONTACT',
   PRIMARY_CONTACT_FOLLOW_UP: 'PRIMARY_CONTACT_FOLLOW_UP',
   SECONDARY_CONTACT: 'SECONDARY_CONTACT',
@@ -22,6 +23,7 @@ export type Stage = (typeof Stage)[keyof typeof Stage]
 
 
 export const LeadStatus = {
+  IDLE: 'IDLE',
   ACTIVE: 'ACTIVE',
   PENDING: 'PENDING',
   CLOSED: 'CLOSED'

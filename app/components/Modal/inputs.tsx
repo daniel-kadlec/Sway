@@ -21,9 +21,9 @@ export function Select(props: React.InputHTMLAttributes<HTMLSelectElement>) {
             {...props}
             className="w-full rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
         >
-            <option>Instagram</option>
-            <option>Email</option>
-            <option>Phone</option>
+            <option value="INSTAGRAM">Instagram</option>
+            <option value="EMAIL">Email</option>
+            <option value="PHONE">Phone</option>
         </select>
     );
 }
