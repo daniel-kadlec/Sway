@@ -123,7 +123,7 @@ export default function CreateModal({ data }: CreateModalProps) {
 
                         <div>
                             <Label>Secondary platform</Label>
-                            <Select value={form.primaryPlatform}
+                            <Select value={form.secondaryPlatform}
                                     onChange={(e) =>
                                         handleInputChange("secondaryPlatform", e.target.value)
                                     }/>
