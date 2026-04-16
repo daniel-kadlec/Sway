@@ -1,20 +1,17 @@
 import { prisma } from "@/lib/utils/prisma";
-import {useModal} from "@/app/context/ModalContext";
 import Table from "@/app/components/table";
-
+import { formatLead } from "@/app/utils/formatLead";
 
 import { FaSort } from "react-icons/fa6";
 import { FaSortUp } from "react-icons/fa";
 import { FaSortDown } from "react-icons/fa6";
-
-
-
 
 export default async function TablePage() {
 
     const leads = await prisma.lead.findMany({
         orderBy: { createdAt: "desc" },
     });
+    const formattedLeads = leads.map(formatLead);
 
 
     const columns = [
@@ -48,7 +45,7 @@ export default async function TablePage() {
                     ))}
                 </tr>
                 </thead>
-                <Table leads={leads}/>
+                <Table leads={formattedLeads}/>
             </table>
         </div>
     );
