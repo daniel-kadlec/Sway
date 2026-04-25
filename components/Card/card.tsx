@@ -1,7 +1,7 @@
 'use client';
 
-import Lead from "@/app/components/Card/lead";
-import CardHeader from "@/app/components/Card/card-header";
+import Lead from "@/components/Card/lead";
+import CardHeader from "@/components/Card/card-header";
 
 import { IconType } from "react-icons";
 import { FaClock, FaFloppyDisk } from "react-icons/fa6";

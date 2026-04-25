@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import Button from "@/app/components/button";
+import Button from "@/components/button";
 
 type ContextMenuProps = {
     children: React.ReactNode;

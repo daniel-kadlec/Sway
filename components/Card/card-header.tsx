@@ -1,6 +1,6 @@
     'use client';
 
-import {VariantConfig} from "@/app/components/Card/card";
+import {VariantConfig} from "@/components/Card/card";
 
 type CardHeaderProps = {
     title: string;

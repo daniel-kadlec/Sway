@@ -1,7 +1,7 @@
 'use client';
 
-import { useModal } from "@/app/context/ModalContext";
-import { FormattedLead } from "@/app/types/formattedLead";
+import { useModal } from "@/context/ModalContext";
+import { FormattedLead } from "@/types/formattedLead";
 
 export default function Table({ leads }: { leads: FormattedLead[]}) {
     const { openModal } = useModal();

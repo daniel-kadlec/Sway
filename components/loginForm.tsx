@@ -1,9 +1,9 @@
 'use client'
-import {Input} from "@/app/components/Modal/inputs";
-import Button from "@/app/components/button";
+import {Input} from "@/components/Modal/inputs";
+import Button from "@/components/button";
 import {useState} from "react";
 import { TbLogin } from "react-icons/tb";
-import {useToast} from "@/app/context/ToastContext";
+import {useToast} from "@/context/ToastContext";
 import {useRouter} from "next/navigation";
 
 export default function LoginForm(){

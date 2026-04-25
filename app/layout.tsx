@@ -1,8 +1,8 @@
 import "./globals.css";
-import { ModalProvider } from "@/app/context/ModalContext";
-import ModalShell from "@/app/components/Modal/modalShell";
+import { ModalProvider } from "@/context/ModalContext";
+import ModalShell from "@/components/Modal/modalShell";
 
-import {ToastProvider} from "@/app/context/ToastContext";
+import {ToastProvider} from "@/context/ToastContext";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (

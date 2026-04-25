@@ -1,7 +1,7 @@
 import { FaCheck } from "react-icons/fa";
 import { IoIosWarning } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
-import { ToastType } from "@/app/context/ToastContext";
+import { ToastType } from "@/context/ToastContext";
 
 type Props = {
     toasts: ToastType[];

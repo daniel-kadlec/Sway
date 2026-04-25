@@ -1,7 +1,7 @@
-import { useModal } from "@/app/context/ModalContext";
+import { useModal } from "@/context/ModalContext";
 import { IoClose } from "react-icons/io5";
 import { Label, Input, Select } from "./inputs";
-import Button from "@/app/components/button";
+import Button from "@/components/button";
 import { FaTrash } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
 

@@ -1,6 +1,6 @@
-import { useModal } from "@/app/context/ModalContext";
-import Button from "@/app/components/button";
-import ContextMenu from "@/app/components/context-menu";
+import { useModal } from "@/context/ModalContext";
+import Button from "@/components/button";
+import ContextMenu from "@/components/context-menu";
 import {IoClose, IoEllipsisHorizontal, IoMail, IoCall, IoGlobeOutline, IoLogoInstagram} from "react-icons/io5";
 
 import { FaForward } from "react-icons/fa";

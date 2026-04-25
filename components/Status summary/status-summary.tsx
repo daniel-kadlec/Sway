@@ -1,4 +1,4 @@
-import StatusSummaryItem from "@/app/components/Status summary/status-summary-item";
+import StatusSummaryItem from "@/components/Status summary/status-summary-item";
 
 import { IoIosWarning } from "react-icons/io";
 import {FaClock} from "react-icons/fa6";

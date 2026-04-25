@@ -1,17 +1,17 @@
 'use client';
 
-import StatusSummary from "@/app/components/Status summary/status-summary";
-import NavLinks from "@/app/components/Navbar/navLinks";
+import StatusSummary from "@/components/Status summary/status-summary";
+import NavLinks from "@/components/Navbar/navLinks";
 import { useEffect, useState } from "react";
-import {useModal} from "@/app/context/ModalContext";
+import {useModal} from "@/context/ModalContext";
 import { useRouter } from "next/navigation";
-import {useToast} from "@/app/context/ToastContext";
+import {useToast} from "@/context/ToastContext";
 
 import { FaUser } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import { TbLogout2 } from "react-icons/tb";
-import ContextMenu from "@/app/components/context-menu";
-import Button from "@/app/components/button";
+import ContextMenu from "@/components/context-menu";
+import Button from "@/components/button";
 
 
 

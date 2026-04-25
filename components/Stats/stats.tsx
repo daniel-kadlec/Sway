@@ -1,4 +1,4 @@
-import StatItem from "@/app/components/Stats/stats-item";
+import StatItem from "@/components/Stats/stats-item";
 
 import { IoIosWarning } from "react-icons/io";
 import { FaRegClock } from "react-icons/fa6";

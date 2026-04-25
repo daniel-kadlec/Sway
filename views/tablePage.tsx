@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/utils/prisma";
-import Table from "@/app/components/table";
-import { formatLead } from "@/app/utils/formatLead";
+import Table from "@/components/table";
+import { formatLead } from "@/utils/formatLead";
 
 import { FaSort } from "react-icons/fa6";
 import { FaSortUp } from "react-icons/fa";

@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import ToastContainer from "@/app/components/toastContainer";
+import ToastContainer from "@/components/toastContainer";
 
 export type ToastVariant = "success" | "warning" | "error";
 

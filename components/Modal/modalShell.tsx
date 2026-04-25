@@ -1,10 +1,10 @@
 "use client";
 
-import {useModal} from "@/app/context/ModalContext";
-import CreateModal from "@/app/components/Modal/createModal";
-import EditModal from "@/app/components/Modal/editModal";
-import ViewModal from "@/app/components/Modal/viewModal";
-import FinishModal from "@/app/components/Modal/finishModal";
+import {useModal} from "@/context/ModalContext";
+import CreateModal from "@/components/Modal/createModal";
+import EditModal from "@/components/Modal/editModal";
+import ViewModal from "@/components/Modal/viewModal";
+import FinishModal from "@/components/Modal/finishModal";
 
 
 const MODAL_COMPONENTS = {

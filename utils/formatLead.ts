@@ -1,5 +1,5 @@
-import { Lead, Platform } from "../types/lead";
-import { FormattedLead } from "../types/formattedLead";
+import { Lead, Platform } from "@/types/lead";
+import { FormattedLead } from "@/types/formattedLead";
 
 function formatDate(date?: string | Date | null): string {
     if (!date) return "—";
