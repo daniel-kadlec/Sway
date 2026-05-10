@@ -102,7 +102,7 @@ export default function ViewModal({ data }: ViewModalProps) {
             <div>
                 {/* Company */}
                 <h3 className="text-5xl font-bold text-black mb-10">
-                    {data.companyName}
+                    {/*{data.companyName}*/}
                 </h3>
 
                 {/* Contact details */}
@@ -157,18 +157,18 @@ export default function ViewModal({ data }: ViewModalProps) {
                     />
                 </div>
 
-                {/* Note */}
-                {data.note && (
-                    <div className="mt-10 rounded-2xl bg-[#FFF4CC] px-6 py-5 flex items-start gap-4">
-                        <div className="size-10 rounded-xl flex items-center justify-center shrink-0">
-                            <IoChatbubbleEllipsesOutline className="text-[#F2B400] size-9"/>
-                        </div>
+                {/*/!* Note *!/*/}
+                {/*{data.note && (*/}
+                {/*    <div className="mt-10 rounded-2xl bg-[#FFF4CC] px-6 py-5 flex items-start gap-4">*/}
+                {/*        <div className="size-10 rounded-xl flex items-center justify-center shrink-0">*/}
+                {/*            <IoChatbubbleEllipsesOutline className="text-[#F2B400] size-9"/>*/}
+                {/*        </div>*/}
 
-                        <p className="text-xl leading-relaxed text-[#4B4B4B]">
-                            {data.note}
-                        </p>
-                    </div>
-                )}
+                {/*        <p className="text-xl leading-relaxed text-[#4B4B4B]">*/}
+                {/*            {data.note} Note*/}
+                {/*        </p>*/}
+                {/*    </div>*/}
+                {/*)}*/}
 
 
                 {/* Timeline */}

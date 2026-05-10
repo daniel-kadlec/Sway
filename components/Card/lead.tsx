@@ -7,32 +7,34 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
 import { useModal } from "@/context/ModalContext";
 import { VariantConfig } from "@/components/Card/card";
+import {FormattedLead} from "@/types/formattedLead";
 
 type LeadProps = {
     v: VariantConfig;
+    lead: FormattedLead;
 };
 
-export default function Lead({ v }: LeadProps) {
+export default function Lead({ v, lead }: LeadProps) {
     const { openModal } = useModal();
 
     return (
         <div className="group relative h-30 w-full border-b border-lightgray py-4 px-10 flex flex-col justify-center overflow-hidden">
 
             <span className="flex gap-2 items-center z-10">
-                <h1 className="font-bold text-3xl text-offblack">El Negro</h1>
+                <h1 className="font-bold text-3xl text-offblack">{lead.companyName}</h1>
                 <IoLogoInstagram size={30} className={`${v.iconColor} mt-0.5`} />
             </span>
 
             <span className="mt-2 -ml-0.5 flex gap-4 items-center z-10">
                 <span className={`px-4 py-0.5 rounded-full font-bold text-lg ${v.iconBg} ${v.iconColor}`}>
-                    Stage
+                    {lead.stage}
                 </span>
 
                 <span className={`flex items-center gap-2 ${v.iconColor}`}>
                     <FaRegCalendar size={20} />
-                    <span className="text-lg font-semibold">12.2.</span>
+                    <span className="text-lg font-semibold">{lead.nextActionAtFormatted}</span>
                     <FaRegClock size={20} />
-                    <span className="text-lg font-semibold">Today</span>
+                    <span className="text-lg font-semibold">{lead.nextActionAtFormatted}</span>
                 </span>
             </span>
 

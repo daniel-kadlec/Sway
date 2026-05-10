@@ -7,6 +7,7 @@ import { IconType } from "react-icons";
 import { FaClock, FaFloppyDisk } from "react-icons/fa6";
 import { IoIosWarning } from "react-icons/io";
 import { FaTrophy } from "react-icons/fa";
+import {FormattedLead} from "@/types/formattedLead";
 
 type VariantKey = "blue" | "red" | "yellow" | "gray" | "purple" | "green";
 
@@ -22,6 +23,7 @@ type CardProps = {
     title: string;
     variant?: VariantKey;
     className?: string;
+    leads: FormattedLead[];
 };
 
 const variants: Record<VariantKey, VariantConfig> = {
@@ -73,12 +75,18 @@ const variants: Record<VariantKey, VariantConfig> = {
     },
 };
 
-export default function Card({ title, variant = "blue", className }: CardProps) {
+export default function Card({ title, variant = "blue", className, leads }: CardProps) {
     const v = variants[variant];
 
     return (
         <div className={`bg-white rounded-3xl shadow-primary h-full max-h-[600px] overflow-y-scroll hide-scrollbar ${className}`}>
             <CardHeader title={title} v={v} />
+
+            {leads.map((lead: FormattedLead) => {
+                return(
+                    <Lead v={v} lead={lead} key={lead.id}/>
+                )
+            })}
         </div>
     );
 }
