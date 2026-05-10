@@ -3,7 +3,7 @@ import { Lead, Platform } from "./lead";
 export type FormattedLead = Lead & {
     contacts: Record<Platform, string | null>;
 
-    formattedStage: string;
+    stageFormatted: string;
 
     primaryContactAtFormatted: string;
     primaryFollowUpAtFormatted: string;

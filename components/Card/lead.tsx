@@ -17,6 +17,8 @@ type LeadProps = {
 export default function Lead({ v, lead }: LeadProps) {
     const { openModal } = useModal();
 
+    console.log(lead.nextActionAtFormatted)
+
     return (
         <div className="group relative h-30 w-full border-b border-lightgray py-4 px-10 flex flex-col justify-center overflow-hidden">
 
@@ -27,15 +29,17 @@ export default function Lead({ v, lead }: LeadProps) {
 
             <span className="mt-2 -ml-0.5 flex gap-4 items-center z-10">
                 <span className={`px-4 py-0.5 rounded-full font-bold text-lg ${v.iconBg} ${v.iconColor}`}>
-                    {lead.stage}
+                    {lead.stageFormatted}
                 </span>
 
-                <span className={`flex items-center gap-2 ${v.iconColor}`}>
-                    <FaRegCalendar size={20} />
-                    <span className="text-lg font-semibold">{lead.nextActionAtFormatted}</span>
-                    <FaRegClock size={20} />
-                    <span className="text-lg font-semibold">{lead.nextActionAtFormatted}</span>
-                </span>
+                {lead.nextActionAt && (
+                    <span className={`flex items-center gap-2 ${v.iconColor}`}>
+                        <FaRegCalendar size={20} />
+                        <span className="text-lg font-semibold">{lead.nextActionAtFormatted.substring(0, lead.nextActionAtFormatted.length - 5)}</span>
+                        <FaRegClock size={20} />
+                        <span className="text-lg font-semibold">{lead.nextActionAtFormatted.substring(0, lead.nextActionAtFormatted.length - 5)}</span>
+                    </span>
+                )}
             </span>
 
             {/* overlay */}

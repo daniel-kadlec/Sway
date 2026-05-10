@@ -23,7 +23,7 @@ export default function Table({ leads }: { leads: FormattedLead[]}) {
                     <td className="table-cell">{lead.secondaryContactAtFormatted}</td>
                     <td className="table-cell">{lead.secondaryFollowUpAtFormatted}</td>
 
-                    <td className="table-cell">{lead.formattedStage}</td>
+                    <td className="table-cell">{lead.stageFormatted}</td>
                     <td className="table-cell">{lead.verdict || "—"}</td>
                 </tr>
             )}
