@@ -96,7 +96,7 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar:vertical {
-    width: 0px;
+    width: 0;
 }
 
 .custom-scrollbar::-webkit-scrollbar:horizontal {
@@ -118,7 +118,7 @@
         width: 100%;
     }
     to {
-        width: 0%;
+        width: 0;
     }
 }
 
