@@ -1,21 +1,10 @@
-'use client'
-
 import Table from "@/components/table";
 import { getLeads } from "@/lib/utils/data/leads";
 import { FaSort } from "react-icons/fa6";
-import {useEffect, useState} from "react";
 
-export default function TablePage() {
+export default async function TablePage() {
 
-    const [leads, setLeads] = useState([]);
-
-    useEffect(() => {
-        const fetchLeads = async () => {
-            const data = await getLeads();
-            setLeads(data);
-        };
-        fetchLeads();
-    }, []);
+    const leads = await getLeads()
 
 
     const columns = [

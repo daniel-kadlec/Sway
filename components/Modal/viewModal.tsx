@@ -194,7 +194,7 @@ export default function ViewModal({ data }: ViewModalProps) {
                 <div className="flex items-center gap-4 mt-14">
                     <Button
                         className="!bg-error-light !text-error icon-button"
-                        onClick={() => deleteLead(data.id)}
+                        onClick={() => handleDelete()}
                     >
                         <FaTrash className="size-4" />
                         Delete

@@ -6,11 +6,7 @@ import Button from "@/components/button";
 import {useToast} from "@/context/ToastContext";
 import {createLead} from "@/lib/utils/data/leads";
 
-type CreateModalProps = {
-    data?: any;
-};
-
-export default function CreateModal({ data }: CreateModalProps) {
+export default function CreateModal() {
     const [advanced, setAdvanced] = useState(false);
     const { closeModal } = useModal();
     const { showToast } = useToast();
