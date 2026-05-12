@@ -17,7 +17,14 @@ type LeadProps = {
 export default function Lead({ v, lead }: LeadProps) {
     const { openModal } = useModal();
 
-    console.log(lead.nextActionAtFormatted)
+    function timeUntil(nextActionAt: any) {
+        const now = new Date();
+        const target = new Date(nextActionAt);
+
+        const diffMs = target.getTime() - now.getTime();
+
+        return Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    }
 
     return (
         <div className="group relative h-30 w-full border-b border-lightgray py-4 px-10 flex flex-col justify-center overflow-hidden">
@@ -37,7 +44,7 @@ export default function Lead({ v, lead }: LeadProps) {
                         <FaRegCalendar size={20} />
                         <span className="text-lg font-semibold">{lead.nextActionAtFormatted.substring(0, lead.nextActionAtFormatted.length - 5)}</span>
                         <FaRegClock size={20} />
-                        <span className="text-lg font-semibold">{lead.nextActionAtFormatted.substring(0, lead.nextActionAtFormatted.length - 5)}</span>
+                        <span className="text-lg font-semibold">{timeUntil(lead.nextActionAt) + 1 + "d"}</span>
                     </span>
                 )}
             </span>
