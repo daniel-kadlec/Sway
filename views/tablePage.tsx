@@ -1,5 +1,5 @@
 import Table from "@/components/table";
-import { getLeads } from "@/lib/data/leads";
+import { getLeads } from "@/lib/utils/data/leads";
 import { FaSort } from "react-icons/fa6";
 
 export default async function TablePage() {

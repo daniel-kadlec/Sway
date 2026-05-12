@@ -10,23 +10,24 @@ import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { FaFlagCheckered } from "react-icons/fa";
 import { TbReload } from "react-icons/tb";
 import { FaClock } from "react-icons/fa";
-
-
-
+import {getLeadContacts} from "@/lib/utils/data/contactMap";
 
 type ViewModalProps = {
     data?: any;
 };
 
+
+
 function InfoItem({icon: Icon, value, href}: {
     icon: any;
     label: string;
-    value?: string;
+    value?: string | null;
     href?: string;
 }) {
-    const content = value || "—";
+    if (!value) return null;
 
     return (
+
         <div className="flex items-center gap-5">
             <Icon className="text-primary size-11 cursor-pointer" />
 
@@ -38,10 +39,10 @@ function InfoItem({icon: Icon, value, href}: {
                         rel="noreferrer"
                         className="text-3xl text-black hover:underline break-all"
                     >
-                        {content}
+                        {value}
                     </a>
                 ) : (
-                    <p className="text-3xl text-black break-all">{content}</p>
+                    <p className="text-3xl text-black break-all">{value}</p>
                 )}
             </div>
         </div>
@@ -51,6 +52,8 @@ function InfoItem({icon: Icon, value, href}: {
 
 export default function ViewModal({ data }: ViewModalProps) {
     const { closeModal, openModal } = useModal();
+
+    const contacts = getLeadContacts(data);
 
     const ContextMenuContent = (
         <div className={' flex flex-col items-center justify-center gap-3 p-2 w-full'}>
@@ -102,7 +105,7 @@ export default function ViewModal({ data }: ViewModalProps) {
             <div>
                 {/* Company */}
                 <h3 className="text-5xl font-bold text-black mb-10">
-                    {/*{data.companyName}*/}
+                    {data.companyName}
                 </h3>
 
                 {/* Contact details */}
@@ -110,65 +113,65 @@ export default function ViewModal({ data }: ViewModalProps) {
                     <InfoItem
                         icon={IoLogoInstagram}
                         label="Instagram"
-                        // value={instagram}
-                        // href={
-                        //     data?.instagramUrl ||
-                        //     (instagram && instagram !== "—"
-                        //         ? `https://instagram.com/${String(instagram).replace(
-                        //             "@",
-                        //             ""
-                        //         )}`
-                        //         : undefined)
-                        /*}*/
+                        value={contacts.instagram}
+                         href={
+                             data?.instagramUrl ||
+                             (contacts.instagram && contacts.instagram !== "—"
+                                 ? `https://instagram.com/${String(contacts.instagram).replace(
+                                    "@",
+                                    ""
+                               )}`
+                                 : undefined)
+                        }
                     />
 
                     <InfoItem
                         icon={IoMail}
                         label="Email"
-                        // value={email}
-                        // href={
-                        //     email && email !== "—"
-                        //         ? `mailto:${email}`
-                        //         : undefined
-                        // }
+                        value={contacts.email}
+                        href={
+                            contacts.email && contacts.email !== "—"
+                                ? `mailto:${contacts.email}`
+                                : undefined
+                        }
                     />
 
                     <InfoItem
                         icon={IoGlobeOutline}
                         label="Website"
-                        // value={website}
-                        // href={
-                        //     data?.websiteUrl ||
-                        //     (website && website !== "—"
-                        //         ? `https://${website.replace(/^https?:\/\//, "")}`
-                        //         : undefined)
-                        // }
+                        value={data.website}
+                        href={
+                            data?.websiteUrl ||
+                            (data.website && data.website !== "—"
+                                ? `https://${data.website.replace(/^https?:\/\//, "")}`
+                                : undefined)
+                        }
                     />
 
                     <InfoItem
                         icon={IoCall}
                         label="Phone"
-                        // value={phone}
-                        // href={
-                        //     phone && phone !== "—"
-                        //         ? `tel:${phone.replace(/\s/g, "")}`
-                        //         : undefined
-                        // }
+                        value={contacts.phone}
+                        href={
+                            contacts.phone && contacts.phone !== "—"
+                                ? `tel:${contacts.phone.replace(/\s/g, "")}`
+                                : undefined
+                        }
                     />
                 </div>
 
-                {/*/!* Note *!/*/}
-                {/*{data.note && (*/}
-                {/*    <div className="mt-10 rounded-2xl bg-[#FFF4CC] px-6 py-5 flex items-start gap-4">*/}
-                {/*        <div className="size-10 rounded-xl flex items-center justify-center shrink-0">*/}
-                {/*            <IoChatbubbleEllipsesOutline className="text-[#F2B400] size-9"/>*/}
-                {/*        </div>*/}
+                {/* Note */}
+                {data.note && (
+                    <div className="mt-10 rounded-2xl bg-[#FFF4CC] px-6 py-5 flex items-start gap-4">
+                        <div className="size-10 rounded-xl flex items-center justify-center shrink-0">
+                            <IoChatbubbleEllipsesOutline className="text-[#F2B400] size-9"/>
+                        </div>
 
-                {/*        <p className="text-xl leading-relaxed text-[#4B4B4B]">*/}
-                {/*            {data.note} Note*/}
-                {/*        </p>*/}
-                {/*    </div>*/}
-                {/*)}*/}
+                        <p className="text-xl mt-[3px] leading-relaxed text-[#4B4B4B]">
+                            {data.note}
+                        </p>
+                    </div>
+                )}
 
 
                 {/* Timeline */}

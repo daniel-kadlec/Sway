@@ -1,6 +1,6 @@
 import Card from "@/components/Card/card";
 import Recent from "@/components/Recent/recent";
-import {getLeads} from "@/lib/data/leads";
+import {getLeads} from "@/lib/utils/data/leads";
 
 export default async function KanbanPage(){
 

@@ -1,5 +1,5 @@
-import { prisma } from "@/lib/utils/prisma";
-import { formatLead } from "@/utils/formatLead";
+import { prisma } from "@/lib/prisma";
+import { formatLead } from "@/lib/utils/data/formatLead";
 
 export async function getLeads() {
 
