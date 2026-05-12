@@ -2,7 +2,6 @@ import { useModal } from "@/context/ModalContext";
 import Button from "@/components/button";
 import ContextMenu from "@/components/context-menu";
 import {IoClose, IoEllipsisHorizontal, IoMail, IoCall, IoGlobeOutline, IoLogoInstagram} from "react-icons/io5";
-
 import { FaForward } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
@@ -11,13 +10,12 @@ import { FaFlagCheckered } from "react-icons/fa";
 import { TbReload } from "react-icons/tb";
 import { FaClock } from "react-icons/fa";
 import {getLeadContacts} from "@/lib/utils/data/contactMap";
+import { deleteLead } from "@/lib/utils/data/leads";
+import {useToast} from "@/context/ToastContext";
 
 type ViewModalProps = {
     data?: any;
 };
-
-
-
 function InfoItem({icon: Icon, value, href}: {
     icon: any;
     label: string;
@@ -52,8 +50,21 @@ function InfoItem({icon: Icon, value, href}: {
 
 export default function ViewModal({ data }: ViewModalProps) {
     const { closeModal, openModal } = useModal();
+    const {showToast} = useToast()
 
     const contacts = getLeadContacts(data);
+
+    const handleDelete = () => {
+        try {
+            deleteLead(data.id);
+            closeModal();
+            showToast("Lead deleted successfully", "", "success");
+        }
+        catch{
+            showToast("Error", "", "error");
+
+        }
+    }
 
     const ContextMenuContent = (
         <div className={' flex flex-col items-center justify-center gap-3 p-2 w-full'}>
@@ -183,7 +194,7 @@ export default function ViewModal({ data }: ViewModalProps) {
                 <div className="flex items-center gap-4 mt-14">
                     <Button
                         className="!bg-error-light !text-error icon-button"
-                        onClick={() => data?.onDelete?.(data)}
+                        onClick={() => deleteLead(data.id)}
                     >
                         <FaTrash className="size-4" />
                         Delete
@@ -191,7 +202,7 @@ export default function ViewModal({ data }: ViewModalProps) {
 
                     <Button
                         className="bg-primary-light! text-primary! icon-button"
-                        onClick={() => openModal("edit", data)}
+                        onClick={() => openModal('edit', data)}
                     >
                         <FaPen className="size-4" />
                         Edit

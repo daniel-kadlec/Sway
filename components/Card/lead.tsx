@@ -75,7 +75,7 @@ export default function Lead({ v, lead }: LeadProps) {
                     <HiOutlineDotsHorizontal
                         onClick={(e) => {
                             e.stopPropagation();
-                            openModal("view");
+                            openModal("view", lead);
                         }}
                         size={46}
                         className="lead-control -ml-2"

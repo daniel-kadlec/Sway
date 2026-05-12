@@ -4,6 +4,8 @@ import { Label, Input, Select } from "./inputs";
 import Button from "@/components/button";
 import { FaTrash } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
+import {deleteLead} from "@/lib/utils/data/leads";
+import {useToast} from "@/context/ToastContext";
 
 type editModalProps = {
     data: any;
@@ -11,6 +13,19 @@ type editModalProps = {
 
 export default function EditModal({ data }: editModalProps) {
     const { closeModal, openModal } = useModal();
+    const {showToast} = useToast();
+
+    const handleDelete = () => {
+        try {
+            deleteLead(data.id);
+            closeModal();
+            showToast("Lead deleted successfully", "", "success");
+        }
+        catch{
+            showToast("Error", "", "error");
+        }
+    }
+
 
     return (
             <>
@@ -93,7 +108,7 @@ export default function EditModal({ data }: editModalProps) {
                 {/* Actions */}
                 <div className="flex mt-12 justify-between">
                     <div className={'flex gap-6'}>
-                        <Button className="!bg-error-light !text-error icon-button">
+                        <Button onClick={() => handleDelete()} className="!bg-error-light !text-error icon-button">
                             <FaTrash className="size-4" />
                             Delete
                         </Button>

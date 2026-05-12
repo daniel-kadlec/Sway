@@ -1,10 +1,22 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Card from "@/components/Card/card";
 import Stats from "@/components/Stats/stats";
 import { getLeads } from "@/lib/utils/data/leads";
 
-export default async function DashboardPage() {
+export default function DashboardPage() {
+    const [leads, setLeads] = useState([]);
 
-    const leads = await getLeads();
+    useEffect(() => {
+        const fetchLeads = async () => {
+            const data = await getLeads();
+            setLeads(data);
+        };
+        fetchLeads();
+    }, []);
+
+
 
     return (
         <div className={'h-full'}>

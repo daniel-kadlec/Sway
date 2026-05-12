@@ -4,6 +4,7 @@ import { IoClose } from "react-icons/io5";
 import { Label, Input, Select } from "./inputs";
 import Button from "@/components/button";
 import {useToast} from "@/context/ToastContext";
+import {createLead} from "@/lib/utils/data/leads";
 
 type CreateModalProps = {
     data?: any;
@@ -34,15 +35,7 @@ export default function CreateModal({ data }: CreateModalProps) {
 
     const handleLeadCreate = async () => {
         try {
-            const res = await fetch("/api/leads", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(form),
-            });
-
-            if (!res.ok) throw new Error();
+            await createLead(form);
 
             showToast("Lead created successfully", "", "success");
             closeModal();

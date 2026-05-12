@@ -1,10 +1,22 @@
+'use client'
+
 import Card from "@/components/Card/card";
 import Recent from "@/components/Recent/recent";
 import {getLeads} from "@/lib/utils/data/leads";
+import {useEffect, useState} from "react";
 
-export default async function KanbanPage(){
+export default function KanbanPage(){
 
-    const leads = await getLeads();
+    const [leads, setLeads] = useState([]);
+
+    useEffect(() => {
+        const fetchLeads = async () => {
+            const data = await getLeads();
+            setLeads(data);
+        };
+        fetchLeads();
+    }, []);
+
 
     return(
         <div className={'h-full'}>
