@@ -79,7 +79,7 @@ export default function Card({ title, variant = "blue", className, leads }: Card
     const v = variants[variant];
 
     return (
-        <div className={`bg-white rounded-3xl shadow-primary h-[550px] overflow-y-scroll hide-scrollbar ${className}`}>
+        <div className={`bg-white rounded-3xl shadow-primary h-full overflow-y-scroll hide-scrollbar ${className}`}>
             <CardHeader title={title} v={v} />
 
             {leads.map((lead: FormattedLead) => {
