@@ -2,6 +2,14 @@
 
 import { prisma } from "@/lib/prisma";
 import { formatLead } from "@/lib/utils/data/formatLead";
+import { revalidatePath } from "next/cache";
+
+
+function revalidatePaths () {
+    revalidatePath("/dashboard");
+    revalidatePath("/kanban");
+    revalidatePath("/table");
+}
 
 export async function getLeads() {
     const leads = await prisma.lead.findMany({
@@ -39,6 +47,7 @@ export async function createLead(form: any) {
                 : null,
         },
     });
+    revalidatePaths();
 }
 
 export async function deleteLead(id: string) {
@@ -47,4 +56,5 @@ export async function deleteLead(id: string) {
             id,
         },
     });
+    revalidatePaths();
 }
