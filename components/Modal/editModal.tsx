@@ -1,132 +1,241 @@
 import { useModal } from "@/context/ModalContext";
+import { useToast } from "@/context/ToastContext";
 import { IoClose } from "react-icons/io5";
+import { FaTrash, FaPen } from "react-icons/fa";
+import { useState } from "react";
+
 import { Label, Input, Select } from "./inputs";
 import Button from "@/components/button";
-import { FaTrash } from "react-icons/fa";
-import { FaPen } from "react-icons/fa";
-import {deleteLead} from "@/lib/utils/data/leads";
-import {useToast} from "@/context/ToastContext";
 
-type editModalProps = {
+import { deleteLead, updateLead } from "@/lib/utils/data/leads";
+
+type EditModalProps = {
     data: any;
 };
 
-export default function EditModal({ data }: editModalProps) {
+export default function EditModal({ data }: EditModalProps) {
     const { closeModal, openModal } = useModal();
-    const {showToast} = useToast();
+    const { showToast } = useToast();
 
-    const handleDelete = () => {
+    const [form, setForm] = useState({
+        companyName: data.companyName || "",
+        primaryContactValue: data.primaryContactValue || "",
+        primaryPlatform: data.primaryPlatform || "INSTAGRAM",
+        website: data.website || "",
+        contactDate: data.nextActionAt
+            ? new Date(data.nextActionAt).toISOString().split("T")[0]
+            : "",
+        secondaryContactValue: data.secondaryContactValue || "",
+        secondaryPlatform: data.secondaryPlatform || "EMAIL",
+        note: data.note || "",
+    });
+
+    const handleInputChange = (field: string, value: string) => {
+        setForm((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
+
+    const handleDelete = async () => {
         try {
-            deleteLead(data.id);
-            closeModal();
-            showToast("Lead deleted successfully", "", "success");
-        }
-        catch{
-            showToast("Error", "", "error");
-        }
-    }
+            await deleteLead(data.id);
 
+            closeModal();
+
+            showToast("Lead deleted successfully", "", "success");
+        } catch {
+            showToast("Error deleting lead", "", "error");
+        }
+    };
+
+    const handleUpdate = async () => {
+        try {
+            await updateLead(data.id, form);
+
+            showToast("Lead updated successfully", "", "success");
+
+            openModal("view", {
+                ...data,
+                ...form,
+                nextActionAt: form.contactDate,
+            });
+        } catch (err) {
+            showToast("Failed to update lead", "", "error");
+        }
+    };
 
     return (
-            <>
+        <>
+            {/* Header */}
+            <div className="mb-8 flex items-center justify-between">
+                <h2 className="text-4xl font-bold text-primary">
+                    Edit lead
+                </h2>
 
-                {/* Header */}
-                <div className="flex items-center justify-between mb-8">
-                    <h2 className="text-4xl font-bold text-primary">
-                        Edit lead
-                    </h2>
+                <button
+                    onClick={closeModal}
+                    className="flex size-12 items-center justify-center rounded-full bg-primary-light transition hover:opacity-90"
+                >
+                    <IoClose className="size-8 text-primary" />
+                </button>
+            </div>
 
-                    <button
-                        onClick={closeModal}
-                        className="size-12 flex items-center justify-center rounded-full bg-primary-light hover:opacity-90 transition"
-                    >
-                        <IoClose className="text-primary size-8" />
-                    </button>
+            {/* Form */}
+            <div className="grid grid-cols-2 gap-8">
+                <div className="col-span-2">
+                    <Label>
+                        Company name
+                        <span className={"required"} />
+                    </Label>
+
+                    <Input
+                        placeholder="Enter company name"
+                        value={form.companyName}
+                        onChange={(e) =>
+                            handleInputChange(
+                                "companyName",
+                                e.target.value
+                            )
+                        }
+                    />
                 </div>
 
-                {/* Form */}
-                <div className="grid grid-cols-2 gap-8">
+                <div>
+                    <Label>
+                        Primary contact
+                        <span className={"required"} />
+                    </Label>
 
-                    {/* Company */}
-                    <div className="col-span-2">
-                        <Label>Company name</Label>
-                        <Input placeholder="Velká firma" />
-                    </div>
-
-                    {/* Primary */}
-                    <div>
-                        <Label>Primary contact</Label>
-                        <Input
-                            placeholder="E-mail, IG, phone"
-                        />
-                    </div>
-
-                    <div>
-                        <Label>Primary platform</Label>
-                        <Select />
-                    </div>
-
-                    {/* Website + date */}
-                    <div>
-                        <Label>Website (optional)</Label>
-                        <Input
-                            placeholder="youtube.com"
-                        />
-                    </div>
-
-                    <div>
-                        <Label>Contact date (optional)</Label>
-                        <Input
-                            placeholder="7.7.2027"
-                        />
-                    </div>
-
-                    {/* Secondary */}
-                    <div>
-                        <Label>Secondary contact</Label>
-                        <Input
-                            placeholder="E-mail, IG, phone"
-                        />
-                    </div>
-
-                    <div>
-                        <Label>Secondary platform</Label>
-                        <Select/>
-                    </div>
-
-                    {/* Note */}
-                    <div className="col-span-2">
-                        <Label>Note</Label>
-                        <textarea
-                            defaultValue={data?.note}
-                            className="w-full min-h-[110px] rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                            placeholder="Poznámka..."
-                        />
-                    </div>
+                    <Input
+                        placeholder="E-mail, Instagram, or phone"
+                        value={form.primaryContactValue}
+                        onChange={(e) =>
+                            handleInputChange(
+                                "primaryContactValue",
+                                e.target.value
+                            )
+                        }
+                    />
                 </div>
 
-                {/* Actions */}
-                <div className="flex mt-12 justify-between">
-                    <div className={'flex gap-6'}>
-                        <Button onClick={() => handleDelete()} className="!bg-error-light !text-error icon-button">
-                            <FaTrash className="size-4" />
-                            Delete
-                        </Button>
+                <div>
+                    <Label>
+                        Primary platform
+                        <span className={"required"} />
+                    </Label>
 
-                        <Button
-                            className="!bg-primary-light !text-primary icon-button"
-                            onClick={() => openModal("view", data)}
-                        >
-                            <FaPen className="size-4" />
-                            Cancel
-                        </Button>
-                    </div>
+                    <Select
+                        value={form.primaryPlatform}
+                        onChange={(e) =>
+                            handleInputChange(
+                                "primaryPlatform",
+                                e.target.value
+                            )
+                        }
+                    />
+                </div>
+
+                <div>
+                    <Label>Website</Label>
+
+                    <Input
+                        placeholder="company.com"
+                        value={form.website}
+                        onChange={(e) =>
+                            handleInputChange(
+                                "website",
+                                e.target.value
+                            )
+                        }
+                    />
+                </div>
+
+                <div>
+                    <Label>Contact date</Label>
+
+                    <Input
+                        type="date"
+                        value={form.contactDate}
+                        onChange={(e) =>
+                            handleInputChange(
+                                "contactDate",
+                                e.target.value
+                            )
+                        }
+                    />
+                </div>
+
+                <div>
+                    <Label>Secondary contact</Label>
+
+                    <Input
+                        placeholder="E-mail, Instagram, or phone"
+                        value={form.secondaryContactValue}
+                        onChange={(e) =>
+                            handleInputChange(
+                                "secondaryContactValue",
+                                e.target.value
+                            )
+                        }
+                    />
+                </div>
+
+                <div>
+                    <Label>Secondary platform</Label>
+
+                    <Select
+                        value={form.secondaryPlatform}
+                        onChange={(e) =>
+                            handleInputChange(
+                                "secondaryPlatform",
+                                e.target.value
+                            )
+                        }
+                    />
+                </div>
+
+                <div className="col-span-2">
+                    <Label>Note</Label>
+
+                    <textarea
+                        className="min-h-[100px] w-full rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        placeholder="Add notes, context, or follow-up details"
+                        value={form.note}
+                        onChange={(e) =>
+                            handleInputChange(
+                                "note",
+                                e.target.value
+                            )
+                        }
+                    />
+                </div>
+            </div>
+
+            {/* Actions */}
+            <div className="mt-12 flex justify-between">
+                <div className={"flex gap-6"}>
                     <Button
+                        onClick={handleDelete}
+                        className="icon-button !bg-error-light !text-error"
+                    >
+                        <FaTrash className="size-4" />
+                        Delete
+                    </Button>
+
+                    <Button
+                        className="icon-button !bg-primary-light !text-primary"
                         onClick={() => openModal("view", data)}
                     >
-                        Save
+                        <FaPen className="size-4" />
+                        Cancel
                     </Button>
                 </div>
-            </>
+
+                <Button onClick={handleUpdate}>
+                    Save
+                </Button>
+            </div>
+        </>
     );
 }

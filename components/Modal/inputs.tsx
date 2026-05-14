@@ -20,6 +20,7 @@ export function Select(props: React.InputHTMLAttributes<HTMLSelectElement>) {
         <select
             {...props}
             className="w-full rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            value={props.value}
         >
             <option value="INSTAGRAM">Instagram</option>
             <option value="EMAIL">Email</option>

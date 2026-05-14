@@ -74,12 +74,12 @@ export default function CreateModal() {
 
                 <div className="col-span-2">
                     <Label>Company name<span className={'required'}/></Label>
-                    <Input onChange={(e) => handleInputChange("companyName", e.target.value)} placeholder="XS Drink" />
+                    <Input onChange={(e) => handleInputChange("companyName", e.target.value)} placeholder="Enter company name" />
                 </div>
 
                 <div>
                     <Label>Primary contact<span className={'required'}/></Label>
-                    <Input onChange={(e) => handleInputChange("primaryContactValue", e.target.value)} placeholder="E-mail, IG, phone" />
+                    <Input onChange={(e) => handleInputChange("primaryContactValue", e.target.value)} placeholder="E-mail, Instagram, or phone" />
                 </div>
 
                 <div>
@@ -92,7 +92,7 @@ export default function CreateModal() {
 
                 <div>
                     <Label>Website</Label>
-                    <Input onChange={(e) => handleInputChange("website", e.target.value)} placeholder="youtube.com" />
+                    <Input onChange={(e) => handleInputChange("website", e.target.value)} placeholder="company.com" />
                 </div>
 
                 <div>
@@ -107,7 +107,7 @@ export default function CreateModal() {
                     <>
                         <div>
                             <Label>Secondary contact</Label>
-                            <Input onChange={(e) => handleInputChange("secondaryContactValue", e.target.value)} placeholder="E-mail, IG, phone" />
+                            <Input onChange={(e) => handleInputChange("secondaryContactValue", e.target.value)} placeholder="E-mail, Instagram, or phone" />
                         </div>
 
                         <div>
@@ -122,7 +122,7 @@ export default function CreateModal() {
                             <Label>Note</Label>
                             <textarea
                                 className="w-full min-h-[100px] rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                                placeholder="Company smells weird... And there is smoke coming out of it!"
+                                placeholder="Add notes, context, or follow-up details"
                                 onChange={(e) => handleInputChange("note", e.target.value)}
                             />
                         </div>

@@ -58,3 +58,26 @@ export async function deleteLead(id: string) {
     });
     revalidatePaths();
 }
+
+export async function updateLead(id: string, form: any) {
+    await prisma.lead.update({
+        where: {
+            id,
+        },
+        data: {
+            companyName: form.companyName,
+            primaryContactValue: form.primaryContactValue,
+            primaryPlatform: form.primaryPlatform,
+            website: form.website,
+            nextActionAt: form.contactDate
+                ? new Date(form.contactDate)
+                : null,
+            secondaryContactValue:
+                form.secondaryContactValue || undefined,
+            secondaryPlatform:
+                form.secondaryPlatform || undefined,
+            note: form.note,
+        },
+    });
+    revalidatePaths();
+}
