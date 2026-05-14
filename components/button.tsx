@@ -1,25 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {useToast} from "@/context/ToastContext";
 
 type ButtonProps = {
     children: React.ReactNode;
-    onClick?: () => void;
+    onClickAction?: () => void;
     className?: string;
     type?: "submit" | "reset" | "button";
     destructive?: boolean;
 };
 
-export default function Button({
-                                   children,
-                                   onClick,
-                                   className,
-                                   type = "button",
-                                   destructive = false,
-                               }: ButtonProps) {
+export default function Button({children, onClickAction, className, type = "button", destructive = false}: ButtonProps) {
 
     const [armed, setArmed] = useState(false);
     const [cooldown, setCooldown] = useState(false);
+
+    const {showToast} = useToast();
 
     useEffect(() => {
         if (!armed) return;
@@ -34,31 +31,31 @@ export default function Button({
 
     function handleClick() {
 
-        // Normal button
+        // normal buttopn
         if (!destructive) {
-            onClick?.();
+            onClickAction?.();
             return;
         }
 
-        // First click
+        // first click
         if (!armed) {
             setArmed(true);
+            showToast("Are you sure?", "This action is irreversible.", "warning");
 
             // Small anti-doubleclick delay
             setCooldown(true);
 
             setTimeout(() => {
                 setCooldown(false);
-            }, 800);
+            }, 1000);
 
             return;
         }
 
-        // Ignore spam during cooldown
+        // ignore spam during cooldown
         if (cooldown) return;
 
-        // Confirmed
-        onClick?.();
+        onClickAction?.();
 
         setArmed(false);
     }

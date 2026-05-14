@@ -68,7 +68,7 @@ export default function ViewModal({ data }: ViewModalProps) {
 
     const ContextMenuContent = (
         <div className={' flex flex-col items-center justify-center gap-3 p-2 w-full'}>
-            <Button onClick={()=> openModal('finish')} className={'icon-button w-full bg-success-light! text-success!'}>
+            <Button onClickAction={()=> openModal('finish')} className={'icon-button w-full bg-success-light! text-success!'}>
                 <FaFlagCheckered className={'mt-0.5'}/>
                 Finish
             </Button>
@@ -195,7 +195,7 @@ export default function ViewModal({ data }: ViewModalProps) {
                     <Button
                         destructive={true}
                         className="!bg-error-light !text-error icon-button"
-                        onClick={() => handleDelete()}
+                        onClickAction={() => handleDelete()}
                     >
                         <FaTrash className="size-4" />
                         Delete
@@ -203,7 +203,7 @@ export default function ViewModal({ data }: ViewModalProps) {
 
                     <Button
                         className="bg-primary-light! text-primary! icon-button"
-                        onClick={() => openModal('edit', data)}
+                        onClickAction={() => openModal('edit', data)}
                     >
                         <FaPen className="size-4" />
                         Edit

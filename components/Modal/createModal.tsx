@@ -79,12 +79,12 @@ export default function CreateModal() {
                 </div>
 
                 <div>
-                    <Label>Primary contact<span className={'required'}/></Label>
+                    <Label>Primary contact<span className={''}/></Label>
                     <Input value={form.secondaryContactValue} onChange={(e) => handleInputChange("primaryContactValue", e.target.value)} placeholder="E-mail, Instagram, or phone" />
                 </div>
 
                 <div>
-                    <Label>Primary platform<span className={'required'}/></Label>
+                    <Label>Primary platform<span className={''}/></Label>
                     <Select value={form.primaryPlatform}
                             onChange={(e) =>
                                 handleInputChange("primaryPlatform", e.target.value)
@@ -133,13 +133,13 @@ export default function CreateModal() {
             </div>
 
             <div className="flex justify-end gap-3 mt-10">
-                <Button className={'bg-primary-light! text-primary!'} onClick={() => {
+                <Button className={'bg-primary-light! text-primary!'} onClickAction={() => {
                     handleLeadCreate();
                     setForm(initialForm);
                 }}>
                     Create & Next
                 </Button>
-                <Button onClick={() => {
+                <Button onClickAction={() => {
                     handleLeadCreate();
                     closeModal();
                 }}>

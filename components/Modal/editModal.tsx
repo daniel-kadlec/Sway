@@ -66,177 +66,86 @@ export default function EditModal({ data }: EditModalProps) {
     };
 
     return (
-        <>
+        <div className="">
             {/* Header */}
-            <div className="mb-8 flex items-center justify-between">
+            <div className="flex items-center justify-between mb-8">
                 <h2 className="text-4xl font-bold text-primary">
                     Edit lead
                 </h2>
 
                 <button
-                    onClick={closeModal}
-                    className="flex size-12 items-center justify-center rounded-full bg-primary-light transition hover:opacity-90"
+                    onClick={() => closeModal()}
+                    className="size-12 flex items-center justify-center rounded-full bg-primary-light transition cursor-pointer hover:opacity-90"
                 >
-                    <IoClose className="size-8 text-primary" />
+                    <IoClose className={'text-primary size-8'} />
                 </button>
             </div>
 
-            {/* Form */}
             <div className="grid grid-cols-2 gap-8">
                 <div className="col-span-2">
-                    <Label>
-                        Company name
-                        <span className={"required"} />
-                    </Label>
-
-                    <Input
-                        placeholder="Enter company name"
-                        value={form.companyName}
-                        onChange={(e) =>
-                            handleInputChange(
-                                "companyName",
-                                e.target.value
-                            )
-                        }
-                    />
+                    <Label>Company name<span className={'required'} /></Label>
+                    <Input value={form.companyName} onChange={(e) => handleInputChange("companyName", e.target.value)} placeholder="Enter company name" />
                 </div>
 
                 <div>
-                    <Label>
-                        Primary contact
-                        <span className={"required"} />
-                    </Label>
-
-                    <Input
-                        placeholder="E-mail, Instagram, or phone"
-                        value={form.primaryContactValue}
-                        onChange={(e) =>
-                            handleInputChange(
-                                "primaryContactValue",
-                                e.target.value
-                            )
-                        }
-                    />
+                    <Label>Primary contact<span className={''} /></Label>
+                    <Input value={form.primaryContactValue} onChange={(e) => handleInputChange("primaryContactValue", e.target.value)} placeholder="E-mail, Instagram, or phone" />
                 </div>
 
                 <div>
-                    <Label>
-                        Primary platform
-                        <span className={"required"} />
-                    </Label>
-
-                    <Select
-                        value={form.primaryPlatform}
-                        onChange={(e) =>
-                            handleInputChange(
-                                "primaryPlatform",
-                                e.target.value
-                            )
-                        }
-                    />
+                    <Label>Primary platform<span className={''} /></Label>
+                    <Select value={form.primaryPlatform} onChange={(e) => handleInputChange("primaryPlatform", e.target.value)} />
                 </div>
 
                 <div>
                     <Label>Website</Label>
-
-                    <Input
-                        placeholder="company.com"
-                        value={form.website}
-                        onChange={(e) =>
-                            handleInputChange(
-                                "website",
-                                e.target.value
-                            )
-                        }
-                    />
+                    <Input value={form.website} onChange={(e) => handleInputChange("website", e.target.value)} placeholder="company.com" />
                 </div>
 
                 <div>
                     <Label>Contact date</Label>
-
-                    <Input
-                        type="date"
-                        value={form.contactDate}
-                        onChange={(e) =>
-                            handleInputChange(
-                                "contactDate",
-                                e.target.value
-                            )
-                        }
-                    />
+                    <Input type="date" value={form.contactDate} onChange={(e) => handleInputChange("contactDate", e.target.value)} placeholder="7.7.2027" />
                 </div>
 
                 <div>
                     <Label>Secondary contact</Label>
-
-                    <Input
-                        placeholder="E-mail, Instagram, or phone"
-                        value={form.secondaryContactValue}
-                        onChange={(e) =>
-                            handleInputChange(
-                                "secondaryContactValue",
-                                e.target.value
-                            )
-                        }
-                    />
+                    <Input value={form.secondaryContactValue} onChange={(e) => handleInputChange("secondaryContactValue", e.target.value)} placeholder="E-mail, Instagram, or phone" />
                 </div>
 
                 <div>
                     <Label>Secondary platform</Label>
-
-                    <Select
-                        value={form.secondaryPlatform}
-                        onChange={(e) =>
-                            handleInputChange(
-                                "secondaryPlatform",
-                                e.target.value
-                            )
-                        }
-                    />
+                    <Select value={form.secondaryPlatform} onChange={(e) => handleInputChange("secondaryPlatform", e.target.value)} />
                 </div>
 
                 <div className="col-span-2">
                     <Label>Note</Label>
 
                     <textarea
-                        className="min-h-[100px] w-full rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                        placeholder="Add notes, context, or follow-up details"
                         value={form.note}
-                        onChange={(e) =>
-                            handleInputChange(
-                                "note",
-                                e.target.value
-                            )
-                        }
+                        className="w-full min-h-[100px] rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        placeholder="Add notes, context, or follow-up details"
+                        onChange={(e) => handleInputChange("note", e.target.value)}
                     />
                 </div>
             </div>
 
-            {/* Actions */}
-            <div className="mt-12 flex justify-between">
-                <div className={"flex gap-6"}>
-                    <Button
-                        onClick={handleDelete}
-                        destructive={true}
-                        className="icon-button !bg-error-light !text-error"
-                    >
+            <div className="flex justify-between gap-3 mt-10">
+                <div className="flex gap-3">
+                    <Button destructive={true} className={'icon-button text-error! bg-error-light!'} onClickAction={handleDelete}>
                         <FaTrash className="size-4" />
                         Delete
                     </Button>
 
-                    <Button
-                        className="icon-button !bg-primary-light !text-primary"
-                        onClick={() => openModal("view", data)}
-                    >
-                        <FaPen className="size-4" />
+                    <Button className={'bg-primary-light! text-primary! flex items-center gap-2'} onClickAction={() => openModal("view", data)}>
+                        <FaPen/>
                         Cancel
                     </Button>
                 </div>
 
-                <Button onClick={handleUpdate}>
+                <Button onClickAction={handleUpdate}>
                     Save
                 </Button>
             </div>
-        </>
+        </div>
     );
 }

@@ -58,7 +58,7 @@ export default function Navbar(){
         <div className={'text-offblack flex flex-col justify-center items-center p-3'}>
             <h1 className={'text-primary font-bold text-2xl'}>Daniel Kadlec</h1>
             <h1 className={''}>Admin</h1>
-            <Button  onClick={
+            <Button  onClickAction={
                 async () => {
                     await fetch("/api/logout", { method: "POST" });
                     router.push("/login");
