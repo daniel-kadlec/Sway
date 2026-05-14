@@ -25,8 +25,8 @@ export async function createLead(form: any) {
     await prisma.lead.create({
         data: {
             companyName: form.companyName,
-            primaryContactValue: form.primaryContactValue,
-            primaryPlatform: form.primaryPlatform,
+            primaryContactValue: form.primaryContactValue || null,
+            primaryPlatform: form.primaryPlatform || null,
             website: form.website,
             nextActionAt: form.contactDate
                 ? new Date(form.contactDate)

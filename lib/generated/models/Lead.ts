@@ -223,8 +223,8 @@ export type LeadGroupByOutputType = {
   id: string
   companyName: string
   note: string | null
-  primaryContactValue: string
-  primaryPlatform: $Enums.Platform
+  primaryContactValue: string | null
+  primaryPlatform: $Enums.Platform | null
   secondaryContactValue: string | null
   secondaryPlatform: $Enums.Platform | null
   website: string | null
@@ -264,8 +264,8 @@ export type LeadWhereInput = {
   id?: Prisma.StringFilter<"Lead"> | string
   companyName?: Prisma.StringFilter<"Lead"> | string
   note?: Prisma.StringNullableFilter<"Lead"> | string | null
-  primaryContactValue?: Prisma.StringFilter<"Lead"> | string
-  primaryPlatform?: Prisma.EnumPlatformFilter<"Lead"> | $Enums.Platform
+  primaryContactValue?: Prisma.StringNullableFilter<"Lead"> | string | null
+  primaryPlatform?: Prisma.EnumPlatformNullableFilter<"Lead"> | $Enums.Platform | null
   secondaryContactValue?: Prisma.StringNullableFilter<"Lead"> | string | null
   secondaryPlatform?: Prisma.EnumPlatformNullableFilter<"Lead"> | $Enums.Platform | null
   website?: Prisma.StringNullableFilter<"Lead"> | string | null
@@ -285,8 +285,8 @@ export type LeadOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   companyName?: Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
-  primaryContactValue?: Prisma.SortOrder
-  primaryPlatform?: Prisma.SortOrder
+  primaryContactValue?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryPlatform?: Prisma.SortOrderInput | Prisma.SortOrder
   secondaryContactValue?: Prisma.SortOrderInput | Prisma.SortOrder
   secondaryPlatform?: Prisma.SortOrderInput | Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -309,8 +309,8 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.LeadWhereInput | Prisma.LeadWhereInput[]
   companyName?: Prisma.StringFilter<"Lead"> | string
   note?: Prisma.StringNullableFilter<"Lead"> | string | null
-  primaryContactValue?: Prisma.StringFilter<"Lead"> | string
-  primaryPlatform?: Prisma.EnumPlatformFilter<"Lead"> | $Enums.Platform
+  primaryContactValue?: Prisma.StringNullableFilter<"Lead"> | string | null
+  primaryPlatform?: Prisma.EnumPlatformNullableFilter<"Lead"> | $Enums.Platform | null
   secondaryContactValue?: Prisma.StringNullableFilter<"Lead"> | string | null
   secondaryPlatform?: Prisma.EnumPlatformNullableFilter<"Lead"> | $Enums.Platform | null
   website?: Prisma.StringNullableFilter<"Lead"> | string | null
@@ -330,8 +330,8 @@ export type LeadOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   companyName?: Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
-  primaryContactValue?: Prisma.SortOrder
-  primaryPlatform?: Prisma.SortOrder
+  primaryContactValue?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryPlatform?: Prisma.SortOrderInput | Prisma.SortOrder
   secondaryContactValue?: Prisma.SortOrderInput | Prisma.SortOrder
   secondaryPlatform?: Prisma.SortOrderInput | Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -356,8 +356,8 @@ export type LeadScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Lead"> | string
   companyName?: Prisma.StringWithAggregatesFilter<"Lead"> | string
   note?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
-  primaryContactValue?: Prisma.StringWithAggregatesFilter<"Lead"> | string
-  primaryPlatform?: Prisma.EnumPlatformWithAggregatesFilter<"Lead"> | $Enums.Platform
+  primaryContactValue?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  primaryPlatform?: Prisma.EnumPlatformNullableWithAggregatesFilter<"Lead"> | $Enums.Platform | null
   secondaryContactValue?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   secondaryPlatform?: Prisma.EnumPlatformNullableWithAggregatesFilter<"Lead"> | $Enums.Platform | null
   website?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
@@ -376,8 +376,8 @@ export type LeadCreateInput = {
   id?: string
   companyName: string
   note?: string | null
-  primaryContactValue: string
-  primaryPlatform: $Enums.Platform
+  primaryContactValue?: string | null
+  primaryPlatform?: $Enums.Platform | null
   secondaryContactValue?: string | null
   secondaryPlatform?: $Enums.Platform | null
   website?: string | null
@@ -397,8 +397,8 @@ export type LeadUncheckedCreateInput = {
   id?: string
   companyName: string
   note?: string | null
-  primaryContactValue: string
-  primaryPlatform: $Enums.Platform
+  primaryContactValue?: string | null
+  primaryPlatform?: $Enums.Platform | null
   secondaryContactValue?: string | null
   secondaryPlatform?: $Enums.Platform | null
   website?: string | null
@@ -418,8 +418,8 @@ export type LeadUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   companyName?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryContactValue?: Prisma.StringFieldUpdateOperationsInput | string
-  primaryPlatform?: Prisma.EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
+  primaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
   secondaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secondaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -439,8 +439,8 @@ export type LeadUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   companyName?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryContactValue?: Prisma.StringFieldUpdateOperationsInput | string
-  primaryPlatform?: Prisma.EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
+  primaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
   secondaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secondaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -460,8 +460,8 @@ export type LeadCreateManyInput = {
   id?: string
   companyName: string
   note?: string | null
-  primaryContactValue: string
-  primaryPlatform: $Enums.Platform
+  primaryContactValue?: string | null
+  primaryPlatform?: $Enums.Platform | null
   secondaryContactValue?: string | null
   secondaryPlatform?: $Enums.Platform | null
   website?: string | null
@@ -480,8 +480,8 @@ export type LeadUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   companyName?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryContactValue?: Prisma.StringFieldUpdateOperationsInput | string
-  primaryPlatform?: Prisma.EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
+  primaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
   secondaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secondaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -500,8 +500,8 @@ export type LeadUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   companyName?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryContactValue?: Prisma.StringFieldUpdateOperationsInput | string
-  primaryPlatform?: Prisma.EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
+  primaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
   secondaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secondaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -589,10 +589,6 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
-export type EnumPlatformFieldUpdateOperationsInput = {
-  set?: $Enums.Platform
-}
-
 export type NullableEnumPlatformFieldUpdateOperationsInput = {
   set?: $Enums.Platform | null
 }
@@ -635,8 +631,8 @@ export type LeadCreateWithoutLogsInput = {
   id?: string
   companyName: string
   note?: string | null
-  primaryContactValue: string
-  primaryPlatform: $Enums.Platform
+  primaryContactValue?: string | null
+  primaryPlatform?: $Enums.Platform | null
   secondaryContactValue?: string | null
   secondaryPlatform?: $Enums.Platform | null
   website?: string | null
@@ -655,8 +651,8 @@ export type LeadUncheckedCreateWithoutLogsInput = {
   id?: string
   companyName: string
   note?: string | null
-  primaryContactValue: string
-  primaryPlatform: $Enums.Platform
+  primaryContactValue?: string | null
+  primaryPlatform?: $Enums.Platform | null
   secondaryContactValue?: string | null
   secondaryPlatform?: $Enums.Platform | null
   website?: string | null
@@ -691,8 +687,8 @@ export type LeadUpdateWithoutLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   companyName?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryContactValue?: Prisma.StringFieldUpdateOperationsInput | string
-  primaryPlatform?: Prisma.EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
+  primaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
   secondaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secondaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -711,8 +707,8 @@ export type LeadUncheckedUpdateWithoutLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   companyName?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryContactValue?: Prisma.StringFieldUpdateOperationsInput | string
-  primaryPlatform?: Prisma.EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
+  primaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
   secondaryContactValue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secondaryPlatform?: Prisma.NullableEnumPlatformFieldUpdateOperationsInput | $Enums.Platform | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -857,8 +853,8 @@ export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: string
     companyName: string
     note: string | null
-    primaryContactValue: string
-    primaryPlatform: $Enums.Platform
+    primaryContactValue: string | null
+    primaryPlatform: $Enums.Platform | null
     secondaryContactValue: string | null
     secondaryPlatform: $Enums.Platform | null
     website: string | null

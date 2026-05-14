@@ -20,23 +20,22 @@ export default function EditModal({ data }: EditModalProps) {
     const [form, setForm] = useState({
         companyName: data.companyName || "",
         primaryContactValue: data.primaryContactValue || "",
-        primaryPlatform: data.primaryPlatform || "INSTAGRAM",
+        primaryPlatform: data.primaryPlatform as string | null,
         website: data.website || "",
         contactDate: data.nextActionAt
             ? new Date(data.nextActionAt).toISOString().split("T")[0]
             : "",
         secondaryContactValue: data.secondaryContactValue || "",
-        secondaryPlatform: data.secondaryPlatform || "EMAIL",
+        secondaryPlatform: data.secondaryPlatform as string | null,
         note: data.note || "",
     });
 
-    const handleInputChange = (field: string, value: string) => {
+    const handleInputChange = (field: string, value: string | null) => {
         setForm((prev) => ({
             ...prev,
-            [field]: value,
+            [field]: value === "" ? null : value,
         }));
     };
-
     const handleDelete = async () => {
         try {
             await deleteLead(data.id);
@@ -94,7 +93,7 @@ export default function EditModal({ data }: EditModalProps) {
 
                 <div>
                     <Label>Primary platform<span className={''} /></Label>
-                    <Select value={form.primaryPlatform} onChange={(e) => handleInputChange("primaryPlatform", e.target.value)} />
+                    <Select value={form.primaryPlatform ?? ""} onChange={(e) => handleInputChange("primaryPlatform", e.target.value)} />
                 </div>
 
                 <div>
@@ -114,7 +113,7 @@ export default function EditModal({ data }: EditModalProps) {
 
                 <div>
                     <Label>Secondary platform</Label>
-                    <Select value={form.secondaryPlatform} onChange={(e) => handleInputChange("secondaryPlatform", e.target.value)} />
+                    <Select value={form.secondaryPlatform ?? ""} onChange={(e) => handleInputChange("secondaryPlatform", e.target.value)} />
                 </div>
 
                 <div className="col-span-2">

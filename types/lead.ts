@@ -5,8 +5,8 @@ export type Lead = {
     companyName: string;
     note?: string | null;
 
-    primaryContactValue: string;
-    primaryPlatform: Platform;
+    primaryContactValue?: string | null;
+    primaryPlatform?: Platform | null;
 
     secondaryContactValue?: string | null;
     secondaryPlatform?: Platform | null;

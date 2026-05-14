@@ -18,13 +18,15 @@ function mapContacts(lead: Lead): Record<Platform, string | null> {
         PHONE: null,
     };
 
-    contacts[lead.primaryPlatform as "EMAIL" | "INSTAGRAM" | "PHONE"] =
-        lead.primaryContactValue;
-
-    if (lead.secondaryPlatform && lead.secondaryContactValue) {
-        contacts[lead.secondaryPlatform as "EMAIL" | "INSTAGRAM" | "PHONE"] =
-            lead.secondaryContactValue;
+    if (lead.primaryPlatform) {
+        contacts[lead.primaryPlatform] = lead.primaryContactValue ?? null;
     }
+
+    if (lead.secondaryPlatform) {
+        contacts[lead.secondaryPlatform] =
+            lead.secondaryContactValue ?? null;
+    }
+
     return contacts;
 }
 

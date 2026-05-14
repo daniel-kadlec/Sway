@@ -15,16 +15,32 @@ export function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
     );
 }
 
-export function Select(props: React.InputHTMLAttributes<HTMLSelectElement>) {
+type SelectProps = React.SelectHTMLAttributes<HTMLSelectElement>;
+
+export function Select({ value, ...props }: SelectProps) {
+    const hasValue = !!value;
+
     return (
         <select
             {...props}
+            value={value}
             className="w-full rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
-            value={props.value}
         >
+            {!hasValue && (
+                <option value="" hidden>
+                    Select a platform
+                </option>
+            )}
+
             <option value="INSTAGRAM">Instagram</option>
             <option value="EMAIL">Email</option>
             <option value="PHONE">Phone</option>
+
+            {hasValue && (
+                <option value="" className="text-error">
+                    Remove platform
+                </option>
+            )}
         </select>
     );
 }

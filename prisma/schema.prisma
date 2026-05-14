@@ -48,8 +48,8 @@ model Lead {
   companyName String
   note        String?
 
-  primaryContactValue String
-  primaryPlatform     Platform
+  primaryContactValue String?
+  primaryPlatform     Platform?
 
   secondaryContactValue String?
   secondaryPlatform     Platform?

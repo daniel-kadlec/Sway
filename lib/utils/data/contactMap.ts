@@ -1,4 +1,4 @@
-import {FormattedLead} from "@/types/formattedLead";
+import { FormattedLead } from "@/types/formattedLead";
 
 export type LeadContacts = {
     email: string | null;
@@ -19,12 +19,14 @@ export function getLeadContacts(lead: FormattedLead): LeadContacts {
         PHONE: "phone",
     } as const;
 
-    contacts[platformMap[lead.primaryPlatform]] =
-        lead.primaryContactValue;
+    if (lead.primaryPlatform) {
+        contacts[platformMap[lead.primaryPlatform]] =
+            lead.primaryContactValue ?? null;
+    }
 
-    if (lead.secondaryPlatform && lead.secondaryContactValue) {
+    if (lead.secondaryPlatform) {
         contacts[platformMap[lead.secondaryPlatform]] =
-            lead.secondaryContactValue;
+            lead.secondaryContactValue ?? null;
     }
 
     return contacts;

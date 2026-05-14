@@ -8,6 +8,7 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { useModal } from "@/context/ModalContext";
 import { VariantConfig } from "@/components/Card/card";
 import {FormattedLead} from "@/types/formattedLead";
+import {IoCall, IoMail} from "react-icons/io5";
 
 type LeadProps = {
     v: VariantConfig;
@@ -26,12 +27,26 @@ export default function Lead({ v, lead }: LeadProps) {
         return Math.floor(diffMs / (1000 * 60 * 60 * 24));
     }
 
+    const assignContactIcon = (platform: string) => {
+        switch (platform) {
+            case "INSTAGRAM":
+                return <IoLogoInstagram size={30} className={`${v.iconColor} mt-0.5`} />;
+            case "EMAIL":
+                return <IoMail size={28} className={`${v.iconColor} mt-0.5 ml-0.5`} />;
+            case "PHONE":
+                return <IoCall size={30} className={`${v.iconColor} mt-0.5`} />;
+            default:
+                return null;
+        }
+
+    }
+
     return (
         <div className="group relative h-30 w-full border-b border-lightgray py-4 px-10 flex flex-col justify-center overflow-hidden">
 
             <span className="flex gap-2 items-center z-10">
                 <h1 className="font-bold text-3xl text-offblack">{lead.companyName}</h1>
-                <IoLogoInstagram size={30} className={`${v.iconColor} mt-0.5`} />
+                {assignContactIcon(lead.primaryPlatform!)}
             </span>
 
             <span className="mt-2 -ml-0.5 flex gap-4 items-center z-10">

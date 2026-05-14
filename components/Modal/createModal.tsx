@@ -8,17 +8,17 @@ import {createLead} from "@/lib/utils/data/leads";
 
 export default function CreateModal() {
     const [advanced, setAdvanced] = useState(false);
-    const { closeModal, openModal } = useModal();
+    const { closeModal } = useModal();
     const { showToast } = useToast();
 
     const initialForm = {
         companyName: "",
         primaryContactValue: "",
-        primaryPlatform: "INSTAGRAM",
+        primaryPlatform: "",
         website: "",
         contactDate: "",
         secondaryContactValue: "",
-        secondaryPlatform: "EMAIL",
+        secondaryPlatform: "",
         note: "",
     };
 
@@ -38,6 +38,8 @@ export default function CreateModal() {
             showToast("Lead created successfully", "", "success");
         } catch (err) {
             showToast("Failed to create lead", "", "error");
+
+            throw err;
         }
     };
 
@@ -80,7 +82,7 @@ export default function CreateModal() {
 
                 <div>
                     <Label>Primary contact<span className={''}/></Label>
-                    <Input value={form.secondaryContactValue} onChange={(e) => handleInputChange("primaryContactValue", e.target.value)} placeholder="E-mail, Instagram, or phone" />
+                    <Input value={form.primaryContactValue} onChange={(e) => handleInputChange("primaryContactValue", e.target.value)} placeholder="E-mail, Instagram, or phone" />
                 </div>
 
                 <div>
@@ -139,9 +141,13 @@ export default function CreateModal() {
                 }}>
                     Create & Next
                 </Button>
-                <Button onClickAction={() => {
-                    handleLeadCreate();
-                    closeModal();
+                <Button onClickAction={async () => {
+                    try {
+                        await handleLeadCreate();
+                        closeModal();
+                    } catch (err) {
+                        console.error(err);
+                    }
                 }}>
                     Create
                 </Button>

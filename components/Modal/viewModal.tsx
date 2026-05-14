@@ -115,12 +115,12 @@ export default function ViewModal({ data }: ViewModalProps) {
 
             <div>
                 {/* Company */}
-                <h3 className="text-5xl font-bold text-black mb-10">
+                <h3 className="text-5xl font-bold text-black mt-10">
                     {data.companyName}
                 </h3>
 
                 {/* Contact details */}
-                <div className="grid grid-cols-2 gap-x-14 gap-y-6">
+                <div className="grid grid-cols-2 gap-x-14 gap-y-6 mt-10">
                     <InfoItem
                         icon={IoLogoInstagram}
                         label="Instagram"
