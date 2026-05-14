@@ -217,6 +217,7 @@ export default function EditModal({ data }: EditModalProps) {
                 <div className={"flex gap-6"}>
                     <Button
                         onClick={handleDelete}
+                        destructive={true}
                         className="icon-button !bg-error-light !text-error"
                     >
                         <FaTrash className="size-4" />

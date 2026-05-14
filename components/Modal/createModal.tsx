@@ -8,10 +8,10 @@ import {createLead} from "@/lib/utils/data/leads";
 
 export default function CreateModal() {
     const [advanced, setAdvanced] = useState(false);
-    const { closeModal } = useModal();
+    const { closeModal, openModal } = useModal();
     const { showToast } = useToast();
 
-    const [form, setForm] = useState({
+    const initialForm = {
         companyName: "",
         primaryContactValue: "",
         primaryPlatform: "INSTAGRAM",
@@ -20,7 +20,9 @@ export default function CreateModal() {
         secondaryContactValue: "",
         secondaryPlatform: "EMAIL",
         note: "",
-    });
+    };
+
+    const [form, setForm] = useState(initialForm);
 
     const handleInputChange = (field: string, value: string) => {
         setForm((prev) => ({
@@ -34,7 +36,6 @@ export default function CreateModal() {
             await createLead(form);
 
             showToast("Lead created successfully", "", "success");
-            closeModal();
         } catch (err) {
             showToast("Failed to create lead", "", "error");
         }
@@ -73,13 +74,13 @@ export default function CreateModal() {
             <div className="grid grid-cols-2 gap-8">
 
                 <div className="col-span-2">
-                    <Label>Company name<span className={'required'}/></Label>
-                    <Input onChange={(e) => handleInputChange("companyName", e.target.value)} placeholder="Enter company name" />
+                    <Label >Company name<span className={'required'}/></Label>
+                    <Input value={form.companyName} onChange={(e) => handleInputChange("companyName", e.target.value)} placeholder="Enter company name" />
                 </div>
 
                 <div>
                     <Label>Primary contact<span className={'required'}/></Label>
-                    <Input onChange={(e) => handleInputChange("primaryContactValue", e.target.value)} placeholder="E-mail, Instagram, or phone" />
+                    <Input value={form.secondaryContactValue} onChange={(e) => handleInputChange("primaryContactValue", e.target.value)} placeholder="E-mail, Instagram, or phone" />
                 </div>
 
                 <div>
@@ -92,7 +93,7 @@ export default function CreateModal() {
 
                 <div>
                     <Label>Website</Label>
-                    <Input onChange={(e) => handleInputChange("website", e.target.value)} placeholder="company.com" />
+                    <Input value={form.website} onChange={(e) => handleInputChange("website", e.target.value)} placeholder="company.com" />
                 </div>
 
                 <div>
@@ -107,7 +108,7 @@ export default function CreateModal() {
                     <>
                         <div>
                             <Label>Secondary contact</Label>
-                            <Input onChange={(e) => handleInputChange("secondaryContactValue", e.target.value)} placeholder="E-mail, Instagram, or phone" />
+                            <Input value={form.secondaryContactValue} onChange={(e) => handleInputChange("secondaryContactValue", e.target.value)} placeholder="E-mail, Instagram, or phone" />
                         </div>
 
                         <div>
@@ -121,6 +122,7 @@ export default function CreateModal() {
                         <div className="col-span-2">
                             <Label>Note</Label>
                             <textarea
+                                value={form.note}
                                 className="w-full min-h-[100px] rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
                                 placeholder="Add notes, context, or follow-up details"
                                 onChange={(e) => handleInputChange("note", e.target.value)}
@@ -131,10 +133,16 @@ export default function CreateModal() {
             </div>
 
             <div className="flex justify-end gap-3 mt-10">
-                <Button className={'bg-primary-light! text-primary!'}>
+                <Button className={'bg-primary-light! text-primary!'} onClick={() => {
+                    handleLeadCreate();
+                    setForm(initialForm);
+                }}>
                     Create & Next
                 </Button>
-                <Button onClick={handleLeadCreate}>
+                <Button onClick={() => {
+                    handleLeadCreate();
+                    closeModal();
+                }}>
                     Create
                 </Button>
             </div>

@@ -76,11 +76,11 @@ export default function ViewModal({ data }: ViewModalProps) {
                 <FaClock className={'mt-0.5'}/>
                 Pending
             </Button>
-            <Button className={'icon-button w-full bg-lightgray! text-darkgray!'}>
+            <Button destructive={true} className={'icon-button w-full bg-lightgray! text-darkgray!'}>
                 <FaForward className={'mt-0.5 rotate-180'}/>
                 Go back
             </Button>
-            <Button className={'icon-button w-full bg-error-light! text-error!'}>
+            <Button destructive={true} className={'icon-button w-full bg-error-light! text-error!'}>
                 <TbReload className={'mt-0.5'}/>
                 Reset
             </Button>
@@ -193,6 +193,7 @@ export default function ViewModal({ data }: ViewModalProps) {
                 {/* Actions */}
                 <div className="flex items-center gap-4 mt-14">
                     <Button
+                        destructive={true}
                         className="!bg-error-light !text-error icon-button"
                         onClick={() => handleDelete()}
                     >
