@@ -1,5 +1,4 @@
-
-import KanbanPage from "@/app/pages/kanbanPage";
+import KanbanPage from "@/views/kanbanPage";
 export default function Kanban(){
     return(
         <KanbanPage/>

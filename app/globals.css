@@ -49,7 +49,7 @@
 }
 
 .cut-corner{
-    @apply bg-primary w-8 h-8 absolute top-1/3 left-0 -translate-x-(--container-gap);
+    @apply bg-primary w-8 h-8 absolute top-[40%] left-0 -translate-x-(--container-gap);
 
     --cut: 32px;
 
@@ -91,7 +91,16 @@
 
 /* Custom scrollbar*/
 .custom-scrollbar::-webkit-scrollbar {
-    height: 6px; /* smaller */
+    width: 8px;
+    height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar:vertical {
+    width: 0;
+}
+
+.custom-scrollbar::-webkit-scrollbar:horizontal {
+    height: 8px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -101,6 +110,7 @@
 .custom-scrollbar::-webkit-scrollbar-thumb {
     background: #e5e7eb;
     border-radius: 9999px;
+    cursor: grab;
 }
 
 @keyframes countdown {
@@ -108,7 +118,7 @@
         width: 100%;
     }
     to {
-        width: 0%;
+        width: 0;
     }
 }
 
@@ -143,4 +153,7 @@
 .toastPresence{
     animation: toastPresence 3s ease-in-out;
 }
-
+.required::after {
+    @apply text-error ml-0.5;
+    content: '*';
+}

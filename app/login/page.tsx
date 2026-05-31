@@ -1,4 +1,4 @@
-import Loginpage from "@/app/loginPage";
+import Loginpage from "@/views/loginPage";
 
 export default function Login(){
     return (

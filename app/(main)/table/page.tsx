@@ -1,7 +1,6 @@
-import TablePage from "@/app/pages/tablePage";
+import TablePage from "@/views/tablePage";
 export default function Table() {
-
-     return (
-       <TablePage/>
+    return (
+        <TablePage/>
     );
 }
