@@ -24,8 +24,6 @@ export async function advanceLead(id: string) {
 
     switch (stage) {
         case "BACKLOG":
-            throw new Error(`Set a contact date to start the flow`)
-        case "SCHEDULED":
             nextStage = "PRIMARY_CONTACT";
             break;
         case "PRIMARY_CONTACT":
@@ -71,12 +69,17 @@ export async function rollbackLead(id: string) {
 
     switch (stage) {
         case "BACKLOG":
-            throw new Error(`Stage backlog`);
-        case "SCHEDULED":
-            previousStage = "BACKLOG";
-            break;
+        throw new Error(`Stage already in backlog`);
         case "PRIMARY_CONTACT":
-            previousStage = "SCHEDULED";
+            previousStage = "BACKLOG";
+            await prisma.lead.update({
+                where: {
+                    id: id,
+                },
+                data: {
+                    nextActionAt: null,
+                },
+            })
             break;
         case "PRIMARY_CONTACT_FOLLOW_UP":
             previousStage = "PRIMARY_CONTACT";

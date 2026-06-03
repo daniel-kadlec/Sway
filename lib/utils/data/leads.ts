@@ -37,7 +37,7 @@ export async function createLead(form: any) {
                 form.secondaryPlatform || undefined,
             note: form.note,
             stage: form.contactDate
-                ? "SCHEDULED"
+                ? "PRIMARY_CONTACT"
                 : "BACKLOG",
             status: form.contactDate
                 ? "ACTIVE"
