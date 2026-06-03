@@ -603,7 +603,8 @@ export const LeadScalarFieldEnum = {
   website: 'website',
   stage: 'stage',
   status: 'status',
-  verdict: 'verdict',
+  outcome: 'outcome',
+  reason: 'reason',
   nextActionAt: 'nextActionAt',
   primaryContactAt: 'primaryContactAt',
   primaryFollowUpAt: 'primaryFollowUpAt',
@@ -621,6 +622,7 @@ export const LeadLogScalarFieldEnum = {
   type: 'type',
   fromStage: 'fromStage',
   toStage: 'toStage',
+  updatedAt: 'updatedAt',
   createdAt: 'createdAt'
 } as const
 
@@ -714,16 +716,30 @@ export type ListEnumLeadStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 
 
 /**
- * Reference to a field of type 'LeadVerdict'
+ * Reference to a field of type 'LeadOutcome'
  */
-export type EnumLeadVerdictFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadVerdict'>
+export type EnumLeadOutcomeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadOutcome'>
     
 
 
 /**
- * Reference to a field of type 'LeadVerdict[]'
+ * Reference to a field of type 'LeadOutcome[]'
  */
-export type ListEnumLeadVerdictFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadVerdict[]'>
+export type ListEnumLeadOutcomeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadOutcome[]'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadLossReason'
+ */
+export type EnumLeadLossReasonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadLossReason'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadLossReason[]'
+ */
+export type ListEnumLeadLossReasonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadLossReason[]'>
     
 
 

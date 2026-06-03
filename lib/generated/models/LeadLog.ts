@@ -30,6 +30,7 @@ export type LeadLogMinAggregateOutputType = {
   type: $Enums.LogType | null
   fromStage: $Enums.Stage | null
   toStage: $Enums.Stage | null
+  updatedAt: Date | null
   createdAt: Date | null
 }
 
@@ -39,6 +40,7 @@ export type LeadLogMaxAggregateOutputType = {
   type: $Enums.LogType | null
   fromStage: $Enums.Stage | null
   toStage: $Enums.Stage | null
+  updatedAt: Date | null
   createdAt: Date | null
 }
 
@@ -48,6 +50,7 @@ export type LeadLogCountAggregateOutputType = {
   type: number
   fromStage: number
   toStage: number
+  updatedAt: number
   createdAt: number
   _all: number
 }
@@ -59,6 +62,7 @@ export type LeadLogMinAggregateInputType = {
   type?: true
   fromStage?: true
   toStage?: true
+  updatedAt?: true
   createdAt?: true
 }
 
@@ -68,6 +72,7 @@ export type LeadLogMaxAggregateInputType = {
   type?: true
   fromStage?: true
   toStage?: true
+  updatedAt?: true
   createdAt?: true
 }
 
@@ -77,6 +82,7 @@ export type LeadLogCountAggregateInputType = {
   type?: true
   fromStage?: true
   toStage?: true
+  updatedAt?: true
   createdAt?: true
   _all?: true
 }
@@ -159,6 +165,7 @@ export type LeadLogGroupByOutputType = {
   type: $Enums.LogType
   fromStage: $Enums.Stage | null
   toStage: $Enums.Stage | null
+  updatedAt: Date
   createdAt: Date
   _count: LeadLogCountAggregateOutputType | null
   _min: LeadLogMinAggregateOutputType | null
@@ -189,6 +196,7 @@ export type LeadLogWhereInput = {
   type?: Prisma.EnumLogTypeFilter<"LeadLog"> | $Enums.LogType
   fromStage?: Prisma.EnumStageNullableFilter<"LeadLog"> | $Enums.Stage | null
   toStage?: Prisma.EnumStageNullableFilter<"LeadLog"> | $Enums.Stage | null
+  updatedAt?: Prisma.DateTimeFilter<"LeadLog"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"LeadLog"> | Date | string
   lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
 }
@@ -199,6 +207,7 @@ export type LeadLogOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   fromStage?: Prisma.SortOrderInput | Prisma.SortOrder
   toStage?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   lead?: Prisma.LeadOrderByWithRelationInput
 }
@@ -212,6 +221,7 @@ export type LeadLogWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.EnumLogTypeFilter<"LeadLog"> | $Enums.LogType
   fromStage?: Prisma.EnumStageNullableFilter<"LeadLog"> | $Enums.Stage | null
   toStage?: Prisma.EnumStageNullableFilter<"LeadLog"> | $Enums.Stage | null
+  updatedAt?: Prisma.DateTimeFilter<"LeadLog"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"LeadLog"> | Date | string
   lead?: Prisma.XOR<Prisma.LeadScalarRelationFilter, Prisma.LeadWhereInput>
 }, "id">
@@ -222,6 +232,7 @@ export type LeadLogOrderByWithAggregationInput = {
   type?: Prisma.SortOrder
   fromStage?: Prisma.SortOrderInput | Prisma.SortOrder
   toStage?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.LeadLogCountOrderByAggregateInput
   _max?: Prisma.LeadLogMaxOrderByAggregateInput
@@ -237,6 +248,7 @@ export type LeadLogScalarWhereWithAggregatesInput = {
   type?: Prisma.EnumLogTypeWithAggregatesFilter<"LeadLog"> | $Enums.LogType
   fromStage?: Prisma.EnumStageNullableWithAggregatesFilter<"LeadLog"> | $Enums.Stage | null
   toStage?: Prisma.EnumStageNullableWithAggregatesFilter<"LeadLog"> | $Enums.Stage | null
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"LeadLog"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"LeadLog"> | Date | string
 }
 
@@ -245,6 +257,7 @@ export type LeadLogCreateInput = {
   type: $Enums.LogType
   fromStage?: $Enums.Stage | null
   toStage?: $Enums.Stage | null
+  updatedAt?: Date | string
   createdAt?: Date | string
   lead: Prisma.LeadCreateNestedOneWithoutLogsInput
 }
@@ -255,6 +268,7 @@ export type LeadLogUncheckedCreateInput = {
   type: $Enums.LogType
   fromStage?: $Enums.Stage | null
   toStage?: $Enums.Stage | null
+  updatedAt?: Date | string
   createdAt?: Date | string
 }
 
@@ -263,6 +277,7 @@ export type LeadLogUpdateInput = {
   type?: Prisma.EnumLogTypeFieldUpdateOperationsInput | $Enums.LogType
   fromStage?: Prisma.NullableEnumStageFieldUpdateOperationsInput | $Enums.Stage | null
   toStage?: Prisma.NullableEnumStageFieldUpdateOperationsInput | $Enums.Stage | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lead?: Prisma.LeadUpdateOneRequiredWithoutLogsNestedInput
 }
@@ -273,6 +288,7 @@ export type LeadLogUncheckedUpdateInput = {
   type?: Prisma.EnumLogTypeFieldUpdateOperationsInput | $Enums.LogType
   fromStage?: Prisma.NullableEnumStageFieldUpdateOperationsInput | $Enums.Stage | null
   toStage?: Prisma.NullableEnumStageFieldUpdateOperationsInput | $Enums.Stage | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -282,6 +298,7 @@ export type LeadLogCreateManyInput = {
   type: $Enums.LogType
   fromStage?: $Enums.Stage | null
   toStage?: $Enums.Stage | null
+  updatedAt?: Date | string
   createdAt?: Date | string
 }
 
@@ -290,6 +307,7 @@ export type LeadLogUpdateManyMutationInput = {
   type?: Prisma.EnumLogTypeFieldUpdateOperationsInput | $Enums.LogType
   fromStage?: Prisma.NullableEnumStageFieldUpdateOperationsInput | $Enums.Stage | null
   toStage?: Prisma.NullableEnumStageFieldUpdateOperationsInput | $Enums.Stage | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -299,6 +317,7 @@ export type LeadLogUncheckedUpdateManyInput = {
   type?: Prisma.EnumLogTypeFieldUpdateOperationsInput | $Enums.LogType
   fromStage?: Prisma.NullableEnumStageFieldUpdateOperationsInput | $Enums.Stage | null
   toStage?: Prisma.NullableEnumStageFieldUpdateOperationsInput | $Enums.Stage | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -318,6 +337,7 @@ export type LeadLogCountOrderByAggregateInput = {
   type?: Prisma.SortOrder
   fromStage?: Prisma.SortOrder
   toStage?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -327,6 +347,7 @@ export type LeadLogMaxOrderByAggregateInput = {
   type?: Prisma.SortOrder
   fromStage?: Prisma.SortOrder
   toStage?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -336,6 +357,7 @@ export type LeadLogMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
   fromStage?: Prisma.SortOrder
   toStage?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -394,6 +416,7 @@ export type LeadLogCreateWithoutLeadInput = {
   type: $Enums.LogType
   fromStage?: $Enums.Stage | null
   toStage?: $Enums.Stage | null
+  updatedAt?: Date | string
   createdAt?: Date | string
 }
 
@@ -402,6 +425,7 @@ export type LeadLogUncheckedCreateWithoutLeadInput = {
   type: $Enums.LogType
   fromStage?: $Enums.Stage | null
   toStage?: $Enums.Stage | null
+  updatedAt?: Date | string
   createdAt?: Date | string
 }
 
@@ -440,6 +464,7 @@ export type LeadLogScalarWhereInput = {
   type?: Prisma.EnumLogTypeFilter<"LeadLog"> | $Enums.LogType
   fromStage?: Prisma.EnumStageNullableFilter<"LeadLog"> | $Enums.Stage | null
   toStage?: Prisma.EnumStageNullableFilter<"LeadLog"> | $Enums.Stage | null
+  updatedAt?: Prisma.DateTimeFilter<"LeadLog"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"LeadLog"> | Date | string
 }
 
@@ -448,6 +473,7 @@ export type LeadLogCreateManyLeadInput = {
   type: $Enums.LogType
   fromStage?: $Enums.Stage | null
   toStage?: $Enums.Stage | null
+  updatedAt?: Date | string
   createdAt?: Date | string
 }
 
@@ -456,6 +482,7 @@ export type LeadLogUpdateWithoutLeadInput = {
   type?: Prisma.EnumLogTypeFieldUpdateOperationsInput | $Enums.LogType
   fromStage?: Prisma.NullableEnumStageFieldUpdateOperationsInput | $Enums.Stage | null
   toStage?: Prisma.NullableEnumStageFieldUpdateOperationsInput | $Enums.Stage | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -464,6 +491,7 @@ export type LeadLogUncheckedUpdateWithoutLeadInput = {
   type?: Prisma.EnumLogTypeFieldUpdateOperationsInput | $Enums.LogType
   fromStage?: Prisma.NullableEnumStageFieldUpdateOperationsInput | $Enums.Stage | null
   toStage?: Prisma.NullableEnumStageFieldUpdateOperationsInput | $Enums.Stage | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -472,6 +500,7 @@ export type LeadLogUncheckedUpdateManyWithoutLeadInput = {
   type?: Prisma.EnumLogTypeFieldUpdateOperationsInput | $Enums.LogType
   fromStage?: Prisma.NullableEnumStageFieldUpdateOperationsInput | $Enums.Stage | null
   toStage?: Prisma.NullableEnumStageFieldUpdateOperationsInput | $Enums.Stage | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -483,6 +512,7 @@ export type LeadLogSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   type?: boolean
   fromStage?: boolean
   toStage?: boolean
+  updatedAt?: boolean
   createdAt?: boolean
   lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadLog"]>
@@ -493,6 +523,7 @@ export type LeadLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   type?: boolean
   fromStage?: boolean
   toStage?: boolean
+  updatedAt?: boolean
   createdAt?: boolean
   lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadLog"]>
@@ -503,6 +534,7 @@ export type LeadLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   type?: boolean
   fromStage?: boolean
   toStage?: boolean
+  updatedAt?: boolean
   createdAt?: boolean
   lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadLog"]>
@@ -513,10 +545,11 @@ export type LeadLogSelectScalar = {
   type?: boolean
   fromStage?: boolean
   toStage?: boolean
+  updatedAt?: boolean
   createdAt?: boolean
 }
 
-export type LeadLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "type" | "fromStage" | "toStage" | "createdAt", ExtArgs["result"]["leadLog"]>
+export type LeadLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "type" | "fromStage" | "toStage" | "updatedAt" | "createdAt", ExtArgs["result"]["leadLog"]>
 export type LeadLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lead?: boolean | Prisma.LeadDefaultArgs<ExtArgs>
 }
@@ -538,6 +571,7 @@ export type $LeadLogPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     type: $Enums.LogType
     fromStage: $Enums.Stage | null
     toStage: $Enums.Stage | null
+    updatedAt: Date
     createdAt: Date
   }, ExtArgs["result"]["leadLog"]>
   composites: {}
@@ -968,6 +1002,7 @@ export interface LeadLogFieldRefs {
   readonly type: Prisma.FieldRef<"LeadLog", 'LogType'>
   readonly fromStage: Prisma.FieldRef<"LeadLog", 'Stage'>
   readonly toStage: Prisma.FieldRef<"LeadLog", 'Stage'>
+  readonly updatedAt: Prisma.FieldRef<"LeadLog", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"LeadLog", 'DateTime'>
 }
     

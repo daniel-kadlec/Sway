@@ -32,12 +32,23 @@ export const LeadStatus = {
 export type LeadStatus = (typeof LeadStatus)[keyof typeof LeadStatus]
 
 
-export const LeadVerdict = {
+export const LeadOutcome = {
   WON: 'WON',
   LOST: 'LOST'
 } as const
 
-export type LeadVerdict = (typeof LeadVerdict)[keyof typeof LeadVerdict]
+export type LeadOutcome = (typeof LeadOutcome)[keyof typeof LeadOutcome]
+
+
+export const LeadLossReason = {
+  GHOSTED: 'GHOSTED',
+  REJECTED: 'REJECTED',
+  NO_BUDGET: 'NO_BUDGET',
+  NO_RESPONSE: 'NO_RESPONSE',
+  OTHER: 'OTHER'
+} as const
+
+export type LeadLossReason = (typeof LeadLossReason)[keyof typeof LeadLossReason]
 
 
 export const Platform = {
@@ -54,7 +65,8 @@ export const LogType = {
   STAGE_CHANGED: 'STAGE_CHANGED',
   STAGE_REVERTED: 'STAGE_REVERTED',
   RESET: 'RESET',
-  MARKED_PENDING: 'MARKED_PENDING'
+  MARKED_PENDING: 'MARKED_PENDING',
+  MARKED_CLOSED: 'MARKED_CLOSED'
 } as const
 
 export type LogType = (typeof LogType)[keyof typeof LogType]

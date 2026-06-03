@@ -31,7 +31,8 @@ function mapContacts(lead: Lead): Record<Platform, string | null> {
 }
 
 function formatStage(stage: string): string {
-    return stage.charAt(0).toUpperCase() + stage.slice(1).toLowerCase();
+    return stage.charAt(0).toUpperCase() + stage.slice(1).toLowerCase().replaceAll("_", " ")
+        ;
 }
 
 export function formatLead(lead: Lead): FormattedLead {

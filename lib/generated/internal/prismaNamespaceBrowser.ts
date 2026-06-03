@@ -82,7 +82,8 @@ export const LeadScalarFieldEnum = {
   website: 'website',
   stage: 'stage',
   status: 'status',
-  verdict: 'verdict',
+  outcome: 'outcome',
+  reason: 'reason',
   nextActionAt: 'nextActionAt',
   primaryContactAt: 'primaryContactAt',
   primaryFollowUpAt: 'primaryFollowUpAt',
@@ -100,6 +101,7 @@ export const LeadLogScalarFieldEnum = {
   type: 'type',
   fromStage: 'fromStage',
   toStage: 'toStage',
+  updatedAt: 'updatedAt',
   createdAt: 'createdAt'
 } as const
 

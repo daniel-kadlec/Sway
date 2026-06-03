@@ -24,9 +24,17 @@ enum LeadStatus {
   CLOSED
 }
 
-enum LeadVerdict {
+enum LeadOutcome {
   WON
   LOST
+}
+
+enum LeadLossReason {
+  GHOSTED
+  REJECTED
+  NO_BUDGET
+  NO_RESPONSE
+  OTHER
 }
 
 enum Platform {
@@ -41,6 +49,7 @@ enum LogType {
   STAGE_REVERTED
   RESET
   MARKED_PENDING
+  MARKED_CLOSED
 }
 
 model Lead {
@@ -57,8 +66,9 @@ model Lead {
   website String?
 
   stage   Stage
-  status  LeadStatus   @default(ACTIVE)
-  verdict LeadVerdict?
+  status  LeadStatus      @default(ACTIVE)
+  outcome LeadOutcome?
+  reason  LeadLossReason?
 
   nextActionAt DateTime?
 
@@ -85,5 +95,6 @@ model LeadLog {
   fromStage Stage?
   toStage   Stage?
 
+  updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
 }
