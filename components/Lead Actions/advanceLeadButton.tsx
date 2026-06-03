@@ -1,5 +1,5 @@
 import {FaForward} from "react-icons/fa";
-import {advanceLead} from "../../lib/utils/data/leadStage"
+import {advanceLead} from "@/lib/utils/data/leadStage"
 import {useToast} from "@/context/ToastContext";
 
 type AdvanceLeadProps = {

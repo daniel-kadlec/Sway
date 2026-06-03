@@ -74,9 +74,9 @@ export default function ViewModal({ data }: ViewModalProps) {
     const ContextMenuContent = (
         <div className={' flex flex-col items-center justify-center gap-3 p-2 w-full'}>
             <FinishLead/>
-            <SetPendingLead/>
-            <RollbackLead/>
-            <ResetLead/>
+            <SetPendingLead id={data.id}/>
+            <RollbackLead id={data.id}/>
+            <ResetLead id={data.id}/>
         </div>
     );
 
