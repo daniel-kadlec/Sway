@@ -97,3 +97,10 @@ model LeadLog {
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
 }
+
+model Settings {
+  id String @id @default(uuid())
+
+  contactDelay            Int @default(7)
+  advanceFromBacklogDelay Int @default(0)
+}

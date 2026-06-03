@@ -9,6 +9,8 @@ import {useToast} from "@/context/ToastContext";
 
 import { FaUser } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
+import { FaGear } from "react-icons/fa6";
+
 import { TbLogout2 } from "react-icons/tb";
 import ContextMenu from "@/components/context-menu";
 import Button from "@/components/button";
@@ -104,6 +106,7 @@ export default function Navbar(){
                             <ContextMenu content={ContextMenucontent}>
                                 <FaUser size={26} className={'text-white cursor-pointer'}/>
                             </ContextMenu>
+                            <FaGear size={26} className={'text-white cursor-pointer'} onClick={() => openModal("settings")}/>
                         </span>
 
                     </span>

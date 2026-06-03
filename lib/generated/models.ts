@@ -10,4 +10,5 @@
  */
 export type * from './models/Lead'
 export type * from './models/LeadLog'
+export type * from './models/Settings'
 export type * from './commonInputTypes'
