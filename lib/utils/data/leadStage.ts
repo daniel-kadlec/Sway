@@ -52,7 +52,22 @@ export async function advanceLead(id: string) {
             stage: nextStage,
         },
     });
-    revalidatePaths()
+
+    if (nextStage === "PRIMARY_CONTACT") {
+        await prisma.lead.update({
+            where: {
+                id: id,
+            },
+            data: {
+                nextActionAt: new Date(),
+            },
+        })
+    }
+    revalidatePaths();
+
+    return {
+        reachedClosed: nextStage === "CLOSED",
+    };
 }
 
 export async function rollbackLead(id: string) {

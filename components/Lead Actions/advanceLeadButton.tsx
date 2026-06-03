@@ -1,18 +1,24 @@
 import {FaForward} from "react-icons/fa";
 import {advanceLead} from "@/lib/utils/data/leadStage"
 import {useToast} from "@/context/ToastContext";
+import {useModal} from "@/context/ModalContext";
 
 type AdvanceLeadProps = {
     id: string;
 }
 export default function advanceLeadButton({id}: AdvanceLeadProps){
     const {showToast} = useToast()
+    const {openModal} = useModal()
     return(
         <button className="size-12 flex items-center justify-center rounded-full bg-primary-light transition cursor-pointer hover:opacity-90"
         onClick={async () => {
             try {
-                await advanceLead(id)
+                const result = await advanceLead(id)
+                if(result.reachedClosed){
+                    openModal("finish", id)
+                }
                 showToast("Stage advanced", "", "success");
+
             }
             catch (err: unknown) {
                 const message =

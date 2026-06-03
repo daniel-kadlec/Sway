@@ -60,24 +60,39 @@ export async function deleteLead(id: string) {
 }
 
 export async function updateLead(id: string, form: any) {
+    const lead = await prisma.lead.findUnique({
+        where: { id },
+    });
+
+    if (!lead) {
+        throw new Error("Lead not found");
+    }
+
+    const nextActionAt = form.contactDate
+        ? new Date(form.contactDate)
+        : null;
+
     await prisma.lead.update({
-        where: {
-            id,
-        },
+        where: { id },
         data: {
             companyName: form.companyName,
             primaryContactValue: form.primaryContactValue,
             primaryPlatform: form.primaryPlatform,
             website: form.website,
-            nextActionAt: form.contactDate
-                ? new Date(form.contactDate)
-                : null,
+            nextActionAt,
             secondaryContactValue:
                 form.secondaryContactValue || undefined,
             secondaryPlatform:
                 form.secondaryPlatform || undefined,
             note: form.note,
+
+            ...(nextActionAt &&
+                lead.stage === "BACKLOG" && {
+                    stage: "PRIMARY_CONTACT",
+                    primaryContactAt: nextActionAt,
+                }),
         },
     });
+
     revalidatePaths();
 }
