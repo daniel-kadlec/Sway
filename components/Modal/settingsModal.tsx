@@ -4,13 +4,10 @@ import Button from "@/components/button";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 type SettingsModalProps = {
-    settings: {
-        ContactDelay: number;
-        advanceFromBacklogDelay: number;
-    };
+    data: any;
 };
 
-export default function SettingsModal({ settings }: SettingsModalProps) {
+export default function SettingsModal() {
     const { closeModal } = useModal();
 
     return (
