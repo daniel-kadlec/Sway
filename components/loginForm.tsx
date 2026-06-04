@@ -1,46 +1,56 @@
 'use client'
-import {Input} from "@/components/Modal/inputs";
-import Button from "@/components/button";
-import {useState} from "react";
-import { TbLogin } from "react-icons/tb";
-import {useToast} from "@/context/ToastContext";
-import {useRouter} from "next/navigation";
 
-export default function LoginForm(){
+import { Input } from "@/components/Modal/inputs";
+import Button from "@/components/button";
+import { useState } from "react";
+import { TbLogin } from "react-icons/tb";
+import { useToast } from "@/context/ToastContext";
+import { useRouter } from "next/navigation";
+import login from "@/lib/utils/auth/login";
+
+export default function LoginForm() {
     const [password, setPassword] = useState("");
     const router = useRouter();
-    const {showToast} = useToast();
+    const { showToast } = useToast();
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
 
-        if (!password){
-            showToast("Password is required", "Please enter your password!", "error");
+        if (!password) {
+            showToast(
+                "Password is required",
+                "Please enter your password!",
+                "error"
+            );
             return;
         }
 
-        const res = await fetch("/api/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ password }),
-        });
+        const result = await login(password);
 
-        if (res.ok) {
-            showToast("Logged in successfully", "Welcome back!", "success");
+        if (result.success) {
+            showToast("Logged in successfully","Welcome back!","success");
+
             router.push("/");
-        }
-        else {
-            showToast("Incorrect password", "Try again!", "error");
+            router.refresh();
+        } else {
+            showToast(
+                "Incorrect password","Try again!","error");
         }
     }
 
-    return(
-        <form className={'flex flex-col justify-center items-center gap-4 w-[300px]'} onSubmit={handleSubmit}>
-            <Input onChange={(e) => setPassword(e.target.value)} type="password" name="password" placeholder={"Password"}/>
-            <Button type={"submit"} className={'w-full icon-button gap-1! py-3!'}>
-                <TbLogin/>
+    return (
+        <form
+            className="flex flex-col justify-center items-center gap-4 w-[300px]"
+            onSubmit={handleSubmit}
+        >
+            <Input
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                name="password"
+                placeholder="Password"
+            />
+            <Button type="submit" className="w-full icon-button gap-1! py-3!">
+                <TbLogin />
                 Login
             </Button>
         </form>

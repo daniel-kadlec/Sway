@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import {useModal} from "@/context/ModalContext";
 import { useRouter } from "next/navigation";
 import {useToast} from "@/context/ToastContext";
+import logout from "@/lib/utils/auth/logout";
 
 import { FaUser } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
@@ -60,14 +61,18 @@ export default function Navbar(){
         <div className={'text-offblack flex flex-col justify-center items-center p-3'}>
             <h1 className={'text-primary font-bold text-2xl'}>Daniel Kadlec</h1>
             <h1 className={''}>Admin</h1>
-            <Button  onClickAction={
-                async () => {
-                    await fetch("/api/logout", { method: "POST" });
+            <Button
+                onClickAction={async () => {
+                    await logout();
+
                     router.push("/login");
-                    showToast("Logged out sucessfully", "See you later!", "success");
+                    router.refresh();
+
+                    showToast("Logged out successfully","See you later!","success");
                 }}
-                     className="w-full justify-start mt-3 !bg-error-light !text-error icon-button">
-                <TbLogout2 className={'mt-0.5'}/>
+                className="w-full justify-start mt-3 !bg-error-light !text-error icon-button"
+            >
+                <TbLogout2 className={'mt-0.5'} />
                 Logout
             </Button>
         </div>
