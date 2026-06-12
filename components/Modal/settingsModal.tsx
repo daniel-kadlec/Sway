@@ -4,6 +4,7 @@ import Button from "@/components/button";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import {updateSettings} from "@/lib/utils/settings/settings";
 import { useRef } from "react";
+import {useToast} from "@/context/ToastContext";
 
 
 type SettingsModalProps = {
@@ -15,11 +16,27 @@ type SettingsModalProps = {
 };
 export default function SettingsModal({data}: SettingsModalProps) {
     const { closeModal } = useModal();
+    const { showToast } = useToast()
     const formRef = useRef<HTMLFormElement>(null);
 
     async function handleSubmit(formData: FormData) {
-        await updateSettings(formData);
-        closeModal();
+        try {
+            await updateSettings(formData);
+            closeModal();
+            showToast("Settings updated", "", "success");
+        }
+        catch (err){
+            showToast("Error", "Failed to update settings", "error");
+        }
+    }
+    function handleReset(){
+        try {
+            formRef.current?.reset()
+            showToast("Changes undone", "", "success");
+        }
+        catch (err){
+            showToast("Error", "Failed to undo changes", "error");
+        }
     }
 
     return (
@@ -75,7 +92,7 @@ export default function SettingsModal({data}: SettingsModalProps) {
                 </div>
 
                 <div className="flex justify-end gap-3 mt-10">
-                    <Button destructive={true} type="button" onClickAction={() => formRef.current?.reset()} className="bg-primary-light! text-primary! flex items-center gap-2"
+                    <Button destructive={true} type="button" onClickAction={() => handleReset() } className="bg-primary-light! text-primary! flex items-center gap-2"
                     >
                         <IoMdArrowRoundBack />
                         Undo Changes
