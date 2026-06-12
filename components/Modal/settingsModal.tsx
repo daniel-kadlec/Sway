@@ -2,13 +2,25 @@ import { IoClose } from "react-icons/io5";
 import { useModal } from "@/context/ModalContext";
 import Button from "@/components/button";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import {updateSettings} from "@/lib/utils/settings/settings";
+import { useRef } from "react";
+
 
 type SettingsModalProps = {
-    data: any;
+    data: {
+        id: string;
+        contactDelay: number;
+        advanceFromBacklogDelay: number;
+    };
 };
-
-export default function SettingsModal() {
+export default function SettingsModal({data}: SettingsModalProps) {
     const { closeModal } = useModal();
+    const formRef = useRef<HTMLFormElement>(null);
+
+    async function handleSubmit(formData: FormData) {
+        await updateSettings(formData);
+        closeModal();
+    }
 
     return (
         <div>
@@ -25,53 +37,55 @@ export default function SettingsModal() {
                 </button>
             </div>
 
-            <div className="space-y-6">
-                <div>
-                    <label
-                        htmlFor="contactDelay"
-                        className="block text-sm font-medium mb-2"
-                    >
-                        Contact Delay (days)
-                    </label>
-                    <input
-                        id="contactDelay"
-                        type="number"
-                        min={0}
-                        defaultValue={0}
-                        className="w-full rounded-lg border border-primary-light px-4 py-3"
-                    />
+            <form ref={formRef} action={handleSubmit}>
+                <div className="space-y-6">
+                    <div>
+                        <label
+                            htmlFor="contactDelay"
+                            className="block text-sm font-medium mb-2"
+                        >
+                            Contact Delay (days)
+                        </label>
+                        <input
+                            id="contactDelay"
+                            name="contactDelay"
+                            type="number"
+                            min={0}
+                            defaultValue={data.contactDelay}
+                            className="w-full rounded-lg border border-primary-light px-4 py-3"
+                        />
+                    </div>
+
+                    <div>
+                        <label
+                            htmlFor="advanceFromBacklogDelay"
+                            className="block text-sm font-medium mb-2"
+                        >
+                            Advance From Backlog Delay (days)
+                        </label>
+                        <input
+                            id="advanceFromBacklogDelay"
+                            name="advanceFromBacklogDelay"
+                            type="number"
+                            min={0}
+                            defaultValue={data.advanceFromBacklogDelay}
+                            className="w-full rounded-lg border border-primary-light px-4 py-3"
+                        />
+                    </div>
                 </div>
 
-                <div>
-                    <label
-                        htmlFor="advanceFromBacklogDelay"
-                        className="block text-sm font-medium mb-2"
+                <div className="flex justify-end gap-3 mt-10">
+                    <Button destructive={true} type="button" onClickAction={() => formRef.current?.reset()} className="bg-primary-light! text-primary! flex items-center gap-2"
                     >
-                        Advance From Backlog Delay (days)
-                    </label>
-                    <input
-                        id="advanceFromBacklogDelay"
-                        type="number"
-                        min={0}
-                        defaultValue={0}
-                        className="w-full rounded-lg border border-primary-light px-4 py-3"
-                    />
+                        <IoMdArrowRoundBack />
+                        Undo Changes
+                    </Button>
+
+                    <Button type="submit">
+                        Save
+                    </Button>
                 </div>
-            </div>
-
-            <div className="flex justify-end gap-3 mt-10">
-                <Button
-                    destructive={true}
-                    className="bg-primary-light! text-primary! flex items-center gap-2"
-                >
-                    <IoMdArrowRoundBack />
-                    Undo Changes
-                </Button>
-
-                <Button>
-                    Save
-                </Button>
-            </div>
+            </form>
         </div>
     );
 }

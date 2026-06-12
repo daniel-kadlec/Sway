@@ -15,6 +15,7 @@ import { FaGear } from "react-icons/fa6";
 import { TbLogout2 } from "react-icons/tb";
 import ContextMenu from "@/components/context-menu";
 import Button from "@/components/button";
+import {getSettings} from "@/lib/utils/settings/settings";
 
 
 
@@ -111,7 +112,10 @@ export default function Navbar(){
                             <ContextMenu content={ContextMenucontent}>
                                 <FaUser size={26} className={'text-white cursor-pointer'}/>
                             </ContextMenu>
-                            <FaGear size={26} className={'text-white cursor-pointer'} onClick={() => openModal("settings")}/>
+                            <FaGear size={26} className={'text-white cursor-pointer'} onClick={async() => {
+                                const settings = await getSettings()
+                                openModal("settings", settings)
+                            }}/>
                         </span>
 
                     </span>
