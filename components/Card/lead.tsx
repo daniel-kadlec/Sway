@@ -2,8 +2,6 @@
 
 import { IoLogoInstagram } from "react-icons/io";
 import { FaRegCalendar, FaRegClock } from "react-icons/fa6";
-import { FaFlagCheckered, FaForward } from "react-icons/fa";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
 import { useModal } from "@/context/ModalContext";
 import { VariantConfig } from "@/components/Card/card";
@@ -42,7 +40,7 @@ export default function Lead({ v, lead }: LeadProps) {
     }
 
     return (
-        <div className="group relative h-30 w-full border-b border-lightgray py-4 px-10 flex flex-col justify-center overflow-hidden">
+        <div onClick={() => openModal("view", lead)} className="group relative h-30 w-full border-b border-lightgray py-4 px-10 flex flex-col justify-center overflow-hidden cursor-pointer hover:bg-lightgray transition-all duration-200">
 
             <span className="flex gap-2 items-center z-10">
                 <h1 className="font-bold text-3xl text-offblack">{lead.companyName}</h1>
@@ -63,40 +61,6 @@ export default function Lead({ v, lead }: LeadProps) {
                     </span>
                 )}
             </span>
-
-            {/* overlay */}
-            <div
-                onClick={() => openModal("view", lead)}
-                className={`absolute inset-0 bg-primary/80 z-10 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center text-white cursor-pointer p-4`}
-            >
-                <div className="flex items-center gap-10">
-                    <FaFlagCheckered
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            openModal("finish");
-                        }}
-                        size={38}
-                        className="lead-control"
-                    />
-
-                    <FaForward
-                        onClick={(e) => {
-                            e.stopPropagation();
-                        }}
-                        size={38}
-                        className="lead-control"
-                    />
-
-                    <HiOutlineDotsHorizontal
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            openModal("view", lead);
-                        }}
-                        size={46}
-                        className="lead-control -ml-2"
-                    />
-                </div>
-            </div>
         </div>
     );
 }
