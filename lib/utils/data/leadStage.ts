@@ -26,9 +26,20 @@ function revalidatePaths () {
 }
 
 export async function advanceLead(id: string) {
-    const Lead = await getLead(id);
-    const stage:Stage = Lead.stage;
+    const lead = await getLead(id);
+    const stage:Stage = lead.stage;
     let nextStage: Stage;
+
+    if (lead.status != "ACTIVE"){
+        await prisma.lead.update({
+            where: {
+                id: id,
+            },
+            data: {
+                status: "ACTIVE"
+            },
+        })
+    }
 
     switch (stage) {
         case "BACKLOG":
@@ -197,20 +208,38 @@ export async function resetLead(id:string){
         data: {
             stage: "BACKLOG",
             nextActionAt: null,
+            status: "IDLE",
         },
     })
     revalidatePaths()
 }
 
 export async function setPendingLead(id:string){
-    await prisma.lead.update({
-        where: {
-            id: id,
-        },
-        data: {
-            status: "PENDING"
-        },
-    })
+    const lead = await getLead(id);
+    if (lead.status == "PENDING" && lead.stage != "BACKLOG"){
+        await prisma.lead.update({
+            where: {
+                id: id,
+            },
+            data: {
+                status: "ACTIVE"
+            },
+        })
+    }
+    if (lead.status == "ACTIVE" && lead.stage != "BACKLOG"){
+        await prisma.lead.update({
+            where: {
+                id: id,
+            },
+            data: {
+                status: "PENDING"
+            },
+        })
+    }
+    if (lead.status != "PENDING" && lead.stage == "BACKLOG"){
+        throw new Error("Unable to set pending");
+    }
+
     revalidatePaths()
 }
 

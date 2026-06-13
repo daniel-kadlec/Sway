@@ -4,6 +4,7 @@ export type FormattedLead = Lead & {
     contacts: Record<Platform, string | null>;
 
     stageFormatted: string;
+    statusFormatted: string;
 
     primaryContactAtFormatted: string;
     primaryFollowUpAtFormatted: string;

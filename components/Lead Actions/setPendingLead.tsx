@@ -12,7 +12,6 @@ export default function SetPendingLead({ id }: SetPendingLeadProps) {
 
     return (
         <Button
-            destructive={true}
             className="icon-button w-full bg-warning-light! text-warning!"
             onClickAction={async () => {
                 try {
@@ -22,7 +21,7 @@ export default function SetPendingLead({ id }: SetPendingLeadProps) {
                     const message =
                         err instanceof Error ? err.message : String(err);
 
-                    showToast("Error", message, "error");
+                    showToast("Lead is inactive", message, "error");
                 }
             }}
         >

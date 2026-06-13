@@ -42,6 +42,7 @@ export function formatLead(lead: Lead): FormattedLead {
         contacts: mapContacts(lead),
 
         stageFormatted: formatStage(lead.stage),
+        statusFormatted: formatStage(lead.status),
 
         primaryContactAtFormatted: formatDate(lead.primaryContactAt),
         primaryFollowUpAtFormatted: formatDate(lead.primaryFollowUpAt),
