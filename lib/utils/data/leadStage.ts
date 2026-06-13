@@ -4,6 +4,21 @@ import {prisma} from "@/lib/prisma";
 import {Stage} from "@/lib/generated/client";
 import {revalidatePath} from "next/cache";
 
+const settings = await prisma.settings.findFirst();
+const contactDelay = settings?.contactDelay;
+
+async function getLead (id: string) {
+    const lead = await prisma.lead.findUnique({
+        where: {
+            id: id,
+        },
+    });
+    if (!lead){
+        throw new Error("Lead not found");
+    }
+    return lead;
+}
+
 function revalidatePaths () {
     revalidatePath("/dashboard");
     revalidatePath("/kanban");
@@ -11,14 +26,7 @@ function revalidatePaths () {
 }
 
 export async function advanceLead(id: string) {
-    const Lead = await prisma.lead.findUnique({
-        where: {
-            id: id,
-        },
-    });
-    if (!Lead){
-        throw new Error("Lead not found");
-    }
+    const Lead = await getLead(id);
     const stage:Stage = Lead.stage;
     let nextStage: Stage;
 
@@ -28,12 +36,15 @@ export async function advanceLead(id: string) {
             break;
         case "PRIMARY_CONTACT":
             nextStage = "PRIMARY_CONTACT_FOLLOW_UP";
+            await advanceNextActionAt();
             break;
         case "PRIMARY_CONTACT_FOLLOW_UP":
             nextStage = "SECONDARY_CONTACT";
+            await advanceNextActionAt();
             break;
         case "SECONDARY_CONTACT":
             nextStage = "SECONDARY_CONTACT_FOLLOW_UP";
+            await advanceNextActionAt();
             break;
         case "SECONDARY_CONTACT_FOLLOW_UP":
             nextStage = "CLOSED";
@@ -42,6 +53,28 @@ export async function advanceLead(id: string) {
             throw new Error(`Stage closed`);
         default:
             throw new Error(`Invalid stage: ${stage}`);
+    }
+
+    async function advanceNextActionAt() {
+        const contactDelay = settings?.contactDelay;
+
+        const lead = await getLead(id);
+
+        if (!lead?.nextActionAt || contactDelay == null) return;
+
+        const updatedNextActionAt = new Date(lead.nextActionAt);
+        updatedNextActionAt.setDate(
+            updatedNextActionAt.getDate() + contactDelay
+        );
+
+        await prisma.lead.update({
+            where: {
+                id: id,
+            },
+            data: {
+                nextActionAt: updatedNextActionAt,
+            },
+        });
     }
 
     await prisma.lead.update({
@@ -79,6 +112,28 @@ export async function rollbackLead(id: string) {
     if (!Lead){
         throw new Error("Lead not found");
     }
+    async function rollbackNextActionAt() {
+
+
+        const lead = await getLead(id);
+
+        if (!lead?.nextActionAt || contactDelay == null) return;
+
+        const updatedNextActionAt = new Date(lead.nextActionAt);
+        updatedNextActionAt.setDate(
+            updatedNextActionAt.getDate() - contactDelay
+        );
+
+        await prisma.lead.update({
+            where: {
+                id: id,
+            },
+            data: {
+                nextActionAt: updatedNextActionAt,
+            },
+        });
+    }
+
     const stage:Stage = Lead.stage;
     let previousStage: Stage;
 
@@ -98,12 +153,15 @@ export async function rollbackLead(id: string) {
             break;
         case "PRIMARY_CONTACT_FOLLOW_UP":
             previousStage = "PRIMARY_CONTACT";
+            await rollbackNextActionAt();
             break;
         case "SECONDARY_CONTACT":
             previousStage = "PRIMARY_CONTACT_FOLLOW_UP";
+            await rollbackNextActionAt();
             break;
         case "SECONDARY_CONTACT_FOLLOW_UP":
             previousStage = "SECONDARY_CONTACT";
+            await rollbackNextActionAt();
             break;
         case "CLOSED":
             previousStage = "SECONDARY_CONTACT_FOLLOW_UP";
