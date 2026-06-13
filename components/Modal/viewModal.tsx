@@ -2,13 +2,9 @@ import { useModal } from "@/context/ModalContext";
 import Button from "@/components/button";
 import ContextMenu from "@/components/context-menu";
 import {IoClose, IoEllipsisHorizontal, IoMail, IoCall, IoGlobeOutline, IoLogoInstagram} from "react-icons/io5";
-import { FaForward } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
-import { FaFlagCheckered } from "react-icons/fa";
-import { TbReload } from "react-icons/tb";
-import { FaClock } from "react-icons/fa";
 import {getLeadContacts} from "@/lib/utils/data/contactMap";
 import { deleteLead } from "@/lib/utils/data/leads";
 import {useToast} from "@/context/ToastContext";
@@ -67,14 +63,13 @@ export default function ViewModal({ data }: ViewModalProps) {
         }
         catch{
             showToast("Error", "", "error");
-
         }
     }
 
     const ContextMenuContent = (
-        <div className={' flex flex-col items-center justify-center gap-3 p-2 w-full'}>
+        <div className={'flex flex-col items-center justify-center gap-3 p-2 w-full'}>
             <FinishLead/>
-            <SetPendingLead id={data.id}/>
+            <SetPendingLead id={data.id} status={data.status}/>
             <RollbackLead id={data.id}/>
             <ResetLead id={data.id}/>
         </div>

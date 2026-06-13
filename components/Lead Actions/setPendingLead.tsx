@@ -2,13 +2,20 @@ import Button from "@/components/button";
 import { FaClock } from "react-icons/fa";
 import { setPendingLead } from "@/lib/utils/data/leadStage";
 import { useToast } from "@/context/ToastContext";
+import {useState} from "react";
 
 type SetPendingLeadProps = {
     id: string;
+    status: string,
 };
 
-export default function SetPendingLead({ id }: SetPendingLeadProps) {
+export default function SetPendingLead({ id, status }: SetPendingLeadProps) {
     const { showToast } = useToast();
+    const [isPending, setIsPending] = useState(status === "PENDING");
+
+    function handleStatusChange () {
+        setIsPending(!isPending);
+    }
 
     return (
         <Button
@@ -16,7 +23,8 @@ export default function SetPendingLead({ id }: SetPendingLeadProps) {
             onClickAction={async () => {
                 try {
                     await setPendingLead(id);
-                    showToast("Lead marked as pending", "", "success");
+                    handleStatusChange()
+                    showToast((isPending ? "Lead no longer pending" : "Lead marked as pending"), "", "success");
                 } catch (err: unknown) {
                     const message =
                         err instanceof Error ? err.message : String(err);
@@ -26,7 +34,7 @@ export default function SetPendingLead({ id }: SetPendingLeadProps) {
             }}
         >
             <FaClock className="mt-0.5" />
-            Pending
+            {isPending? "Cancel pending" : "Set Pending"}
         </Button>
     );
 }
