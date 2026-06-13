@@ -48,6 +48,14 @@ export async function advanceLead(id: string) {
             break;
         case "SECONDARY_CONTACT_FOLLOW_UP":
             nextStage = "CLOSED";
+            await prisma.lead.update({
+                where: {
+                    id: id,
+                },
+                data: {
+                    nextActionAt: null,
+                }
+            })
             break;
         case "CLOSED":
             throw new Error(`Stage closed`);
