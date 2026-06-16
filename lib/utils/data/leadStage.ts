@@ -20,15 +20,31 @@ async function getLead (id: string) {
     return lead;
 }
 
-async function createLeadLog(leadID: string, logType: LogType, previousStage?: Stage, newStage?: Stage, previousStatus?: LeadStatus, newStatus?: LeadStatus, leadOutcome?: LeadOutcome, leadLossReason?: LeadLossReason) {
+async function createLeadLog(
+    leadID: string,
+    logType: LogType,
+    previousStage?: Stage,
+    newStage?: Stage,
+    previousStatus?: LeadStatus,
+    newStatus?: LeadStatus,
+    leadOutcome?: LeadOutcome,
+    leadLossReason?: LeadLossReason
+) {
     await prisma.leadLog.create({
         data: {
             leadId: leadID,
             type: logType,
-            fromStage: previousStage,
-            toStage: newStage,
-            fromStatus: previousStatus,
-            toStatus: newStatus,
+
+            fromStage:
+                previousStage !== newStage ? previousStage : null,
+            toStage:
+                previousStage !== newStage ? newStage : null,
+
+            fromStatus:
+                previousStatus !== newStatus ? previousStatus : null,
+            toStatus:
+                previousStatus !== newStatus ? newStatus : null,
+
             outcome: leadOutcome,
             reason: leadLossReason,
         },
@@ -126,6 +142,13 @@ export async function advanceLead(id: string) {
     });
 
     revalidatePaths();
+
+    const nextStatus = updateData.status ? updateData.status : lead.status;
+    if (updateData.status !== lead.status || nextStage !== lead.stage) {
+
+    }
+
+    await createLeadLog(id, "STAGE_CHANGED", lead.stage, nextStage, lead.status, nextStatus)
 
     return {
         reachedClosed: false,
@@ -227,36 +250,44 @@ export async function resetLead(id:string){
     revalidatePaths()
 }
 
-export async function setPendingLead(id:string){
+export async function setPendingLead(id: string) {
     const lead = await getLead(id);
-    if (lead.status == "PENDING" && lead.stage != "BACKLOG"){
-        await prisma.lead.update({
-            where: {
-                id: id,
-            },
-            data: {
-                status: "ACTIVE"
-            },
-        })
-    }
-    if (lead.status == "ACTIVE" && lead.stage != "BACKLOG"){
-        await prisma.lead.update({
-            where: {
-                id: id,
-            },
-            data: {
-                status: "PENDING"
-            },
-        })
-    }
-    if (lead.status != "PENDING" && lead.stage == "BACKLOG"){
+
+    if (lead.stage === "BACKLOG") {
         throw new Error("Unable to set pending");
     }
 
-    revalidatePaths()
-}
+    let newStatus: "ACTIVE" | "PENDING";
 
+    if (lead.status === "PENDING") {
+        newStatus = "ACTIVE";
+    } else if (lead.status === "ACTIVE") {
+        newStatus = "PENDING";
+    } else {
+        throw new Error(`Cannot toggle status from ${lead.status}`);
+    }
+
+    await prisma.lead.update({
+        where: { id },
+        data: { status: newStatus },
+    });
+
+    await createLeadLog(
+        id,
+        "STATUS_CHANGED",
+        undefined,
+        undefined,
+        lead.status,
+        newStatus
+    );
+
+    revalidatePaths();
+}
 export async function finishLead(id:string, outcome:LeadOutcome, lossReason?:LeadLossReason){
+    const lead = await getLead(id)
+
+    await createLeadLog(id, "CLOSED", lead.stage, "CLOSED", lead.status, "CLOSED", outcome, lossReason)
+
     await prisma.lead.update({
         where: {
             id: id,
