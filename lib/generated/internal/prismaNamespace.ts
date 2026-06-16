@@ -685,7 +685,8 @@ export const LeadScalarFieldEnum = {
   primaryFollowUpAt: 'primaryFollowUpAt',
   secondaryContactAt: 'secondaryContactAt',
   secondaryFollowUpAt: 'secondaryFollowUpAt',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]

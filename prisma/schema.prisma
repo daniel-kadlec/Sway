@@ -47,7 +47,7 @@ enum LogType {
   STAGE_CHANGED
   STAGE_REVERTED
   RESET
-  MARKED_PENDING
+  PENDING_CHANGED
   MARKED_CLOSED
 }
 
@@ -77,12 +77,14 @@ model Lead {
   secondaryFollowUpAt DateTime?
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   logs LeadLog[]
 
   @@index([stage])
   @@index([status])
   @@index([nextActionAt])
+  @@index([updatedAt])
 }
 
 model LeadLog {
