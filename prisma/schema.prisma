@@ -45,10 +45,9 @@ enum Platform {
 enum LogType {
   CREATED
   STAGE_CHANGED
-  STAGE_REVERTED
+  STATUS_CHANGED
+  CLOSED
   RESET
-  PENDING_CHANGED
-  MARKED_CLOSED
 }
 
 model Lead {
@@ -92,11 +91,17 @@ model LeadLog {
   leadId String
   lead   Lead   @relation(fields: [leadId], references: [id])
 
-  type      LogType
+  type LogType
+
   fromStage Stage?
   toStage   Stage?
 
-  updatedAt DateTime @updatedAt
+  fromStatus LeadStatus?
+  toStatus   LeadStatus?
+
+  outcome LeadOutcome?
+  reason  LeadLossReason?
+
   createdAt DateTime @default(now())
 }
 

@@ -62,10 +62,9 @@ export type Platform = (typeof Platform)[keyof typeof Platform]
 export const LogType = {
   CREATED: 'CREATED',
   STAGE_CHANGED: 'STAGE_CHANGED',
-  STAGE_REVERTED: 'STAGE_REVERTED',
-  RESET: 'RESET',
-  PENDING_CHANGED: 'PENDING_CHANGED',
-  MARKED_CLOSED: 'MARKED_CLOSED'
+  STATUS_CHANGED: 'STATUS_CHANGED',
+  CLOSED: 'CLOSED',
+  RESET: 'RESET'
 } as const
 
 export type LogType = (typeof LogType)[keyof typeof LogType]

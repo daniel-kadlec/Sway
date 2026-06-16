@@ -103,7 +103,10 @@ export const LeadLogScalarFieldEnum = {
   type: 'type',
   fromStage: 'fromStage',
   toStage: 'toStage',
-  updatedAt: 'updatedAt',
+  fromStatus: 'fromStatus',
+  toStatus: 'toStatus',
+  outcome: 'outcome',
+  reason: 'reason',
   createdAt: 'createdAt'
 } as const
 

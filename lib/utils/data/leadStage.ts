@@ -1,9 +1,10 @@
 'use server'
 
 import {prisma} from "@/lib/prisma";
-import {Stage, LeadOutcome , LeadLossReason} from "@/lib/generated/client";
+import {Stage, LeadOutcome , LeadLossReason, LogType, LeadStatus} from "@/lib/generated/client";
 import {revalidatePath} from "next/cache";
 
+// Helpers
 const settings = await prisma.settings.findFirst();
 const contactDelay = settings?.contactDelay;
 
@@ -19,11 +20,28 @@ async function getLead (id: string) {
     return lead;
 }
 
+async function createLeadLog(leadID: string, logType: LogType, previousStage?: Stage, newStage?: Stage, previousStatus?: LeadStatus, newStatus?: LeadStatus, leadOutcome?: LeadOutcome, leadLossReason?: LeadLossReason) {
+    await prisma.leadLog.create({
+        data: {
+            leadId: leadID,
+            type: logType,
+            fromStage: previousStage,
+            toStage: newStage,
+            fromStatus: previousStatus,
+            toStatus: newStatus,
+            outcome: leadOutcome,
+            reason: leadLossReason,
+        },
+    });
+}
+
 function revalidatePaths () {
     revalidatePath("/dashboard");
     revalidatePath("/kanban");
     revalidatePath("/table");
 }
+
+// End of helpers
 
 export async function advanceLead(id: string) {
     const lead = await getLead(id);
