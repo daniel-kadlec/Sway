@@ -5,6 +5,8 @@ import { FaXmark } from "react-icons/fa6";
 
 import { useModal } from "@/context/ModalContext";
 import Button from "@/components/button";
+import {finishLead} from "@/lib/utils/data/leadStage";
+import {LeadLossReason} from "@/lib/generated/client";
 
 type FinishModalProps = {
     data: any;
@@ -15,8 +17,8 @@ const lostReasons = ["GHOSTED", "REJECTED", "NO_BUDGET", "NO_RESPONSE", "OTHER"]
 export default function FinishModal({ data }: FinishModalProps) {
     const { closeModal, openModal } = useModal();
 
-    const [result, setResult] = useState<"WON" | "LOST" | null>(null);
-    const [lostReason, setLostReason] = useState<string | null>(null);
+    const [outcome, setOutcome] = useState<"WON" | "LOST" | null>(null);
+    const [lostReason, setLostReason] = useState<LeadLossReason | null>(null);
 
     return (
         <>
@@ -37,11 +39,11 @@ export default function FinishModal({ data }: FinishModalProps) {
                 <button
                     type="button"
                     onClick={() => {
-                        setResult("WON");
+                        setOutcome("WON");
                         setLostReason(null);
                     }}
                     className={`rounded-2xl border-2 p-8 flex flex-col items-center gap-4 transition cursor-pointer ${
-                        result === "WON"
+                        outcome === "WON"
                             ? "border-primary bg-primary-light"
                             : "border-gray-200 hover:border-primary"
                     }`}
@@ -52,9 +54,9 @@ export default function FinishModal({ data }: FinishModalProps) {
 
                 <button
                     type="button"
-                    onClick={() => setResult("LOST")}
+                    onClick={() => setOutcome("LOST")}
                     className={`rounded-2xl border-2 p-8 flex flex-col items-center gap-4 transition cursor-pointer ${
-                        result === "LOST"
+                        outcome === "LOST"
                             ? "border-primary bg-primary-light"
                             : "border-gray-200 hover:border-primary"
                     }`}
@@ -64,7 +66,7 @@ export default function FinishModal({ data }: FinishModalProps) {
                 </button>
             </div>
 
-            {result === "LOST" && (
+            {outcome === "LOST" && (
                 <div className="mt-8">
                     <h3 className="text-2xl font-semibold mb-4">Reason</h3>
 
@@ -73,7 +75,7 @@ export default function FinishModal({ data }: FinishModalProps) {
                             <button
                                 key={reason}
                                 type="button"
-                                onClick={() => setLostReason(reason)}
+                                onClick={() => setLostReason(reason as LeadLossReason)}
                                 className={`w-full rounded-xl border-2 px-5 py-4 text-left text-xl transition cursor-pointer ${
                                     lostReason === reason
                                         ? "border-primary bg-primary-light"
@@ -92,7 +94,9 @@ export default function FinishModal({ data }: FinishModalProps) {
                     Cancel
                 </Button>
 
-                <Button onClickAction={() => {}}>
+                <Button onClickAction={async () => {
+                   await finishLead(data.id, outcome!, lostReason!);
+                }}>
                     Save
                 </Button>
             </div>

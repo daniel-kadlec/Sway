@@ -1,7 +1,7 @@
 'use server'
 
 import {prisma} from "@/lib/prisma";
-import {Stage} from "@/lib/generated/client";
+import {Stage, LeadOutcome , LeadLossReason} from "@/lib/generated/client";
 import {revalidatePath} from "next/cache";
 
 const settings = await prisma.settings.findFirst();
@@ -149,6 +149,8 @@ export async function rollbackLead(id: string) {
             },
             data: {
                 nextActionAt: updatedNextActionAt,
+                reason: null,
+                outcome: null
             },
         });
     }
@@ -209,6 +211,8 @@ export async function resetLead(id:string){
             stage: "BACKLOG",
             nextActionAt: null,
             status: "IDLE",
+            outcome: null,
+            reason: null,
         },
     })
     revalidatePaths()
@@ -243,7 +247,7 @@ export async function setPendingLead(id:string){
     revalidatePaths()
 }
 
-export async function finishLead(id:string){
+export async function finishLead(id:string, outcome:LeadOutcome, lossReason?:LeadLossReason){
     await prisma.lead.update({
         where: {
             id: id,
@@ -251,6 +255,10 @@ export async function finishLead(id:string){
         data: {
             stage: "CLOSED",
             status: "CLOSED",
+            outcome: outcome,
+            reason: lossReason ? lossReason : null,
+            nextActionAt: null,
         },
     })
+    revalidatePaths()
 }
