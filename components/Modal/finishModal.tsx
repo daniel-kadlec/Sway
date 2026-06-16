@@ -4,6 +4,7 @@ import { FaTrophy } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 
 import { useModal } from "@/context/ModalContext";
+import { useToast } from "@/context/ToastContext";
 import Button from "@/components/button";
 import {finishLead} from "@/lib/utils/data/leadStage";
 import {LeadLossReason} from "@/lib/generated/client";
@@ -16,9 +17,17 @@ const lostReasons = ["GHOSTED", "REJECTED", "NO_BUDGET", "NO_RESPONSE", "OTHER"]
 
 export default function FinishModal({ data }: FinishModalProps) {
     const { closeModal, openModal } = useModal();
+    const { showToast} = useToast();
 
     const [outcome, setOutcome] = useState<"WON" | "LOST" | null>(null);
     const [lostReason, setLostReason] = useState<LeadLossReason | null>(null);
+
+    const formatEnumText = (value: string) =>
+        value
+            .toLowerCase()
+            .split("_")
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
 
     return (
         <>
@@ -94,9 +103,34 @@ export default function FinishModal({ data }: FinishModalProps) {
                     Cancel
                 </Button>
 
-                <Button onClickAction={async () => {
-                   await finishLead(data.id, outcome!, lostReason!);
-                }}>
+                <Button
+                    onClickAction={async () => {
+                        try {
+                            await finishLead(data.id, outcome!, lostReason!);
+
+                            const formattedOutcome = formatEnumText(outcome!);
+
+                            const description =
+                                outcome === "LOST" && lostReason
+                                    ? `Lead ${formattedOutcome}. ${formatEnumText(lostReason)}.`
+                                    : `Lead ${formattedOutcome}.`;
+
+                            showToast(
+                                "Lead Closed",
+                                description,
+                                "success"
+                            );
+
+                            closeModal();
+                        } catch (err) {
+                            showToast(
+                                "Failed to Close Lead",
+                                "The lead could not be closed.",
+                                "error"
+                            );
+                        }
+                    }}
+                >
                     Save
                 </Button>
             </div>

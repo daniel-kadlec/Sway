@@ -6,7 +6,7 @@ import {useModal} from "@/context/ModalContext";
 type AdvanceLeadProps = {
     id: string;
 }
-export default function advanceLeadButton({id}: AdvanceLeadProps){
+export default function AdvanceLeadButton({id}: AdvanceLeadProps){
     const {showToast} = useToast()
     const {openModal} = useModal()
     return(
@@ -14,10 +14,13 @@ export default function advanceLeadButton({id}: AdvanceLeadProps){
         onClick={async () => {
             try {
                 const result = await advanceLead(id)
-                if(result.reachedClosed){
-                    openModal("finish", id)
+                if(result!.reachedClosed){
+                    openModal("finish", {id})
                 }
-                showToast("Stage advanced", "", "success");
+                else{
+                    showToast("Stage advanced", "", "success");
+
+                }
 
             }
             catch (err: unknown) {

@@ -55,9 +55,9 @@ export default function ViewModal({ data }: ViewModalProps) {
 
     const contacts = getLeadContacts(data);
 
-    const handleDelete = () => {
+    async function handleDelete ()  {
         try {
-            deleteLead(data.id);
+            await deleteLead(data.id);
             closeModal();
             showToast("Lead deleted successfully", "", "success");
         }
@@ -68,7 +68,7 @@ export default function ViewModal({ data }: ViewModalProps) {
 
     const ContextMenuContent = (
         <div className={'flex flex-col items-center justify-center gap-3 p-2 w-full'}>
-            <FinishLead data={data}/>
+            <FinishLead id={data.id}/>
             <SetPendingLead id={data.id} status={data.status}/>
             <RollbackLead id={data.id}/>
             <ResetLead id={data.id}/>

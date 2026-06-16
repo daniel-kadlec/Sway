@@ -45,59 +45,12 @@ function revalidatePaths () {
 
 export async function advanceLead(id: string) {
     const lead = await getLead(id);
-    const stage:Stage = lead.stage;
-    let nextStage: Stage;
-
-    if (lead.status != "ACTIVE"){
-        await prisma.lead.update({
-            where: {
-                id: id,
-            },
-            data: {
-                status: "ACTIVE"
-            },
-        })
-    }
-
-    switch (stage) {
-        case "BACKLOG":
-            nextStage = "PRIMARY_CONTACT";
-            break;
-        case "PRIMARY_CONTACT":
-            nextStage = "PRIMARY_CONTACT_FOLLOW_UP";
-            await advanceNextActionAt();
-            break;
-        case "PRIMARY_CONTACT_FOLLOW_UP":
-            nextStage = "SECONDARY_CONTACT";
-            await advanceNextActionAt();
-            break;
-        case "SECONDARY_CONTACT":
-            nextStage = "SECONDARY_CONTACT_FOLLOW_UP";
-            await advanceNextActionAt();
-            break;
-        case "SECONDARY_CONTACT_FOLLOW_UP":
-            nextStage = "CLOSED";
-            await prisma.lead.update({
-                where: {
-                    id: id,
-                },
-                data: {
-                    nextActionAt: null,
-                }
-            })
-            break;
-        case "CLOSED":
-            throw new Error(`Stage closed`);
-        default:
-            throw new Error(`Invalid stage: ${stage}`);
-    }
 
     async function advanceNextActionAt() {
+        const settings = await prisma.settings.findFirst();
         const contactDelay = settings?.contactDelay;
 
-        const lead = await getLead(id);
-
-        if (!lead?.nextActionAt || contactDelay == null) return;
+        if (!lead.nextActionAt || contactDelay == null) return;
 
         const updatedNextActionAt = new Date(lead.nextActionAt);
         updatedNextActionAt.setDate(
@@ -106,7 +59,7 @@ export async function advanceLead(id: string) {
 
         await prisma.lead.update({
             where: {
-                id: id,
+                id,
             },
             data: {
                 nextActionAt: updatedNextActionAt,
@@ -114,32 +67,70 @@ export async function advanceLead(id: string) {
         });
     }
 
-    await prisma.lead.update({
-        where: {
-            id: id,
-        },
-        data: {
-            stage: nextStage,
-        },
-    });
+    if (lead.stage === "SECONDARY_CONTACT_FOLLOW_UP") {
+        return {
+            reachedClosed: true,
+        };
+    }
+
+    let nextStage: Stage;
+
+    switch (lead.stage) {
+        case "BACKLOG":
+            nextStage = "PRIMARY_CONTACT";
+            break;
+
+        case "PRIMARY_CONTACT":
+            nextStage = "PRIMARY_CONTACT_FOLLOW_UP";
+            await advanceNextActionAt();
+            break;
+
+        case "PRIMARY_CONTACT_FOLLOW_UP":
+            nextStage = "SECONDARY_CONTACT";
+            await advanceNextActionAt();
+            break;
+
+        case "SECONDARY_CONTACT":
+            nextStage = "SECONDARY_CONTACT_FOLLOW_UP";
+            await advanceNextActionAt();
+            break;
+
+        case "CLOSED":
+            throw new Error("Lead is already closed");
+
+        default:
+            throw new Error(`Invalid stage: ${lead.stage}`);
+    }
+
+    const updateData: {
+        stage: Stage;
+        status?: LeadStatus;
+        nextActionAt?: Date;
+    } = {
+        stage: nextStage,
+    };
+
+    if (lead.status !== "ACTIVE") {
+        updateData.status = "ACTIVE";
+    }
 
     if (nextStage === "PRIMARY_CONTACT") {
-        await prisma.lead.update({
-            where: {
-                id: id,
-            },
-            data: {
-                nextActionAt: new Date(),
-            },
-        })
+        updateData.nextActionAt = new Date();
     }
+
+    await prisma.lead.update({
+        where: {
+            id,
+        },
+        data: updateData,
+    });
+
     revalidatePaths();
 
     return {
-        reachedClosed: nextStage === "CLOSED",
+        reachedClosed: false,
     };
 }
-
 export async function rollbackLead(id: string) {
     const Lead = await prisma.lead.findUnique({
         where: {
