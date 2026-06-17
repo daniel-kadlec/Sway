@@ -3,10 +3,8 @@
 import {prisma} from "@/lib/prisma";
 import {Stage, LeadOutcome , LeadLossReason, LogType, LeadStatus} from "@/lib/generated/client";
 import {revalidatePath} from "next/cache";
-// Helpers
-const settings = await prisma.settings.findFirst();
-const contactDelay = settings?.contactDelay;
 
+// Helpers
 async function getLead (id: string) {
     const lead = await prisma.lead.findUnique({
         where: {
@@ -67,9 +65,9 @@ function revalidatePaths () {
     revalidatePath("/kanban");
     revalidatePath("/table");
 }
-
 // End of helpers
 
+// ------- //
 export async function advanceLead(id: string) {
     const lead = await getLead(id);
 
@@ -120,12 +118,10 @@ export async function advanceLead(id: string) {
         updateData.status = "ACTIVE";
     }
 
-    // BACKLOG -> PRIMARY_CONTACT
     if (nextStage === "PRIMARY_CONTACT") {
         updateData.nextActionAt = new Date();
     }
 
-    // Advance existing nextActionAt for follow-up stages
     if (
         lead.stage !== "BACKLOG" &&
         lead.nextActionAt &&
@@ -165,93 +161,100 @@ export async function advanceLead(id: string) {
         reachedClosed: false,
     };
 }
+
+// ------- //
+
 export async function rollbackLead(id: string) {
-    const Lead = await prisma.lead.findUnique({
+    const latestLog = await prisma.leadLog.findFirst({
         where: {
-            id: id,
+            leadId: id,
+            rolledBackAt: null,
+            type: {
+                not: "ROLLED_BACK",
+            },
+        },
+        orderBy: {
+            createdAt: "desc",
         },
     });
-    if (!Lead){
-        throw new Error("Lead not found");
+
+    if (!latestLog) {
+        throw new Error("No actions to rollback");
     }
-    async function rollbackNextActionAt() {
 
-        const lead = await getLead(id);
-        const latestLog = await prisma.leadLog.findFirst({
-            where:{
-                leadId: id,
-            },
-            orderBy:{
-                createdAt: "desc",
-            },
-            // take: 2,
-        })
+    if (latestLog.type === "CREATED") {
+        throw new Error("Cannot rollback lead creation");
+    }
 
-        if (!lead?.nextActionAt || contactDelay == null) return;
+    const updateData: {
+        stage?: Stage;
+        status?: LeadStatus;
+        nextActionAt?: Date | null;
+        outcome?: LeadOutcome | null;
+        reason?: LeadLossReason | null;
+    } = {};
 
-        const updatedNextActionAt = new Date(lead.nextActionAt);
-        updatedNextActionAt.setDate(
-            updatedNextActionAt.getDate() - contactDelay
-        );
+    if (latestLog.fromStage) {
+        updateData.stage = latestLog.fromStage;
+    }
 
-        await prisma.lead.update({
+    if (latestLog.fromStatus) {
+        updateData.status = latestLog.fromStatus;
+    }
+
+    if (
+        latestLog.fromNextActionAt !== null ||
+        latestLog.toNextActionAt !== null
+    ) {
+        updateData.nextActionAt = latestLog.fromNextActionAt;
+    }
+
+    if (latestLog.type === "CLOSED") {
+        updateData.outcome = null;
+        updateData.reason = null;
+    }
+
+    await prisma.$transaction(async (tx) => {
+        await tx.leadLog.update({
             where: {
-                id: id,
+                id: latestLog.id,
             },
             data: {
-                nextActionAt: updatedNextActionAt,
-                reason: null,
-                outcome: null
+                rolledBackAt: new Date(),
             },
         });
-    }
 
-    const stage:Stage = Lead.stage;
-    let previousStage: Stage;
+        await tx.lead.update({
+            where: {
+                id,
+            },
+            data: updateData,
+        });
 
-    switch (stage) {
-        case "BACKLOG":
-        throw new Error(`Stage already in backlog`);
-        case "PRIMARY_CONTACT":
-            previousStage = "BACKLOG";
-            await prisma.lead.update({
-                where: {
-                    id: id,
-                },
-                data: {
-                    nextActionAt: null,
-                },
-            })
-            break;
-        case "PRIMARY_CONTACT_FOLLOW_UP":
-            previousStage = "PRIMARY_CONTACT";
-            await rollbackNextActionAt();
-            break;
-        case "SECONDARY_CONTACT":
-            previousStage = "PRIMARY_CONTACT_FOLLOW_UP";
-            await rollbackNextActionAt();
-            break;
-        case "SECONDARY_CONTACT_FOLLOW_UP":
-            previousStage = "SECONDARY_CONTACT";
-            await rollbackNextActionAt();
-            break;
-        case "CLOSED":
-            previousStage = "SECONDARY_CONTACT_FOLLOW_UP";
-            break;
-        default:
-            throw new Error(`Invalid stage: ${stage}`);
-    }
+        await tx.leadLog.create({
+            data: {
+                leadId: id,
+                type: "ROLLED_BACK",
 
-    await prisma.lead.update({
-        where: {
-            id: id,
-        },
-        data: {
-            stage: previousStage,
-        },
+                fromStage: latestLog.toStage,
+                toStage: latestLog.fromStage,
+
+                fromStatus: latestLog.toStatus,
+                toStatus: latestLog.fromStatus,
+
+                fromNextActionAt: latestLog.toNextActionAt,
+                toNextActionAt: latestLog.fromNextActionAt,
+
+                outcome: latestLog.outcome,
+                reason: latestLog.reason,
+            },
+        });
     });
-    revalidatePaths()
+
+    revalidatePaths();
 }
+
+// ------- //
 
 export async function resetLead(id:string){
     const lead = await getLead(id)
@@ -272,9 +275,22 @@ export async function resetLead(id:string){
             reason: null,
         },
     })
-    await createLeadLog(id, "RESET", lead.stage, "BACKLOG", lead.status, "IDLE", undefined, undefined, null)
+    await createLeadLog(
+        id,
+        "RESET",
+        lead.stage,
+        "BACKLOG",
+        lead.status,
+        "IDLE",
+        undefined,
+        undefined,
+        lead.nextActionAt,
+        null
+    )
     revalidatePaths()
 }
+
+// ------- //
 
 export async function setPendingLead(id: string) {
     const lead = await getLead(id);
@@ -312,6 +328,9 @@ export async function setPendingLead(id: string) {
     );
     revalidatePaths();
 }
+
+// ------- //
+
 export async function finishLead(id:string, outcome:LeadOutcome, lossReason?:LeadLossReason){
     const lead = await getLead(id)
 
@@ -341,3 +360,5 @@ export async function finishLead(id:string, outcome:LeadOutcome, lossReason?:Lea
     })
     revalidatePaths()
 }
+
+// ------- //
