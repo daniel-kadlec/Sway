@@ -3,7 +3,6 @@
 import {prisma} from "@/lib/prisma";
 import {Stage, LeadOutcome , LeadLossReason, LogType, LeadStatus} from "@/lib/generated/client";
 import {revalidatePath} from "next/cache";
-
 // Helpers
 const settings = await prisma.settings.findFirst();
 const contactDelay = settings?.contactDelay;
@@ -19,7 +18,6 @@ async function getLead (id: string) {
     }
     return lead;
 }
-
 async function createLeadLog(
     leadID: string,
     logType: LogType,
@@ -28,7 +26,8 @@ async function createLeadLog(
     previousStatus?: LeadStatus,
     newStatus?: LeadStatus,
     leadOutcome?: LeadOutcome,
-    leadLossReason?: LeadLossReason
+    leadLossReason?: LeadLossReason,
+    nextActionAt: Date | null = null
 ) {
     await prisma.leadLog.create({
         data: {
@@ -47,6 +46,8 @@ async function createLeadLog(
 
             outcome: leadOutcome,
             reason: leadLossReason,
+
+            nextActionAt: nextActionAt ? nextActionAt : null,
         },
     });
 }
@@ -62,32 +63,14 @@ function revalidatePaths () {
 export async function advanceLead(id: string) {
     const lead = await getLead(id);
 
-    async function advanceNextActionAt() {
-        const settings = await prisma.settings.findFirst();
-        const contactDelay = settings?.contactDelay;
-
-        if (!lead.nextActionAt || contactDelay == null) return;
-
-        const updatedNextActionAt = new Date(lead.nextActionAt);
-        updatedNextActionAt.setDate(
-            updatedNextActionAt.getDate() + contactDelay
-        );
-
-        await prisma.lead.update({
-            where: {
-                id,
-            },
-            data: {
-                nextActionAt: updatedNextActionAt,
-            },
-        });
-    }
-
     if (lead.stage === "SECONDARY_CONTACT_FOLLOW_UP") {
         return {
             reachedClosed: true,
         };
     }
+
+    const settings = await prisma.settings.findFirst();
+    const contactDelay = settings?.contactDelay;
 
     let nextStage: Stage;
 
@@ -98,17 +81,14 @@ export async function advanceLead(id: string) {
 
         case "PRIMARY_CONTACT":
             nextStage = "PRIMARY_CONTACT_FOLLOW_UP";
-            await advanceNextActionAt();
             break;
 
         case "PRIMARY_CONTACT_FOLLOW_UP":
             nextStage = "SECONDARY_CONTACT";
-            await advanceNextActionAt();
             break;
 
         case "SECONDARY_CONTACT":
             nextStage = "SECONDARY_CONTACT_FOLLOW_UP";
-            await advanceNextActionAt();
             break;
 
         case "CLOSED":
@@ -121,7 +101,7 @@ export async function advanceLead(id: string) {
     const updateData: {
         stage: Stage;
         status?: LeadStatus;
-        nextActionAt?: Date;
+        nextActionAt?: Date | null;
     } = {
         stage: nextStage,
     };
@@ -130,25 +110,45 @@ export async function advanceLead(id: string) {
         updateData.status = "ACTIVE";
     }
 
+    // BACKLOG -> PRIMARY_CONTACT
     if (nextStage === "PRIMARY_CONTACT") {
         updateData.nextActionAt = new Date();
     }
 
-    await prisma.lead.update({
-        where: {
-            id,
-        },
+    // Advance existing nextActionAt for follow-up stages
+    if (
+        lead.stage !== "BACKLOG" &&
+        lead.nextActionAt &&
+        contactDelay != null
+    ) {
+        const updatedNextActionAt = new Date(lead.nextActionAt);
+        updatedNextActionAt.setDate(
+            updatedNextActionAt.getDate() + contactDelay
+        );
+
+        updateData.nextActionAt = updatedNextActionAt;
+    }
+
+    const updatedLead = await prisma.lead.update({
+        where: { id },
         data: updateData,
     });
 
     revalidatePaths();
 
-    const nextStatus = updateData.status ? updateData.status : lead.status;
-    if (updateData.status !== lead.status || nextStage !== lead.stage) {
+    const nextStatus = updatedLead.status;
 
-    }
-
-    await createLeadLog(id, "STAGE_CHANGED", lead.stage, nextStage, lead.status, nextStatus)
+    await createLeadLog(
+        id,
+        "STAGE_CHANGED",
+        lead.stage,
+        nextStage,
+        lead.status,
+        nextStatus,
+        undefined,
+        undefined,
+        updatedLead.nextActionAt
+    );
 
     return {
         reachedClosed: false,
@@ -165,8 +165,16 @@ export async function rollbackLead(id: string) {
     }
     async function rollbackNextActionAt() {
 
-
         const lead = await getLead(id);
+        const latestLog = await prisma.leadLog.findFirst({
+            where:{
+                leadId: id,
+            },
+            orderBy:{
+                createdAt: "desc",
+            },
+            // take: 2,
+        })
 
         if (!lead?.nextActionAt || contactDelay == null) return;
 
@@ -253,7 +261,7 @@ export async function resetLead(id:string){
             reason: null,
         },
     })
-    await createLeadLog(id, "RESET", lead.stage, "BACKLOG", lead.status, "IDLE")
+    await createLeadLog(id, "RESET", lead.stage, "BACKLOG", lead.status, "IDLE", undefined, undefined, null)
     revalidatePaths()
 }
 
@@ -279,21 +287,14 @@ export async function setPendingLead(id: string) {
         data: { status: newStatus },
     });
 
-    await createLeadLog(
-        id,
-        "STATUS_CHANGED",
-        undefined,
-        undefined,
-        lead.status,
-        newStatus
-    );
+    await createLeadLog(id, "STATUS_CHANGED", undefined, undefined, lead.status, newStatus, undefined, undefined, lead.nextActionAt);
 
     revalidatePaths();
 }
 export async function finishLead(id:string, outcome:LeadOutcome, lossReason?:LeadLossReason){
     const lead = await getLead(id)
 
-    await createLeadLog(id, "CLOSED", lead.stage, "CLOSED", lead.status, "CLOSED", outcome, lossReason)
+    await createLeadLog(id, "CLOSED", lead.stage, "CLOSED", lead.status, "CLOSED", outcome, lossReason, null)
 
     await prisma.lead.update({
         where: {

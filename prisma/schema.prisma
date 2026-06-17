@@ -102,6 +102,8 @@ model LeadLog {
   outcome LeadOutcome?
   reason  LeadLossReason?
 
+  nextActionAt DateTime?
+
   createdAt DateTime @default(now())
 }
 
