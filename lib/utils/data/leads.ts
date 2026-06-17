@@ -27,7 +27,7 @@ export async function createLead(form: any) {
             companyName: form.companyName,
             primaryContactValue: form.primaryContactValue || null,
             primaryPlatform: form.primaryPlatform || null,
-            website: form.website,
+            website: form.website || null,
             nextActionAt: form.contactDate
                 ? new Date(form.contactDate)
                 : null,
@@ -45,7 +45,19 @@ export async function createLead(form: any) {
             primaryContactAt: form.contactDate
                 ? new Date(form.contactDate)
                 : null,
+            logs: {
+                create: {
+                    type: "CREATED",
+                    toStage: form.contactDate
+                        ? "PRIMARY_CONTACT"
+                        : "BACKLOG",
+                    toStatus: form.contactDate
+                        ? "ACTIVE"
+                        : "IDLE",
+                }
+            }
         },
+
     });
     revalidatePaths();
 }

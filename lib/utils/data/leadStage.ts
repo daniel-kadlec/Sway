@@ -235,6 +235,12 @@ export async function rollbackLead(id: string) {
 }
 
 export async function resetLead(id:string){
+    const lead = await getLead(id)
+
+    if (lead.stage == "BACKLOG" && lead.status == "IDLE"){
+        throw new Error("Lead is already in backlog");
+    }
+
     await prisma.lead.update({
         where: {
             id: id,
@@ -247,6 +253,7 @@ export async function resetLead(id:string){
             reason: null,
         },
     })
+    await createLeadLog(id, "RESET", lead.stage, "BACKLOG", lead.status, "IDLE")
     revalidatePaths()
 }
 

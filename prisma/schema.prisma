@@ -89,7 +89,7 @@ model Lead {
 model LeadLog {
   id     String @id @default(uuid())
   leadId String
-  lead   Lead   @relation(fields: [leadId], references: [id])
+  lead   Lead   @relation(fields: [leadId], references: [id], onDelete: Cascade)
 
   type LogType
 
