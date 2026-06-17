@@ -48,6 +48,7 @@ enum LogType {
   STATUS_CHANGED
   CLOSED
   RESET
+  ROLLED_BACK
 }
 
 model Lead {
@@ -102,9 +103,14 @@ model LeadLog {
   outcome LeadOutcome?
   reason  LeadLossReason?
 
-  nextActionAt DateTime?
+  fromNextActionAt DateTime?
+  toNextActionAt   DateTime?
+
+  rolledBackAt DateTime?
 
   createdAt DateTime @default(now())
+
+  @@index([leadId, rolledBackAt, createdAt])
 }
 
 model Settings {

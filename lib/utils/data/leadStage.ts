@@ -27,7 +27,9 @@ async function createLeadLog(
     newStatus?: LeadStatus,
     leadOutcome?: LeadOutcome,
     leadLossReason?: LeadLossReason,
-    nextActionAt: Date | null = null
+    fromNextActionAt: Date | null = null,
+    toNextActionAt: Date | null = null
+
 ) {
     await prisma.leadLog.create({
         data: {
@@ -47,7 +49,15 @@ async function createLeadLog(
             outcome: leadOutcome,
             reason: leadLossReason,
 
-            nextActionAt: nextActionAt ? nextActionAt : null,
+            fromNextActionAt:
+                fromNextActionAt?.getTime() !== toNextActionAt?.getTime()
+                    ? fromNextActionAt
+                    : null,
+
+            toNextActionAt:
+                fromNextActionAt?.getTime() !== toNextActionAt?.getTime()
+                    ? toNextActionAt
+                    : null,
         },
     });
 }
@@ -147,6 +157,7 @@ export async function advanceLead(id: string) {
         nextStatus,
         undefined,
         undefined,
+        lead.nextActionAt,
         updatedLead.nextActionAt
     );
 
@@ -287,15 +298,35 @@ export async function setPendingLead(id: string) {
         data: { status: newStatus },
     });
 
-    await createLeadLog(id, "STATUS_CHANGED", undefined, undefined, lead.status, newStatus, undefined, undefined, lead.nextActionAt);
-
+    await createLeadLog(
+        id,
+        "STATUS_CHANGED",
+        undefined,
+        undefined,
+        lead.status,
+        newStatus,
+        undefined,
+        undefined,
+        lead.nextActionAt,
+        lead.nextActionAt
+    );
     revalidatePaths();
 }
 export async function finishLead(id:string, outcome:LeadOutcome, lossReason?:LeadLossReason){
     const lead = await getLead(id)
 
-    await createLeadLog(id, "CLOSED", lead.stage, "CLOSED", lead.status, "CLOSED", outcome, lossReason, null)
-
+    await createLeadLog(
+        id,
+        "CLOSED",
+        lead.stage,
+        "CLOSED",
+        lead.status,
+        "CLOSED",
+        outcome,
+        lossReason,
+        lead.nextActionAt,
+        null
+    )
     await prisma.lead.update({
         where: {
             id: id,

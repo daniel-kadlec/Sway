@@ -64,7 +64,8 @@ export const LogType = {
   STAGE_CHANGED: 'STAGE_CHANGED',
   STATUS_CHANGED: 'STATUS_CHANGED',
   CLOSED: 'CLOSED',
-  RESET: 'RESET'
+  RESET: 'RESET',
+  ROLLED_BACK: 'ROLLED_BACK'
 } as const
 
 export type LogType = (typeof LogType)[keyof typeof LogType]

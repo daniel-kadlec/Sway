@@ -54,7 +54,7 @@ export async function createLead(form: any) {
                     toStatus: form.contactDate
                         ? "ACTIVE"
                         : "IDLE",
-                    nextActionAt: form.contactDate
+                    toNextActionAt: form.contactDate
                         ? new Date(form.contactDate)
                         : null,
                 }
