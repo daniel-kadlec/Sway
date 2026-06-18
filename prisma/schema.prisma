@@ -9,7 +9,6 @@ datasource db {
 
 enum Stage {
   BACKLOG
-  SCHEDULED
   PRIMARY_CONTACT
   PRIMARY_CONTACT_FOLLOW_UP
   SECONDARY_CONTACT
@@ -24,9 +23,17 @@ enum LeadStatus {
   CLOSED
 }
 
-enum LeadVerdict {
+enum LeadOutcome {
   WON
   LOST
+}
+
+enum LeadLossReason {
+  GHOSTED
+  REJECTED
+  NO_BUDGET
+  NO_RESPONSE
+  OTHER
 }
 
 enum Platform {
@@ -38,9 +45,10 @@ enum Platform {
 enum LogType {
   CREATED
   STAGE_CHANGED
-  STAGE_REVERTED
+  STATUS_CHANGED
+  CLOSED
   RESET
-  MARKED_PENDING
+  ROLLED_BACK
 }
 
 model Lead {
@@ -57,8 +65,9 @@ model Lead {
   website String?
 
   stage   Stage
-  status  LeadStatus   @default(ACTIVE)
-  verdict LeadVerdict?
+  status  LeadStatus      @default(ACTIVE)
+  outcome LeadOutcome?
+  reason  LeadLossReason?
 
   nextActionAt DateTime?
 
@@ -68,22 +77,45 @@ model Lead {
   secondaryFollowUpAt DateTime?
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   logs LeadLog[]
 
   @@index([stage])
   @@index([status])
   @@index([nextActionAt])
+  @@index([updatedAt])
 }
 
 model LeadLog {
   id     String @id @default(uuid())
   leadId String
-  lead   Lead   @relation(fields: [leadId], references: [id])
+  lead   Lead   @relation(fields: [leadId], references: [id], onDelete: Cascade)
 
-  type      LogType
+  type LogType
+
   fromStage Stage?
   toStage   Stage?
 
+  fromStatus LeadStatus?
+  toStatus   LeadStatus?
+
+  outcome LeadOutcome?
+  reason  LeadLossReason?
+
+  fromNextActionAt DateTime?
+  toNextActionAt   DateTime?
+
+  rolledBackAt DateTime?
+
   createdAt DateTime @default(now())
+
+  @@index([leadId, rolledBackAt, createdAt])
+}
+
+model Settings {
+  id String @id @default(uuid())
+
+  contactDelay            Int @default(7)
+  advanceFromBacklogDelay Int @default(0)
 }

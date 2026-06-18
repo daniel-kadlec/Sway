@@ -18,7 +18,7 @@ export default async function TablePage() {
         "Secondary contact",
         "Secondary follow up",
         "Stage",
-        "Verdict",
+        "Outcome",
     ];
 
     return (

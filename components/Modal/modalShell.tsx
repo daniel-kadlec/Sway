@@ -5,6 +5,7 @@ import CreateModal from "@/components/Modal/createModal";
 import EditModal from "@/components/Modal/editModal";
 import ViewModal from "@/components/Modal/viewModal";
 import FinishModal from "@/components/Modal/finishModal";
+import SettingsModal from "@/components/Modal/settingsModal";
 
 
 const MODAL_COMPONENTS = {
@@ -12,6 +13,7 @@ const MODAL_COMPONENTS = {
     edit: EditModal,
     view: ViewModal,
     finish: FinishModal,
+    settings: SettingsModal
 };
 
 

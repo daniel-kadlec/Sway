@@ -2,16 +2,17 @@ import { useModal } from "@/context/ModalContext";
 import Button from "@/components/button";
 import ContextMenu from "@/components/context-menu";
 import {IoClose, IoEllipsisHorizontal, IoMail, IoCall, IoGlobeOutline, IoLogoInstagram} from "react-icons/io5";
-import { FaForward } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
-import { FaFlagCheckered } from "react-icons/fa";
-import { TbReload } from "react-icons/tb";
-import { FaClock } from "react-icons/fa";
 import {getLeadContacts} from "@/lib/utils/data/contactMap";
 import { deleteLead } from "@/lib/utils/data/leads";
 import {useToast} from "@/context/ToastContext";
+import AdvanceLead from "@/components/Lead Actions/advanceLeadButton";
+import FinishLead from "@/components/Lead Actions/finishLead";
+import SetPendingLead from "@/components/Lead Actions/setPendingLead";
+import RollbackLead from "@/components/Lead Actions/rollbackLead";
+import ResetLead from "@/components/Lead Actions/resetlead";
 
 type ViewModalProps = {
     data?: any;
@@ -54,36 +55,23 @@ export default function ViewModal({ data }: ViewModalProps) {
 
     const contacts = getLeadContacts(data);
 
-    const handleDelete = () => {
+    async function handleDelete ()  {
         try {
-            deleteLead(data.id);
+            await deleteLead(data.id);
             closeModal();
             showToast("Lead deleted successfully", "", "success");
         }
         catch{
             showToast("Error", "", "error");
-
         }
     }
 
     const ContextMenuContent = (
-        <div className={' flex flex-col items-center justify-center gap-3 p-2 w-full'}>
-            <Button onClickAction={()=> openModal('finish')} className={'icon-button w-full bg-success-light! text-success!'}>
-                <FaFlagCheckered className={'mt-0.5'}/>
-                Finish
-            </Button>
-            <Button className={'icon-button w-full bg-warning-light! text-warning!'}>
-                <FaClock className={'mt-0.5'}/>
-                Pending
-            </Button>
-            <Button destructive={true} className={'icon-button w-full bg-lightgray! text-darkgray!'}>
-                <FaForward className={'mt-0.5 rotate-180'}/>
-                Go back
-            </Button>
-            <Button destructive={true} className={'icon-button w-full bg-error-light! text-error!'}>
-                <TbReload className={'mt-0.5'}/>
-                Reset
-            </Button>
+        <div className={'flex flex-col items-center justify-center gap-3 p-2 w-full'}>
+            <FinishLead id={data.id}/>
+            <SetPendingLead id={data.id} status={data.status}/>
+            <RollbackLead id={data.id}/>
+            <ResetLead id={data.id}/>
         </div>
     );
 
@@ -100,9 +88,7 @@ export default function ViewModal({ data }: ViewModalProps) {
                             <IoEllipsisHorizontal className="text-primary size-8" />
                         </button>
                     </ContextMenu>
-                    <button className="size-12 flex items-center justify-center rounded-full bg-primary-light transition cursor-pointer hover:opacity-90">
-                        <FaForward className="text-primary size-5 ml-1" />
-                    </button>
+                   <AdvanceLead id={data.id}/>
 
                     <button
                         onClick={() => closeModal()}

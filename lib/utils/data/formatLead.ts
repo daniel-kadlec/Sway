@@ -1,4 +1,4 @@
-import { Lead, Platform } from "@/types/lead";
+import { Lead, Platform } from "@/lib/generated/client";
 import { FormattedLead } from "@/types/formattedLead";
 
 function formatDate(date?: string | Date | null): string {
@@ -31,7 +31,8 @@ function mapContacts(lead: Lead): Record<Platform, string | null> {
 }
 
 function formatStage(stage: string): string {
-    return stage.charAt(0).toUpperCase() + stage.slice(1).toLowerCase();
+    return stage.charAt(0).toUpperCase() + stage.slice(1).toLowerCase().replaceAll("_", " ")
+        ;
 }
 
 export function formatLead(lead: Lead): FormattedLead {
@@ -41,6 +42,7 @@ export function formatLead(lead: Lead): FormattedLead {
         contacts: mapContacts(lead),
 
         stageFormatted: formatStage(lead.stage),
+        statusFormatted: formatStage(lead.status),
 
         primaryContactAtFormatted: formatDate(lead.primaryContactAt),
         primaryFollowUpAtFormatted: formatDate(lead.primaryFollowUpAt),

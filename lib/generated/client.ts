@@ -51,3 +51,8 @@ export type Lead = Prisma.LeadModel
  * 
  */
 export type LeadLog = Prisma.LeadLogModel
+/**
+ * Model Settings
+ * 
+ */
+export type Settings = Prisma.SettingsModel

@@ -6,12 +6,16 @@ import { useEffect, useState } from "react";
 import {useModal} from "@/context/ModalContext";
 import { useRouter } from "next/navigation";
 import {useToast} from "@/context/ToastContext";
+import logout from "@/lib/utils/auth/logout";
 
 import { FaUser } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
+import { FaGear } from "react-icons/fa6";
+
 import { TbLogout2 } from "react-icons/tb";
 import ContextMenu from "@/components/context-menu";
 import Button from "@/components/button";
+import {getSettings} from "@/lib/utils/settings/settings";
 
 
 
@@ -58,14 +62,18 @@ export default function Navbar(){
         <div className={'text-offblack flex flex-col justify-center items-center p-3'}>
             <h1 className={'text-primary font-bold text-2xl'}>Daniel Kadlec</h1>
             <h1 className={''}>Admin</h1>
-            <Button  onClickAction={
-                async () => {
-                    await fetch("/api/logout", { method: "POST" });
+            <Button
+                onClickAction={async () => {
+                    await logout();
+
                     router.push("/login");
-                    showToast("Logged out sucessfully", "See you later!", "success");
+                    router.refresh();
+
+                    showToast("Logged out successfully","See you later!","success");
                 }}
-                     className="w-full justify-start mt-3 !bg-error-light !text-error icon-button">
-                <TbLogout2 className={'mt-0.5'}/>
+                className="w-full justify-start mt-3 !bg-error-light !text-error icon-button"
+            >
+                <TbLogout2 className={'mt-0.5'} />
                 Logout
             </Button>
         </div>
@@ -104,6 +112,10 @@ export default function Navbar(){
                             <ContextMenu content={ContextMenucontent}>
                                 <FaUser size={26} className={'text-white cursor-pointer'}/>
                             </ContextMenu>
+                            <FaGear size={26} className={'text-white cursor-pointer'} onClick={async() => {
+                                const settings = await getSettings()
+                                openModal("settings", settings)
+                            }}/>
                         </span>
 
                     </span>

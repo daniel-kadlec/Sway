@@ -56,12 +56,18 @@ export default function Button({
             onMouseLeave={stopHold}
             onTouchStart={startHold}
             onTouchEnd={stopHold}
-            className={`bg-primary text-white px-6 py-2 rounded-xl text-lg transition duration-300 hover:bg-primary-dark min-w-[110px] cursor-pointer hover:opacity-80
+            className={`relative overflow-hidden bg-primary text-white px-6 py-2 rounded-xl text-lg transition duration-300 hover:bg-primary-dark min-w-[110px] cursor-pointer hover:opacity-80
                 ${destructive ? "bg-red-500 hover:bg-red-600 hover:opacity-100!" : ""}
                 ${holding ? "scale-[0.98]" : ""}
                 ${className}
             `}
         >
+            <div className={'h-full bg-gray-400/10 absolute inset-0 origin-left transition-all pointer-events-none'}
+                 style={{
+                     transform: holding ? "scaleX(1)" : "scaleX(0)",
+                     transitionDuration: holding ? "1000ms" : "300ms",
+                     transitionTimingFunction: holding ? "linear" : "ease-out",
+                 }}/>
             {holding ? "Hold" : children}
         </button>
     );

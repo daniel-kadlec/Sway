@@ -52,7 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Lead: 'Lead',
-  LeadLog: 'LeadLog'
+  LeadLog: 'LeadLog',
+  Settings: 'Settings'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -82,13 +83,15 @@ export const LeadScalarFieldEnum = {
   website: 'website',
   stage: 'stage',
   status: 'status',
-  verdict: 'verdict',
+  outcome: 'outcome',
+  reason: 'reason',
   nextActionAt: 'nextActionAt',
   primaryContactAt: 'primaryContactAt',
   primaryFollowUpAt: 'primaryFollowUpAt',
   secondaryContactAt: 'secondaryContactAt',
   secondaryFollowUpAt: 'secondaryFollowUpAt',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
@@ -100,10 +103,26 @@ export const LeadLogScalarFieldEnum = {
   type: 'type',
   fromStage: 'fromStage',
   toStage: 'toStage',
+  fromStatus: 'fromStatus',
+  toStatus: 'toStatus',
+  outcome: 'outcome',
+  reason: 'reason',
+  fromNextActionAt: 'fromNextActionAt',
+  toNextActionAt: 'toNextActionAt',
+  rolledBackAt: 'rolledBackAt',
   createdAt: 'createdAt'
 } as const
 
 export type LeadLogScalarFieldEnum = (typeof LeadLogScalarFieldEnum)[keyof typeof LeadLogScalarFieldEnum]
+
+
+export const SettingsScalarFieldEnum = {
+  id: 'id',
+  contactDelay: 'contactDelay',
+  advanceFromBacklogDelay: 'advanceFromBacklogDelay'
+} as const
+
+export type SettingsScalarFieldEnum = (typeof SettingsScalarFieldEnum)[keyof typeof SettingsScalarFieldEnum]
 
 
 export const SortOrder = {
