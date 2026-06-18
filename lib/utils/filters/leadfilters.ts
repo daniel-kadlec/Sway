@@ -1,29 +1,44 @@
-import { FormattedLead } from "@/types/formattedLead";
+import { Lead } from "@/types/lead";
 
-export function overdueLeads(leads:FormattedLead[]) {
+export function todaysLeads(leads: Lead[]) {
+    const today = new Date().toDateString();
 
+    return leads.filter(
+        (lead) =>
+            lead.nextActionAt &&
+            new Date(lead.nextActionAt).toDateString() === today
+    );
+}
+export function overdueLeads(leads: Lead[]) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    return leads.filter(
+        (lead) =>
+            lead.nextActionAt &&
+            new Date(lead.nextActionAt) < today &&
+            lead.status !== "CLOSED"
+    );
 }
 
-export function todaysLeads(leads:FormattedLead[]) {
-
+export function pendingLeads(leads: Lead[]) {
+    return leads.filter((lead) => lead.status === "PENDING");
 }
 
-export function pendingLeads(leads:FormattedLead[]) {
-
+export function backlogLeads(leads: Lead[]) {
+    return leads.filter((lead) => lead.stage === "BACKLOG");
 }
 
-export function backlogLeads(leads:FormattedLead[]) {
-
+export function activeLeads(leads: Lead[]) {
+    return leads.filter((lead) =>
+            lead.status === "ACTIVE"
+    );
 }
 
-export function activeLeads(leads:FormattedLead[]) {
-
+export function lostLeads(leads: Lead[]) {
+    return leads.filter((lead) => lead.outcome === "LOST");
 }
 
-export function lostLeads(leads:FormattedLead[]) {
-
-}
-
-export function wonLeads(leads:FormattedLead[]) {
-
+export function wonLeads(leads: Lead[]) {
+    return leads.filter((lead) => lead.outcome === "WON");
 }

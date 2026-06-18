@@ -1,4 +1,10 @@
-export type Platform = "EMAIL" | "INSTAGRAM" | "PHONE";
+import {
+    Stage,
+    LeadStatus,
+    LeadOutcome,
+    LeadLossReason,
+    Platform,
+} from "@/lib/generated/client";
 
 export type Lead = {
     id: string;
@@ -13,16 +19,19 @@ export type Lead = {
 
     website?: string | null;
 
-    stage: string;
-    status: string;
-    verdict?: string | null;
+    stage: Stage;
+    status: LeadStatus;
 
-    nextActionAt?:  Date | null;
+    outcome?: LeadOutcome | null;
+    reason?: LeadLossReason | null;
+
+    nextActionAt?: Date | null;
 
     primaryContactAt?: Date | null;
     primaryFollowUpAt?: Date | null;
-    secondaryContactAt?:  Date | null;
+    secondaryContactAt?: Date | null;
     secondaryFollowUpAt?: Date | null;
 
-    createdAt: string | Date;
+    createdAt: Date;
+    updatedAt: Date;
 };

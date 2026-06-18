@@ -12,4 +12,5 @@ export type FormattedLead = Lead & {
     secondaryFollowUpAtFormatted: string;
 
     nextActionAtFormatted: string;
+
 };
