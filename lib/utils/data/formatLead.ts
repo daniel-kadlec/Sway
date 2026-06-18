@@ -1,4 +1,4 @@
-import { Lead, Platform } from "@/types/lead";
+import { Lead, Platform } from "@/lib/generated/client";
 import { FormattedLead } from "@/types/formattedLead";
 
 function formatDate(date?: string | Date | null): string {

@@ -1,6 +1,6 @@
-import { Lead } from "@/types/lead";
+import { FormattedLead } from "@/types/formattedLead";
 
-export function todaysLeads(leads: Lead[]) {
+export function todaysLeads(leads: FormattedLead[]) {
     const today = new Date().toDateString();
 
     return leads.filter(
@@ -9,7 +9,7 @@ export function todaysLeads(leads: Lead[]) {
             new Date(lead.nextActionAt).toDateString() === today
     );
 }
-export function overdueLeads(leads: Lead[]) {
+export function overdueLeads(leads: FormattedLead[]) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -21,24 +21,24 @@ export function overdueLeads(leads: Lead[]) {
     );
 }
 
-export function pendingLeads(leads: Lead[]) {
+export function pendingLeads(leads: FormattedLead[]) {
     return leads.filter((lead) => lead.status === "PENDING");
 }
 
-export function backlogLeads(leads: Lead[]) {
+export function backlogLeads(leads: FormattedLead[]) {
     return leads.filter((lead) => lead.stage === "BACKLOG");
 }
 
-export function activeLeads(leads: Lead[]) {
+export function activeLeads(leads: FormattedLead[]) {
     return leads.filter((lead) =>
             lead.status === "ACTIVE"
     );
 }
 
-export function lostLeads(leads: Lead[]) {
+export function lostLeads(leads: FormattedLead[]) {
     return leads.filter((lead) => lead.outcome === "LOST");
 }
 
-export function wonLeads(leads: Lead[]) {
+export function wonLeads(leads: FormattedLead[]) {
     return leads.filter((lead) => lead.outcome === "WON");
 }

@@ -1,7 +1,5 @@
 import StatItem from "@/components/Stats/stats-item";
 
-import { IoIosWarning } from "react-icons/io";
-import { FaRegClock } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa6";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { FaFrog } from "react-icons/fa";

@@ -5,7 +5,7 @@ import {backlogLeads, activeLeads, lostLeads, wonLeads} from "@/lib/utils/filter
 
 export default async function KanbanPage(){
 
-    const leads = await getLeads()
+    const leads= await getLeads()
 
 
     return(

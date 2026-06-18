@@ -1,4 +1,4 @@
-import { Lead, Platform } from "./lead";
+import { Lead, Platform } from "@/lib/generated/client";
 
 export type FormattedLead = Lead & {
     contacts: Record<Platform, string | null>;

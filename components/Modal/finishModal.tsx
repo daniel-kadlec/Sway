@@ -123,11 +123,8 @@ export default function FinishModal({ data }: FinishModalProps) {
 
                             closeModal();
                         } catch (err) {
-                            showToast(
-                                "Failed to Close Lead",
-                                "The lead could not be closed.",
-                                "error"
-                            );
+                            console.log(err)
+                            showToast("Failed to Close Lead", err instanceof Error ? err.message : "Unknown error","error");
                         }
                     }}
                 >

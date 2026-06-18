@@ -26,7 +26,8 @@ export default function SettingsModal({data}: SettingsModalProps) {
             showToast("Settings updated", "", "success");
         }
         catch (err){
-            showToast("Error", "Failed to update settings", "error");
+            console.log(err)
+            showToast("Failed to update settings", err instanceof Error ? err.message : "Unknown error", "error");
         }
     }
     function handleReset(){
@@ -35,7 +36,8 @@ export default function SettingsModal({data}: SettingsModalProps) {
             showToast("Changes undone", "", "success");
         }
         catch (err){
-            showToast("Error", "Failed to undo changes", "error");
+            console.log(err)
+            showToast("Failed to undo changes", err instanceof Error ? err.message : "Unknown error", "error");
         }
     }
 

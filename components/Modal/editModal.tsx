@@ -60,7 +60,8 @@ export default function EditModal({ data }: EditModalProps) {
                 nextActionAt: form.contactDate,
             });
         } catch (err) {
-            showToast("Failed to update lead", "", "error");
+            console.log(err)
+            showToast("Failed to update lead", err instanceof Error ? err.message : "Unknown error", "error");
         }
     };
 
