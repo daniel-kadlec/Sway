@@ -40,18 +40,19 @@ export default function LoginForm() {
 
     return (
         <form
-            className="flex flex-col justify-center items-center gap-4 w-[300px]"
+            className="flex flex-col justify-center items-center gap-4 w-[400px]"
             onSubmit={handleSubmit}
         >
             <Input
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 name="password"
-                placeholder="Password"
+                placeholder="Enter password"
+                className={"w-full !rounded-full !bg-offwhite !text-darkgray shadow-inner-dark"}
             />
-            <Button type="submit" className="w-full icon-button gap-1! py-3!">
-                <TbLogin />
-                Login
+            <Button type="submit" className="w-full icon-button !gap-1 !py-3 text-xl font-semibold gradient-dark !rounded-full inner-shadow-light">
+                <TbLogin size={24}/>
+                Enter Sway
             </Button>
         </form>
     );

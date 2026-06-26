@@ -28,8 +28,15 @@
     --color-success-light: #D1FAE1;
     /*//*/
 
+    --gradient-primary: linear-gradient(177deg, #FF6C33 0.05%, #FD6226 99.95%);
+    --gradient-dark: linear-gradient(263deg, #040200 7.28%, #291705 70.13%);
+
     --shadow-primary: 2px 5px 6px rgba(0, 0, 0, 0.05);
     --shadow-primary-nav: 6px 5px 6px rgba(0, 0, 0, 0.02);
+
+    --shadow-inner-light: 4px 4px 18px 2px rgba(255, 255, 255, 0.1) inset;
+    --shadow-inner-dark: 0 0 10px 0 rgba(0, 0, 0, 0.15) inset;
+
 
 }
 
@@ -70,6 +77,20 @@
         --container-gap: 16px;
     }
 }
+
+.gradient-primary {
+    background: var(--gradient-primary);
+}
+.gradient-dark {
+    background: var(--gradient-dark);
+}
+.inner-shadow-light {
+    box-shadow: var(--shadow-inner-light);
+}
+.inner-shadow-dark {
+    box-shadow: var(--shadow-inner-dark);
+}
+
 .link{
     @apply font-bold text-2xl transition-all duration-300;
 }

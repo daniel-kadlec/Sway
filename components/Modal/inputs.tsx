@@ -6,11 +6,11 @@ export function Label({ children }: { children: React.ReactNode }) {
     );
 }
 
-export function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
+export function Input({className, ...props}: React.InputHTMLAttributes<HTMLInputElement>) {
     return (
         <input
             {...props}
-            className="w-full rounded-xl border border-lightgray px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            className={`w-full rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary ${className ?? ""}`}
         />
     );
 }
