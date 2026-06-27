@@ -92,26 +92,18 @@
 }
 
 .link{
-    @apply font-bold text-2xl transition-all duration-300;
+    @apply font-bold text-xl font-semibold transition-all duration-300 z-20 px-5 py-1.5 w-52 h-[50px] pt-2;
+}
+.link-text {
+    @apply flex flex-row gap-1.5 items-center;
+}
+.navbar-action{
+    @apply flex flex-row gap-2 text-offwhite cursor-pointer text-xl;
 }
 .long-card-base{
     @apply bg-white rounded-3xl shadow-primary h-[200px] max-h-[130px] 3xl:max-h-[170px];
 }
 
-.cut-corner{
-    @apply bg-primary w-8 h-8 absolute top-[40%] left-0 -translate-x-(--container-gap);
-
-    --cut: 32px;
-
-    mask-image:
-        radial-gradient(circle at bottom right,
-        transparent var(--cut),
-        black var(--cut));
-}
-
-.circle{
-    @apply w-2 h-2 rounded-full bg-white;
-}
 .table-cell{
     @apply py-6 px-6 min-w-[250px] truncate;
 }
