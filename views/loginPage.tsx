@@ -56,7 +56,7 @@ export default function LoginPage() {
                     transition={{delay:0.4,duration:0.4}}
                 >
                     <h1 className={'font-bold -mb-1'}>Continue the flow.</h1>
-                    <h2>Enter password to access sway.</h2>
+                    <h2>Enter password to access Sway.</h2>
                 </motion.div>
 
                 <motion.div

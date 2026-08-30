@@ -23,10 +23,10 @@ export default async function TablePage() {
 
     return (
 
-        <div className="bg-white rounded-3xl shadow-primary overflow-x-auto h-full custom-scrollbar">
-            <table className="w-full text-left border-collapse text-2xl relative">
+        <div className="content-container">
+            <table className="w-full text-left border-collapse text-2xl relative bg-white rounded-3xl shadow-primary overflow-x-auto h-full custom-scrollbar">
                 {/* Header */}
-                <thead className="bg-primary text-offwhite sticky top-0">
+                <thead className="bg-primary text-offwhite sticky top-0 rounded-3xl">
                 <tr>
                     {columns.map((col) => (
                         <th key={col} className="table-cell font-bold whitespace-nowrap">

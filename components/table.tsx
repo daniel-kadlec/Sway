@@ -10,7 +10,7 @@ export default function Table({ leads }: { leads: FormattedLead[]}) {
         <tbody>
         {leads.map((lead: FormattedLead) => {
             return (
-                <tr key={lead.id} onClick={() => openModal("view", lead)} className="border-b border-b-lightgray transition duration-300 cursor-pointer hover:bg-lightgray ">
+                <tr key={lead.id} onClick={() => openModal("view", lead)} className="border-b border-b-lightgray transition duration-300 cursor-pointer hover:bg-lightgray">
                     <td className="font-bold text-primary table-cell">{lead.companyName}</td>
                     <td className="table-cell">{lead.contacts.EMAIL || "—"}</td>
                     <td className="table-cell">{lead.contacts.INSTAGRAM || "—"}</td>

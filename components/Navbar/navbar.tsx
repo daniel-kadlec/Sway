@@ -21,10 +21,10 @@ export default function Navbar(){
     const router = useRouter();
 
     return  (
-        <div className="bg-primary rounded-r-4xl flex flex-col justify-between px-8 py-16 w-56">
+        <div className="gradient-primary shadow-nav-set rounded-r-4xl px-8 py-16 w-60 relative">
             <Image src={logo} alt={"Logo"} className={'w-[90%] mx-auto mt-6'}></Image>
             <NavLinks/>
-            <div className={'flex flex-col items-start ml-1 gap-6 w-full'}>
+            <div className={'flex flex-col items-start ml-1 gap-6 w-full absolute bottom-16'}>
                 <span onClick={() => openModal("create")} className={'navbar-action'}>
                     <Plus size={28} className={'text-white cursor-pointer'}/>
                     Create entry

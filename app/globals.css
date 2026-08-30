@@ -32,41 +32,14 @@
     --gradient-dark: linear-gradient(263deg, #040200 7.28%, #291705 70.13%);
 
     --shadow-primary: 2px 5px 6px rgba(0, 0, 0, 0.05);
-    --shadow-primary-nav: 6px 5px 6px rgba(0, 0, 0, 0.02);
 
     --shadow-inner-light: 4px 4px 18px 2px rgba(255, 255, 255, 0.1) inset;
-    --shadow-inner-dark: 0 0 10px 0 rgba(0, 0, 0, 0.15) inset;
+    --shadow-inner-dark: 0 0 10px 0 rgba(0, 0, 0, 0.2) inset;
 
+    --shadow-inner-nav: -12px 12px 20px 0px rgba(255, 255, 255, 0.07) inset;
+    --shadow-nav: 6px 0px 24px rgba(0, 0, 0, 0.15);
 
 }
-
-/*    --font-primary: Calibri, "Segoe UI", Roboto, Arial, sans-serif;*/
-
-/*    --breakpoint-3xl: 1800px;*/
-
-/*    !*colors*!*/
-/*    --color-primary: #3549FF;*/
-/*    --color-offblack: #020209;*/
-/*    --color-offwhite: #FAFAFA;*/
-/*    --color-darkgray: #414145;*/
-/*    --color-lightgray: #eaebf1;*/
-/*    --color-white: #FFFFFF;*/
-
-/*    --color-primary-light: #CCCCFF;*/
-
-/*    --color-error: #E83434;*/
-/*    --color-error-light: #FAD1D1;*/
-
-/*    --color-warning: #EFBD1A;*/
-/*    --color-warning-light: #FCF1CF;*/
-
-/*    --color-success: #12BA54;*/
-/*    --color-success-light: #D1FAE1;*/
-/*
-
-/*    --shadow-primary: 2px 5px 6px rgba(0, 0, 0, 0.05);*/
-/*    --shadow-primary-nav: 6px 5px 6px rgba(0, 0, 0, 0.02);*/
-
 
 :root {
     --container-gap: 24px;
@@ -90,6 +63,13 @@
 .inner-shadow-dark {
     box-shadow: var(--shadow-inner-dark);
 }
+.shadow-nav-set {
+    box-shadow: var(--shadow-nav), var(--shadow-inner-nav);
+}
+
+.content-container{
+    @apply w-full p-12;
+}
 
 .link{
     @apply font-bold text-xl font-semibold transition-all duration-300 z-20 px-5 py-1.5 w-52 h-[50px] pt-2;
@@ -100,18 +80,9 @@
 .navbar-action{
     @apply flex flex-row gap-2 text-offwhite cursor-pointer text-xl;
 }
-.long-card-base{
-    @apply bg-white rounded-3xl shadow-primary h-[200px] max-h-[130px] 3xl:max-h-[170px];
-}
 
 .table-cell{
     @apply py-6 px-6 min-w-[250px] truncate;
-}
-.date-element{
-    @apply text-shadow-white text-2xl;
-}
-.vertical-line{
-    @apply w-0.5 h-28 bg-lightgray;
 }
 .lead-control{
     @apply cursor-pointer hover:opacity-70 transition-all duration-300;
