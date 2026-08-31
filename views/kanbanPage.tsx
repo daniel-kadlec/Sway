@@ -10,10 +10,10 @@ export default async function KanbanPage(){
     return(
         <div className={'content-container'}>
             <div className="grid grid-cols-4 grid-rows-1 h-full gap-6">
-                <Card title="Backlog" variant="gray" leads={backlogLeads(leads)}/>
-                <Card title="Active" variant="purple" leads={activeLeads(leads)}/>
-                <Card title="Lost" variant="red" leads={lostLeads(leads)}/>
-                <Card title="Won" variant="green" leads={wonLeads(leads)}/>
+                <Card title="Backlog" leads={backlogLeads(leads)}/>
+                <Card title="Active" leads={activeLeads(leads)}/>
+                <Card title="Lost" leads={lostLeads(leads)}/>
+                <Card title="Won" leads={wonLeads(leads)}/>
             </div>
         </div>
     )

@@ -34,7 +34,7 @@
     --shadow-primary: 2px 5px 6px rgba(0, 0, 0, 0.05);
 
     --shadow-inner-light: 4px 4px 18px 2px rgba(255, 255, 255, 0.1) inset;
-    --shadow-inner-dark: 0 0 10px 0 rgba(0, 0, 0, 0.2) inset;
+    --shadow-inner-dark: 0 0 10px 0 rgba(0, 0, 0, 0.1) inset;
 
     --shadow-inner-nav: -12px 12px 20px 0px rgba(255, 255, 255, 0.07) inset;
     --shadow-nav: 6px 0px 24px rgba(0, 0, 0, 0.15);
@@ -57,14 +57,17 @@
 .gradient-dark {
     background: var(--gradient-dark);
 }
-.inner-shadow-light {
+.shadow-inner-light {
     box-shadow: var(--shadow-inner-light);
 }
-.inner-shadow-dark {
+.shadow-inner-dark {
     box-shadow: var(--shadow-inner-dark);
 }
 .shadow-nav-set {
     box-shadow: var(--shadow-nav), var(--shadow-inner-nav);
+}
+.shadow-set {
+    box-shadow: var(--shadow-primary), var(--shadow-inner-light);
 }
 
 .content-container{

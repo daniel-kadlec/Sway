@@ -33,7 +33,7 @@ export default function NavLinks(){
 
     return (
         <div ref={containerRef} className={'relative mt-20'}>
-            <div className={'bg-offwhite inner-shadow-dark absolute rounded-full transition-all duration-300 h-[50px] z-0 w-full'}
+            <div className={'bg-offwhite shadow-inner-dark absolute rounded-full transition-all duration-300 h-[50px] z-0 w-full'}
                  style={{
                 transform: `translateY(${pill.top}px)`
             }}/>

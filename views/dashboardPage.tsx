@@ -8,10 +8,10 @@ export default async function DashboardPage() {
 
     return (
         <div className={'content-container'}>
-            <div className="grid grid-cols-4 grid-rows-1 h-full gap-(--container-gap)">
-                <Card title="Today's leads" variant="blue" leads={todaysLeads(leads)} className="col-span-2" />
-                <Card title="Overdue" variant="red" leads={overdueLeads(leads)}/>
-                <Card title="Pending" variant="yellow" leads={pendingLeads(leads)}/>
+            <div className="grid grid-cols-3 grid-rows-1 h-full gap-(--container-gap)">
+                <Card title="Today's leads" leads={todaysLeads(leads)} primary={true}/>
+                <Card title="Overdue" leads={overdueLeads(leads)}/>
+                <Card title="Pending" leads={pendingLeads(leads)}/>
             </div>
         </div>
     );
