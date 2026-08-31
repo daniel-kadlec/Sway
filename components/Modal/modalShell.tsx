@@ -6,6 +6,7 @@ import EditModal from "@/components/Modal/editModal";
 import ViewModal from "@/components/Modal/viewModal";
 import FinishModal from "@/components/Modal/finishModal";
 import SettingsModal from "@/components/Modal/settingsModal";
+import {AnimatePresence, motion} from "motion/react";
 
 
 const MODAL_COMPONENTS = {
@@ -20,7 +21,6 @@ const MODAL_COMPONENTS = {
 export default function ModalShell() {
     const { modal, closeModal } = useModal();
 
-    if (!modal.isOpen) return null;
     const Component = MODAL_COMPONENTS[modal.type!];
 
     // Only close if the click is directly on the overlay
@@ -31,11 +31,18 @@ export default function ModalShell() {
     };
 
     return (
-        <div onClick={handleOverlayClick} className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="modal-container">
+        <AnimatePresence>
+            {modal.isOpen && Component && (
+                <motion.div onClick={handleOverlayClick} className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1, transition: { duration: 0.15 } }}
+                        exit={{ opacity: 0,  transition: { duration: 0.15 } }}>
+                <div className="modal-container">
+                    {Component && <Component data={modal.data} />}
+                </div>
+            </motion.div>
+            )}
+        </AnimatePresence>
 
-                {Component && <Component data={modal.data} />}
-            </div>
-        </div>
     );
 }
