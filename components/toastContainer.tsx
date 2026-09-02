@@ -10,21 +10,21 @@ type Props = {
 
 const variants = {
     success: {
-        bgLight: "bg-success/30",
+        bgLight: "bg-success/20",
         bg: "bg-success",
         iconColor: "text-offblack",
         icon: FaCheck,
         iconSize: 14,
     },
     warning: {
-        bgLight: "bg-warning/30",
+        bgLight: "bg-warning/20",
         bg: "bg-warning",
         iconColor: "text-offblack",
         icon: IoIosWarning,
         iconSize: 20,
     },
     error: {
-        bgLight: "bg-error/30",
+        bgLight: "bg-error/20",
         bg: "bg-error",
         iconColor: "text-offblack",
         icon: IoClose,
@@ -73,16 +73,14 @@ export default function ToastContainer({ toasts }: Props) {
                                         <Icon className={`${variant.iconColor}`} size={variant.iconSize}/>
                                     </div>
                                 </div>
-                            <div className="flex flex-col justify-center items-start">
-
-                            <span className="font-bold -mb-2 text-xl">
-                                {toast.message}
-                            </span>
-
+                                <div className="flex flex-col justify-center items-start">
+                                    <span className={`font-bold text-xl ${toast.description ? "-mb-2" : ""}`}>
+                                        {toast.message}
+                                    </span>
                                     {toast.description && (
                                         <span className="text-lg">
-                                    {toast.description}
-                                </span>
+                                            {toast.description}
+                                        </span>
                                     )}
                                 </div>
                             </div>
