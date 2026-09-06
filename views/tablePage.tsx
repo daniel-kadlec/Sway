@@ -21,7 +21,7 @@ export default async function TablePage() {
     return (
         <div className="w-full min-w-0 box-border p-12">
             <div className="w-full min-w-0 overflow-x-auto custom-scrollbar rounded-3xl shadow-primary">
-                <table className="min-w-max text-left text-2xl border-separate border-spacing-0 rounded-3xl">
+                <table className="min-w-max text-left text-2xl border-separate border-spacing-0 rounded-3xl w-full">
                     <thead className="text-offwhite">
                     <tr className="gradient-primary shadow-inner-light">
                         {columns.map((col) => (
