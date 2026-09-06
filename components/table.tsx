@@ -7,7 +7,7 @@ export default function Table({ leads }: { leads: FormattedLead[]}) {
     const { openModal } = useModal();
 
     return (
-        <tbody>
+        <tbody className={'bg-white'}>
         {leads.map((lead: FormattedLead) => {
             return (
                 <tr key={lead.id} onClick={() => openModal("view", lead)} className="border-b border-b-lightgray transition duration-300 cursor-pointer hover:bg-lightgray">

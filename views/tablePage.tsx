@@ -3,9 +3,7 @@ import { getLeads } from "@/lib/utils/data/leads";
 import { FaSort } from "react-icons/fa6";
 
 export default async function TablePage() {
-
     const leads = await getLeads()
-
 
     const columns = [
         "Name",
@@ -22,24 +20,27 @@ export default async function TablePage() {
     ];
 
     return (
-
-        <div className="content-container">
-            <table className="w-full text-left border-collapse text-2xl relative bg-white rounded-3xl shadow-primary overflow-x-auto h-full custom-scrollbar">
-                {/* Header */}
-                <thead className="bg-primary text-offwhite sticky top-0 rounded-3xl">
-                <tr>
-                    {columns.map((col) => (
-                        <th key={col} className="table-cell font-bold whitespace-nowrap">
-                            <span className="flex items-center gap-2 cursor-pointer">
+        <div className="content-container rounded-3xl bg-offwhite shadow-primary p-4">
+            <div className="overflow-x-auto custom-scrollbar">
+                <table className="w-full min-w-max text-left text-2xl border-separate border-spacing-0 rounded-3xl">
+                    <thead className="text-offwhite">
+                    <tr className="gradient-primary shadow-inner-light">
+                        {columns.map((col, index) => (
+                            <th
+                                key={col}
+                                className={`px-6 py-8 font-bold whitespace-nowrap
+                                    ${index === 0 ? "rounded-l-full" : ""}
+                                    ${index === columns.length - 1 ? "rounded-r-full" : ""}
+                                `}
+                            >
                                 {col}
-                                <FaSort className="size-6 mt-0.5"/>
-                            </span>
-                        </th>
-                    ))}
-                </tr>
-                </thead>
-                <Table leads={leads}/>
-            </table>
+                            </th>
+                        ))}
+                    </tr>
+                    </thead>
+                    <Table leads={leads} />
+                </table>
+            </div>
         </div>
     );
 }
