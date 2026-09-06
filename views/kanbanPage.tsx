@@ -8,7 +8,7 @@ export default async function KanbanPage(){
 
 
     return(
-        <div className={'content-container'}>
+        <div className={'p-12 w-full'}>
             <div className="grid grid-cols-4 grid-rows-1 h-full gap-6">
                 <Card title="Backlog" leads={backlogLeads(leads)}/>
                 <Card title="Active" leads={activeLeads(leads)}/>

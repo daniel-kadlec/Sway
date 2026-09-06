@@ -7,7 +7,7 @@ export default async function DashboardPage() {
  const leads = await getLeads()
 
     return (
-        <div className={'content-container'}>
+        <div className={'p-12 w-full'}>
             <div className="grid grid-cols-3 grid-rows-1 h-full gap-(--container-gap)">
                 <Card title="Today's leads" leads={todaysLeads(leads)} primary={true}/>
                 <Card title="Overdue" leads={overdueLeads(leads)}/>
