@@ -37,7 +37,7 @@ export default function Lead({ lead }: LeadProps) {
     }
 
     return (
-        <div onClick={() => openModal("view", lead)} className="group relative h-30 w-full px-10 flex flex-col justify-center overflow-hidden cursor-pointer bg-lightgray shadow-inner-dark shadow-primary transition-all duration-200 rounded-xl">
+        <div onClick={() => openModal("view", lead)} className="group relative h-30 w-full px-10 flex flex-col justify-center overflow-hidden cursor-pointer bg-lightgray shadow-set transition-all duration-200 rounded-xl shrink-0">
 
             <span className="flex gap-2 items-center z-10">
                 <h1 className="font-bold text-3xl text-offblack">{lead.companyName}</h1>

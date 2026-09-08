@@ -133,3 +133,6 @@
     @apply text-error ml-0.5;
     content: '*';
 }
+.scroll-fade{
+    @apply mask-[linear-gradient(to_bottom,transparent,black_15px,black_calc(100%-15px),transparent)];
+}
