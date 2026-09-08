@@ -79,6 +79,7 @@ export async function advanceLead(id: string) {
 
     const settings = await prisma.settings.findFirst();
     const contactDelay = settings?.contactDelay;
+    const advanceFromBacklogDelay = settings?.advanceFromBacklogDelay;
 
     let nextStage: Stage;
 
@@ -119,15 +120,18 @@ export async function advanceLead(id: string) {
     }
 
     if (nextStage === "PRIMARY_CONTACT") {
-        updateData.nextActionAt = new Date();
+        const nextActionAt = new Date();
+        nextActionAt.setDate(
+            nextActionAt.getDate() + (advanceFromBacklogDelay ?? 0)
+        );
+        updateData.nextActionAt = nextActionAt;
     }
 
     if (
         lead.stage !== "BACKLOG" &&
-        lead.nextActionAt &&
         contactDelay != null
     ) {
-        const updatedNextActionAt = new Date(lead.nextActionAt);
+        const updatedNextActionAt = new Date();
         updatedNextActionAt.setDate(
             updatedNextActionAt.getDate() + contactDelay
         );
