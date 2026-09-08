@@ -9,7 +9,11 @@ export default function Table({ leads }: { leads: FormattedLead[]}) {
     return (
         <tbody>
         {leads.length == 0 ? (
-            <h1 className={'text-darkgray font-semibold table-cell'}>There are no entries yet.</h1>
+            <tr className={'text-darkgray font-semibold table-cell'}>
+                <td colSpan={11} className="text-center">
+                    There are no entries yet.
+                </td>
+            </tr>
         ): (
             leads.map((lead: FormattedLead) => {
                 return (
