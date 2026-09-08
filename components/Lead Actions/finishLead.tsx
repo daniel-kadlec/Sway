@@ -4,12 +4,13 @@ import {useModal} from "@/context/ModalContext";
 
 type FinishLeadProps = {
     id: string;
+    data?: unknown;
 }
 
-export default function FinishLead({id}: FinishLeadProps){
+export default function FinishLead({id, data}: FinishLeadProps){
     const {openModal} = useModal()
     return(
-        <Button onClickAction={()=> openModal('finish', {id})} className={'icon-button w-full bg-success-light! text-success!'}>
+        <Button onClickAction={()=> openModal('finish', data ?? {id})} className={'icon-button w-full bg-success-light! text-success!'}>
             <FaFlagCheckered className={'mt-0.5'}/>
             Finish
         </Button>
