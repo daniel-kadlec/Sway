@@ -11,8 +11,7 @@ import { Plus, LogOut, Settings } from 'lucide-react';
 import {getSettings} from "@/lib/utils/settings/settings";
 import Image from "next/image"
 import logo from "@/public/logo.svg";
-
-
+import {motion} from "motion/react";
 
 export default function Navbar(){
 
@@ -21,7 +20,11 @@ export default function Navbar(){
     const router = useRouter();
 
     return  (
-        <div className="gradient-primary shadow-nav-set rounded-r-4xl px-8 py-16 w-60 relative">
+        <motion.div className="gradient-primary shadow-nav-set rounded-r-4xl px-8 py-16 w-60 relative"
+        initial={{ x: -20, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}>
+
             <Image src={logo} alt={"Logo"} className={'w-[90%] mx-auto mt-6'}></Image>
             <NavLinks/>
             <div className={'flex flex-col items-start ml-1 gap-6 w-full absolute bottom-16'}>
@@ -48,6 +51,6 @@ export default function Navbar(){
                     Settings
                 </span>
             </div>
-        </div>
+        </motion.div>
     )
 }
