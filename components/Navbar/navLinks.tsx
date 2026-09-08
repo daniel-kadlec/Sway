@@ -6,6 +6,9 @@ import { useEffect, useRef, useState } from "react"
 import { motion } from "motion/react";
 
 import {House, LayoutGrid, List} from 'lucide-react';
+
+const MotionLink = motion(Link)
+
 export default function NavLinks(){
     const pathname = usePathname()
 
@@ -35,32 +38,31 @@ export default function NavLinks(){
         <div ref={containerRef} className={'relative mt-20'}>
             <div className={'bg-offwhite shadow-inner-dark absolute rounded-full transition-all duration-300 h-[50px] z-0 w-full'}
                  style={{
-                transform: `translateY(${pill.top}px)`
-            }}/>
+                     transform: `translateY(${pill.top}px)`
+                 }}/>
 
             <span className="flex flex-col gap-4 z-10">
-               <Link ref={DashboardRef} className={`link flex ${pathname === '/dashboard' ? 'text-primary' : 'text-white'}`} href="/dashboard">
-                   <motion.span className={'link-text'} animate={{ x: pathname === '/dashboard' ? 6 : 0 }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
-                       <House className={'mb-[2px]'} size={22}/>
-                       Dashboard
-                   </motion.span>
-               </Link>
+                <MotionLink ref={DashboardRef} className={`link flex ${pathname === "/dashboard" ? "text-primary" : "text-white"}`} href="/dashboard" whileHover="hover">
+                    <motion.span className="link-text" variants={{hover: {x: 6}}} animate={{x: pathname === "/dashboard" ? 6 : 0}} transition={{duration: 0.3, ease: "easeInOut"}}>
+                        <House className="mb-[2px]" size={22} />
+                        Dashboard
+                    </motion.span>
+                </MotionLink>
 
-               <Link ref={KanbanRef} className={`link flex ${pathname === '/kanban' ? 'text-primary' : 'text-white'}`} href="/kanban">
-                   <motion.span className={'link-text'} animate={{ x: pathname === '/kanban' ? 26: 0 }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
-                       <LayoutGrid className={'mb-[2px]'} size={22}/>
-                       Board
-                   </motion.span>
-               </Link>
+                <MotionLink ref={KanbanRef} className={`link flex ${pathname === "/kanban" ? "text-primary" : "text-white"}`} href="/kanban" whileHover="hover">
+                    <motion.span className="link-text" variants={{hover: {x: 26}}} animate={{x: pathname === "/kanban" ? 26 : 0}} transition={{duration: 0.3, ease: "easeInOut"}}>
+                        <LayoutGrid className="mb-[2px]" size={22} />
+                        Board
+                    </motion.span>
+                </MotionLink>
 
-               <Link ref={TableRef} className={`link flex ${pathname === '/table' ? 'text-primary' : 'text-white'}`} href="/table">
-                   <motion.span className={'link-text'} animate={{ x: pathname === '/table' ? 18 : 0 }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
-                       <List className={'mb-[2px]'} size={22}/>
-                       Records
-                   </motion.span>
-               </Link>
+                <MotionLink ref={TableRef} className={`link flex ${pathname === "/table" ? "text-primary" : "text-white"}`} href="/table" whileHover="hover">
+                    <motion.span className="link-text" variants={{hover: {x: 18}}} animate={{x: pathname === "/table" ? 18 : 0}} transition={{duration: 0.3, ease: "easeOut"}}>
+                        <List className="mb-[2px]" size={22} />
+                        Records
+                    </motion.span>
+                </MotionLink>
             </span>
         </div>
-
     )
 }

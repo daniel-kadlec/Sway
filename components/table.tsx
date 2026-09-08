@@ -43,7 +43,7 @@ export default function Table({ leads }: { leads: FormattedLead[] }) {
                     <tbody>
                         {leads.length === 0 ? (
                             <tr className="text-darkgray font-semibold">
-                                <td colSpan={11} className="text-center">
+                                <td colSpan={11} className="text-center py-8">
                                     There are no entries yet.
                                 </td>
                             </tr>

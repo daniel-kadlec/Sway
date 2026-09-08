@@ -37,7 +37,7 @@ export default function ModalShell() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1, transition: { duration: 0.15 } }}
                         exit={{ opacity: 0,  transition: { duration: 0.15 } }}>
-                <div className="modal-container">
+                <div className="w-full rounded-3xl bg-white shadow-xl px-16 py-14 relative max-w-[900px]">
                     {Component && <Component data={modal.data} />}
                 </div>
             </motion.div>

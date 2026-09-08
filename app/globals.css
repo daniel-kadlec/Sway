@@ -90,9 +90,6 @@
 .lead-control{
     @apply cursor-pointer hover:opacity-70 transition-all duration-300;
 }
-.modal-container{
-    @apply w-full rounded-3xl bg-white shadow-xl px-16 py-14 relative max-w-[900px];
-}
 .icon-button{
     @apply flex justify-center items-center gap-2
 }
@@ -134,5 +131,5 @@
     content: '*';
 }
 .scroll-fade{
-    @apply mask-[linear-gradient(to_bottom,transparent,black_15px,black_calc(100%-15px),transparent)];
+    @apply mask-[linear-gradient(to_bottom,transparent,black_15px,black_calc(100%-10px),transparent)];
 }
