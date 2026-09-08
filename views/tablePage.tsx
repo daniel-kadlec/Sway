@@ -19,11 +19,11 @@ export default async function TablePage() {
     ];
 
     return (
-        <div className="w-full min-w-0 box-border p-12">
-            <div className="w-full min-w-0 overflow-x-auto custom-scrollbar rounded-3xl shadow-primary">
-                <table className="min-w-max text-left text-2xl border-separate border-spacing-0 rounded-3xl w-full">
+        <div className="w-full min-w-0 box-border p-12 h-screen">
+            <div className="w-full min-w-0 overflow-x-auto custom-scrollbar rounded-3xl shadow-primary bg-white">
+                <table className="min-w-max text-left text-2xl border-separate border-spacing-0 rounded-3xl w-full h-full">
                     <thead className="text-offwhite">
-                    <tr className="gradient-primary shadow-inner-light">
+                    <tr className="gradient-primary shadow-set">
                         {columns.map((col) => (
                             <th key={col} className="px-6 py-8 font-bold whitespace-nowrap">
                                 {col}

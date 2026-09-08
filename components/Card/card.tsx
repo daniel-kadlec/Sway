@@ -2,11 +2,6 @@
 
 import Lead from "@/components/Card/lead";
 import CardHeader from "@/components/Card/card-header";
-
-import { IconType } from "react-icons";
-import { FaClock, FaFloppyDisk } from "react-icons/fa6";
-import { IoIosWarning } from "react-icons/io";
-import { FaTrophy } from "react-icons/fa";
 import {FormattedLead} from "@/types/formattedLead";
 
 type CardProps = {

@@ -7,26 +7,30 @@ export default function Table({ leads }: { leads: FormattedLead[]}) {
     const { openModal } = useModal();
 
     return (
-        <tbody className={'bg-white'}>
-        {leads.map((lead: FormattedLead) => {
-            return (
-                <tr key={lead.id} onClick={() => openModal("view", lead)} className="transition duration-300 cursor-pointer hover:bg-lightgray">
-                    <td className="font-bold text-primary table-cell">{lead.companyName}</td>
-                    <td className="table-cell">{lead.contacts.EMAIL || "—"}</td>
-                    <td className="table-cell">{lead.contacts.INSTAGRAM || "—"}</td>
-                    <td className="table-cell">{lead.contacts.PHONE || "—"}</td>
-                    <td className="table-cell">{lead.website || "—"}</td>
+        <tbody>
+        {leads.length == 0 ? (
+            <h1 className={'text-darkgray font-semibold table-cell'}>There are no entries yet.</h1>
+        ): (
+            leads.map((lead: FormattedLead) => {
+                return (
+                    <tr key={lead.id} onClick={() => openModal("view", lead)} className="transition duration-300 cursor-pointer hover:bg-lightgray">
+                        <td className="font-bold text-primary table-cell">{lead.companyName}</td>
+                        <td className="table-cell">{lead.contacts.EMAIL || "—"}</td>
+                        <td className="table-cell">{lead.contacts.INSTAGRAM || "—"}</td>
+                        <td className="table-cell">{lead.contacts.PHONE || "—"}</td>
+                        <td className="table-cell">{lead.website || "—"}</td>
 
-                    <td className="table-cell">{lead.primaryContactAtFormatted}</td>
-                    <td className="table-cell">{lead.primaryFollowUpAtFormatted}</td>
+                        <td className="table-cell">{lead.primaryContactAtFormatted}</td>
+                        <td className="table-cell">{lead.primaryFollowUpAtFormatted}</td>
 
-                    <td className="table-cell">{lead.secondaryContactAtFormatted}</td>
-                    <td className="table-cell">{lead.secondaryFollowUpAtFormatted}</td>
+                        <td className="table-cell">{lead.secondaryContactAtFormatted}</td>
+                        <td className="table-cell">{lead.secondaryFollowUpAtFormatted}</td>
 
-                    <td className="table-cell">{lead.stageFormatted}</td>
-                    <td className="table-cell">{lead.outcome || "—"}</td>
-                </tr>
-            )}
+                        <td className="table-cell">{lead.stageFormatted}</td>
+                        <td className="table-cell">{lead.outcome || "—"}</td>
+                    </tr>
+                )}
+            )
         )}
         </tbody>
     );
